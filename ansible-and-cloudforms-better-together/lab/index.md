@@ -21,9 +21,6 @@
         - [Introduction to Ansible](#introduction-to-ansible)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
-        - [Add vCenter credentials](#add-vcenter-credentials)
-        - [Verify repository sync](#verify-repository-sync)
-        - [Install pysphere](#install-pysphere)
         - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
         - [Create a Service Catalog for Ansible Playbooks](#create-a-service-catalog-for-ansible-playbooks)
         - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook)
@@ -561,9 +558,7 @@ Before we start,  we want to make sure the embedded Ansible role is enabled and 
 
     ![ansible worker started](img/ansible-worker-started.png)
 
-
 Logoff as demouser and login back as Admin
-
 
 ### Add a Git repository of Ansible Playbooks
 
@@ -590,64 +585,6 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 1. Click on ***Add*** to save the settings
 
 ***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
-
-### Add vCenter credentials
-
-For one of the following labs, the Playbook needs to be able to log into the vCenter provider. For this to work, we need to store the necessary credentials.
-
-1. Navigate to ***Automation*** -> ***Ansible*** -> ***Credentials***
-
-    ![navigate to ansible credentials](img/navigate-to-ansible-credentials.png)
-
-1. Click on ***Configuration*** -> ***Add New Credentials***
-
-1. Provide the credentials in the form:
-
-    ***Name:*** vCenter
-
-    ***Credentials Type:*** VMware
-
-    ***Username:*** root
-
-    ***Password:*** r3dh4t1!
-
-    ***vCenter Host:*** vcenter.example.com
-
-    ![vcenter credentials](img/vcenter-credentials.png)
-
-1. Click ***Add*** to save the credentials
-
-***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed. You can track the progress in the Tasks section.
-
-In the top right corner of the screen navigate to ***Administrator*** -> ***Tasks***
-
-![tasks](img/tasks.png)
-
-And click in ***All Other Tasks***
-
-![All-Other-Taks](img/all-other-tasks.png)
-
-### Verify repository sync
-
-In the meantime the repository you created should have completed the initial synchronization. Let's check all Playbooks have been successfully imported and are available for us to use.
-
-1. Navigate to ***Automation*** -> ***Ansible*** -> ***Playbooks***
-
-    ![navigate to ansible Playbooks](img/navigate-to-ansible-playbooks.png)
-
-1. You should see a list of available Playbooks
-
-    ![list of available Playbooks](img/list-pf-playbooks.png)
-
-If there are no Playbooks listed, check the repository was configured correctly. Click the notification icon on the top right (the little bell icon) and check if there are any errors listed. The initial import can also take a minute or two, did you wait long enough?
-
-### Install pysphere
-
-In order to use the Ansible VMware modules you need to install a python library call "pysphere". You need to ssh to you student workstation and jump to the CloudForms server.
-
-`
-$ sudo easy_install -U pysphere
-`
 
 ### Build a Service Catalog to create and delete users
 
