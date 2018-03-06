@@ -4,8 +4,10 @@ This content was presented in a lab at the Red Hat Summit 2019 in San Francisco.
 
 ***The content is currently in development and should not be used!***
 
-The lab is available at:
+The labs are available at:
 
-[Getting well with CloudForms](./getting-well-with-cloudforms/index.md)
+[Red Hat CloudForms with Red Hat Ansible Automation—Better together](./ansible-and-cloudforms-better-together/index.md)
 
-If you have questions, please open an issue
+[Building a self-service portal with Red Hat CloudForms](./self-service-portal-with-cloudforms/index.md)
+
+If you have questions or found a problem, please open an issue on this GitHub repository.
