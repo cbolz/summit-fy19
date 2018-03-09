@@ -17,7 +17,7 @@
         - [Build a Virtual Machine Service Catalog Item](#build-a-virtual-machine-service-catalog-item)
         - [Order the Simple Virtual Machine Service Catalog Item](#order-the-simple-virtual-machine-service-catalog-item)
         - [Verify the order](#verify-the-order)
-    - [CloudForms 4.5 with Ansible batteries included](#cloudforms-45-with-ansible-batteries-included)
+    - [CloudForms with Ansible batteries included](#cloudforms-with-ansible-batteries-included)
         - [Introduction to Ansible](#introduction-to-ansible)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
@@ -46,18 +46,10 @@
         - [Creating and Assigning Policy Profile](#creating-and-assigning-policy-profile)
         - [Assign the policy profile](#assign-the-policy-profile)
         - [Testing the Policy Profile](#testing-the-policy-profile)
+    - [Custom buttons calling Ansible Playbooks](#custom-buttons-calling-ansible-playbooks)
+    - [Calling Ansible Playbooks from Automate](#calling-ansible-playbooks-from-automate)
     - [Advanced labs](#advanced-labs)
         - [Use the Self Service user Interface](#use-the-self-service-user-interface)
-        - [Use role Based Access Control to publish Service Catalog](#use-role-based-access-control-to-publish-service-catalog)
-        - [User Groups](#user-groups)
-        - [Roles](#roles)
-        - [More details](#more-details)
-        - [Create a Role](#create-a-role)
-        - [Create a new Group](#create-a-new-group)
-        - [Create a new User](#create-a-new-user)
-        - [Test user Joe Doe](#test-user-joe-doe)
-        - [Grant access to certain Catalog Items](#grant-access-to-certain-catalog-items)
-        - [Test once more as Joe Doe](#test-once-more-as-joe-doe)
     - [Even more?](#even-more)
 
 <!-- /TOC -->
@@ -524,7 +516,7 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
 
 1. This concludes this first part of the lab
 
-## CloudForms 4.5 with Ansible batteries included
+## CloudForms with Ansible batteries included
 
 ***TODO: Replace this with a better example, we won't have vCenter in this lab***
 
@@ -1274,6 +1266,10 @@ Start by going to vSphere Web Client and selecting the VM that you identified fo
 
     ![verify-vmware-vm](img/verify-vmware-vm.png)
 
+## Custom buttons calling Ansible Playbooks
+
+## Calling Ansible Playbooks from Automate
+
 ## Advanced labs
 
 If you were able to complete all the steps and still have some time left, here are a couple of things you can do to get more familiar with CloudForms.
@@ -1287,202 +1283,6 @@ The Self Service user Interface can be accessed by appending the string "self_se
 [https://cf-&lt;GUID&gt;.labs.rhepds.com/self_service](https://cf-&lt;GUID&gt;.labs.rhepds.com/self_service)
 
 You can login with the same credentials as before.
-
-### Use role Based Access Control to publish Service Catalog
-
-So far we have created Catalog Items which are visible to any logged in user. In most Enterprise environments, specific Service Catalog items should only be accessible for certain user groups.
-
-CloudForms offers a very granular system for role Based Access Control (RBAC). This allows system administrator to grant or deny specific privileges to reduce visibility, reduce risk of human errors or provide better cost control.
-
-In this advanced lab we want only specific Catalog Items to be available for certain user groups. CloudForms is using tags to identify objects. For example, if a Service Catalog Item is tagged as "Department Engineering" only users which are in a group which is also tagged as "Department Engineering" will see and be able to order this Catalog Item.
-
-### User Groups
-
-A user is always member of at least one user group. The group defines the visibility granted to all member users. For example, members of the group "Department Engineering" can see all objects tagged with this tag.
-
-### Roles
-
-The role defines which actions are allowed to groups associated to this role. For example the role can grant the privilege to start or stop Virtual Machines, manage Service Catalog items, or define and use reports.
-
-Since roles can be associated to multiple groups, they can be reused. A user in Department Engineering might have the same privileges as a user in Department Sales, but they will see different objects which they can interact with.
-
-### More details
-
-If you want to learn more about CloudForms' Role Based Access Control, you can read the [official product documentation](https://access.redhat.com/documentation/en/red-hat-cloudforms/). The chapter [access control](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/general_configuration/configuration#access-control) in the [General Configuration](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/general_configuration/) Guide also provides more background information. Last but not least, there is a good summary about [Using Tags for Access Control](http://cloudformsblog.redhat.com/2016/10/13/using-tags-for-access-control/) on the [official CloudForms Blog](http://cloudformsblog.redhat.com).
-
-### Create a Role
-
-For this lab, we first want to create a role which we want to use for testing.
-
-1. Navigate to ***Configuration*** on the top right menu
-
-    ![navigate to configuration](img/navigate-to-configuration.png)
-
-1. Click on ***Access Control*** in the accordion on the left
-
-    ![access control](img/navigate-to-access-control.png)
-
-1. Click on ***roles*** and ***Configuration*** -> ***Add a new role***
-
-    ![add a new role](img/add-a-new-role.png)
-
-1. We want to define a new role, which has enough privileges to order and interact with Service Catalog Items.
-
-    ***Name:*** Self Server role
-
-    ***Access Restriction for Services, VMs, and Templates:*** None
-
-    Defining the privileges is actually very simple. The tree view allows us to simply select or unselect the privileges we want to grant to users associated to this role.
-
-    1. Let's unselect all items on the first level, except for "Services".
-
-    1. Click on the little triangular icon next to "Services" to open the sub folder. Make sure "My Services", "Workloads" and "Request" are selected.
-
-    1. Click on the little triangular icon next to "Catalogs Explorer" and make sure everything except "Service Catalogs" is not selected.
-
-    The resulting dialog should look like this:
-
-    ![defined self server role](img/define-self-service-role.png)
-
-1. Click ***Add*** to save the new role
-
-1. Now we want to create a group associated to this role. Click on ***groups*** and ***Configuration*** -> ***Add a new group***
-
-    ![add a new group](img/add-new-group.png)
-
-### Create a new Group
-
-Next we want to create a group and assign it to the role we just created.
-
-1. Create the new group
-
-    ***Description:*** Self Service Engineering
-
-    Select the role "Self Service role" you just created:
-
-    ***role:*** Self Service role
-
-    CloudForms also supports multiple tenants. Since we have not defined any tenants, choose the parent "My Company" tenant:
-
-    ***Project/Tenant:*** My Company
-
-    In "My Company Tags" click on the little triangular icon next to "Department" and click on "Engineering"
-
-    ***Note:*** It is important to only select this particular tag and do not click on any other additional tags!
-
-    ![define new group](img/define-new-group.png)
-
-1. Click on ***Add*** to create this new group
-
-### Create a new User
-
-Finally we want to create a user which is a member of the group we just created.
-
-1. Click on ***users*** and ***Configuration*** -> ***Add a new user***
-
-    ![add a new user](img/add-new-user.png)
-
-1. Create a new user with these parameters:
-
-    ***Full Name:*** Joe Doe
-
-    ***username:*** joe
-
-    ***Password:*** r3dh4t1!
-
-    ***Confirm Password:*** r3dh4t1!
-
-    ***E-mail Address:*** joe@example.com
-
-    ***Note:*** CloudForms is not configured to send out emails, but the email address is a mandatory field
-
-    ***group:*** Self Service Engineering
-
-    ![add new user Joe Doe](img/add-user-joe-doe.png)
-
-    Click on ***Add*** to create the user
-
-### Test user Joe Doe
-
-So far we have not assigned any objects to the new group, but we have granted very specific rights to members of that group.
-
-Let's see what happens if we log into CloudForms as "Joe Doe".
-
-***Note:*** You can not log into CloudForms with different users while you're in the same browser session. You have to log out and log in again. As an alternative, you can use a different browser, if available, or you can open an additional window in "private" mode.
-
-1. Log out of CloudForms by clicking on the user name on the top right and click on ***Logout***
-
-    ![logout](img/logout.png)
-
-1. Log in as user Joe Doe:
-
-    ***username:*** joe
-
-    ***Password:*** r3dh4t1!
-
-    ![login as Joe Doe](img/login-as-joe-doe.png)
-
-1. You should notice that most of the menus are gone now. On the top level menu on the left, we can only click on ***Services*** and have only four sub menus available.
-
-1. Navigate to the service catalog
-
-    ![navigate to service catalog](img/navigate-to-service-catalog-joe-doe.png)
-
-1. You should notice that there are no Catalog Items available! Although we have defined some Catalog Items earlier in this lab, none of them are available to the "Self Service Engineering" group.
-
-1. Let's logout again
-
-    ![logout](img/logout.png)
-
-### Grant access to certain Catalog Items
-
-We want to make one Catalog Item available to all users which are members of the "Self Service Engineering" group.
-
-1. Log into CloudForms as admin
-
-1. Navigate to ***Services*** -> ***Catalogs***
-
-    ![navigate to services catalogs](img/navigate-to-service-catalog.png)
-
-1. Click on ***Catalog Items*** in the accordion on the left
-
-    ![navigate to catalog items](img/navigate-to-catalog-items-heat.png)
-
-1. Click on ***Virtual Machines*** and ***Simple VM***
-
-    ![catalog item simple vm details](img/catalog-item-simple-vm-details.png)
-
-1. Click on ***Policy*** -> ***Edit Tags***
-
-    ![catalog item edit tags](img/catalog-item-edit-tags.png)
-
-1. Assign the Tag "Department" / "Engineering" to the Catalog Item
-
-    ![assign department engineering tag](img/assign-department-engineering-tag.png)
-
-1. Click ***Save*** to commit the changes
-
-### Test once more as Joe Doe
-
-We want to do another test and see if the user Joe Doe can now see and other the Catalog Item.
-
-1. Log out
-
-    ![logout](img/logout.png)
-
-1. Log in as Joe Doe
-
-    ![login as Joe Doe](img/login-as-joe-doe.png)
-
-1. Navigate to ***Services*** -> ***Catalogs***
-
-    ![navigate to service catalogs](img/navigate-to-service-catalog.png)
-
-1. Now you should see one Service Catalog Item: "Simple VM" - but no other Service Catalog Items.
-
-    ![service catalog](img/service-catalog-joe-doe.png)
-
-1. If you want, you can order the Service Catalog Item and should see that it will be deployed perfectly.
 
 ## Even more?
 

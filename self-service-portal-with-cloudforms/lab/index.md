@@ -8,6 +8,7 @@
     - [Verify Lab](#verify-lab)
         - [OpenStack Provider status](#openstack-provider-status)
         - [Red Hat Virtualization Provider status](#red-hat-virtualization-provider-status)
+        - [Red Hat OpenShift Container Platform status](#red-hat-openshift-container-platform-status)
     - [Build a Service Catalog with CloudForms](#build-a-service-catalog-with-cloudforms)
         - [What's the value of having a service catalog?](#whats-the-value-of-having-a-service-catalog)
         - [Service Basics](#service-basics)
@@ -17,6 +18,8 @@
         - [Build a Virtual Machine Service Catalog Item](#build-a-virtual-machine-service-catalog-item)
         - [Order the Simple Virtual Machine Service Catalog Item](#order-the-simple-virtual-machine-service-catalog-item)
         - [Verify the order](#verify-the-order)
+        - [Ansible Example](#ansible-example)
+        - [OpenShift example](#openshift-example)
         - [HEAT Provisioning example](#heat-provisioning-example)
         - [Prepare the HEAT Template](#prepare-the-heat-template)
         - [Import the HEAT Template](#import-the-heat-template)
@@ -47,6 +50,8 @@
 [General introduction](../../common/index.md)
 
 ### Access the lab environment
+
+TODO: This has to be updated with the Summit specific instructions
 
 Navigate to the RHPDS Portal and order the "Getting Well With CloudForms" in the catalog "Cloud Infrastructure Demos".
 
@@ -138,11 +143,15 @@ Let's then check the RHV Provider:
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
+### Red Hat OpenShift Container Platform status
+
+TODO: Add steps to verify the OCP provider status
+
 ## Build a Service Catalog with CloudForms
 
 This lab will guide you through the process of creating a service catalog in CloudForms.
 
-### What's the value of having a service catalog?
+### Value provided by a Service Catalog
 
 One of the features a Cloud Management Platform provides, is a self service user interface. Here users can order, manage and retire services. Services are categorized in catalogs, where they can be organized and easily consumed.
 
@@ -503,6 +512,14 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
     ![lab VM complete](img/rhv-lab-vm-complete.png)
 
 1. This concludes this first part of the lab
+
+### Ansible Example
+
+TODO: Explain how to create a catalog item based on an Ansible Playbook
+
+### OpenShift example
+
+TODO: Explain how to create a catalog item based on an OpenShift Template
 
 ### HEAT Provisioning example
 
