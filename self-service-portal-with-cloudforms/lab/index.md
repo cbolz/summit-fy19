@@ -143,9 +143,27 @@ Let's then check the RHV Provider:
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
+After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
+
 ### Red Hat OpenShift Container Platform status
 
-TODO: Add steps to verify the OCP provider status
+Let's finally check the OpenShift Provider:
+
+1. Navigate to ***Compute*** -> ***Containers*** -> ***Providers***
+
+    ![navigate to container providers](img/navigate-to-compute-container-providers.png)
+
+1. You should see a tile icon labeled "OpenShift". Click on it.
+
+    ![OpenShift provider tile icon](img/openshift-provider-tile.png)
+
+1. Click on ***Authentication*** -> ***Re-check Authentication Status***
+
+    ![re-check authentication](img/openshift-recheck-authentcation.png)
+
+This will validate the credentials are correct, and it will also restart the provider specific background processes.
+
+After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
 
 ## Build a Service Catalog with CloudForms
 
