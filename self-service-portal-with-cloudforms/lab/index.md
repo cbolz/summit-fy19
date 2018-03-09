@@ -111,11 +111,11 @@ Let's first check the OpenStack Provider:
 
 1. Navigate to ***Compute*** -> ***Clouds*** -> ***Providers***
 
-    [![navigate to cloud providers](img/navigate-to-compute-clouds-providers-small.png)](img/navigate-to-compute-clouds-providers.png)
+    ![navigate to cloud providers](img/navigate-to-compute-clouds-providers.png)
 
 1. You should see a tile icon labeled "RHEV". Click on it.
 
-    [![OpenStack provider tile icon](img/openstack-provider-tile-small.png)](img/openstack-provider-tile.png)
+    ![OpenStack provider tile icon](img/openstack-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
