@@ -10,7 +10,7 @@
         - [Red Hat Virtualization Provider status](#red-hat-virtualization-provider-status)
         - [Red Hat OpenShift Container Platform status](#red-hat-openshift-container-platform-status)
     - [Build a Service Catalog with CloudForms](#build-a-service-catalog-with-cloudforms)
-        - [What's the value of having a service catalog?](#whats-the-value-of-having-a-service-catalog)
+        - [Value provided by a Service Catalog](#value-provided-by-a-service-catalog)
         - [Service Basics](#service-basics)
         - [Virtual Machine Provisioning example](#virtual-machine-provisioning-example)
         - [Build a VM Provisioning Service Dialog](#build-a-vm-provisioning-service-dialog)
@@ -111,11 +111,11 @@ Let's first check the OpenStack Provider:
 
 1. Navigate to ***Compute*** -> ***Clouds*** -> ***Providers***
 
-    ![navigate to cloud providers](img/navigate-to-compute-clouds-providers.png)
+    [![navigate to cloud providers](img/navigate-to-compute-clouds-providers-small.png)](img/navigate-to-compute-clouds-providers.png)
 
 1. You should see a tile icon labeled "RHEV". Click on it.
 
-    ![OpenStack provider tile icon](img/openstack-provider-tile.png)
+    [![OpenStack provider tile icon](img/openstack-provider-tile-small.png)](img/openstack-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
