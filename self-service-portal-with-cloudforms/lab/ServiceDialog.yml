@@ -1,0 +1,107 @@
+---
+- description: Simple VM provisioning dialog
+  buttons: submit,cancel
+  label: Simple VM
+  dialog_tabs:
+  - description: 
+    display: 
+    label: New tab
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: 
+      label: New section
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: option_0_vm_name
+        description: Specify the name of the new virtual machine
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        type: DialogFieldTextBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+        dialog_field_responders: []
+      - name: option_0_vm_memory
+        description: Select how much memory the virtual machine should have
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values:
+        - - 
+          - "<Choose>"
+        - - '2048'
+          - 2 GB
+        - - '4096'
+          - 4 GB
+        - - '8192'
+          - 8 GB
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Memory size
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+        dialog_field_responders: []
