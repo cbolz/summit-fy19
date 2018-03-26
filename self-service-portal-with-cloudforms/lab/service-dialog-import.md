@@ -10,7 +10,7 @@
 
     ![navigate to import/export](../../common/img/dialog-import-export.png)
 
-1. Download the service dialog [YAML definition from Github](https://raw.githubusercontent.com/cbolz/summit-fy19/self-service-update-46/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and save it locally. Make sure the filename ends with .yml
+1. Download the service dialog [YAML definition from Github](https://github.com/cbolz/summit-fy19/blob/self-service-update-46/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and save it locally. Make sure the filename ends with .yml
 
 1. Click on "Chose File" and open the file you just downloaded and click on "Upload"
 
