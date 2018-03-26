@@ -245,7 +245,7 @@ Follow these steps to design the service dialog:
 
     ***Name:*** option_0_vm_name
 
-    The help is some text which will be shown if the clicks the little question mark icon next to the element. It can be used to provide additional information to the user to fill out this field:
+    The help is some text which will be shown if the mouse hovers over the little question mark icon next to the element. It can be used to provide additional information to the user to fill out this field:
 
     ***Help:*** Specify the name of the new virtual machine
 
@@ -282,27 +282,31 @@ Follow these steps to design the service dialog:
 
     ***Description:*** Select how much memory the virtual machine should have
 
-    ***Type:*** Drop Down List
+1. Switch to the ***Options*** tab of the dialog and add the following entries.
 
     A element of type "Drop Down List" allows the user to select one of the predefined values. To create the list of selectable values, scroll down to the table "Entries" and add the following lines:
 
-    ***Value:*** 2048
+    ***Key:*** 2048
 
-    ***Description:*** 2 GB
+    ***Value:*** 2 GB
 
-    ***Value:*** 4096
+    ***Key:*** 4096
 
-    ***Description:*** 4 GB
+    ***Value:*** 4 GB
 
-    ***Value:*** 8192
+    ***Key:*** 8192
 
-    ***Description:*** 8 GB
+    ***Value:*** 8 GB
 
-    ***Note:*** To be able to add a line to the table, click on the little "Add this entry" icon on the left of each row!
+    ***Required:*** is Yes
+
+    ***Variable Type:*** Integer
+
+    ***Note:*** To be able to add a line to the table, click on the little plus icon on the bottom of the list
 
     ![add entries to the drop down list](../../common/img/memory-dropdownlist.png)
 
-1. We are finally done designing the dialog. Click on ***Add*** to save the dialog.
+1. We are finally done designing the dialog. Click on ***Save*** to save the dialog.
 
     ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [Github](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/service-dialog/simple-vm.yml) and import it. Follow the instructions on how to [import a service dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
 
@@ -352,7 +356,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     Catalog Bundles are used for multi tier applications and consist of many Catalog Items. Since we do not have any existing Catalog Items, we can not create a Bundle.
 
-1. Chose the Catalog Item Type. For this example we want to use the Red Hat Virtualization Provider, so click on ***RHEV***
+1. Chose the Catalog Item Type. For this example we want to use the Red Hat Virtualization Provider, so click on ***Red Hat Virtualization***
 
     ![select catalog item type](../../common/img/select-catalog-item-type.png)
 
@@ -397,7 +401,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     Select the template used for provisioning:
 
-    ***Selected VM:*** rhel73
+    ***Selected VM:*** RHEL7
 
     For automatic naming chose "changeme"
 
@@ -419,11 +423,11 @@ To tie everything together, the last step is to define a service catalog item.
 
     The host which will perform the actual tasks and where the VM will initially run on:
 
-    ***Host:*** rhelkvm
+    ***Host:*** rhvh1.example.com
 
     The storage domain to store the VM
 
-    ***Datastore:*** vmstore00
+    ***Datastore:*** data
 
 1. Click on the next sub tab ***Hardware***
 
@@ -433,11 +437,11 @@ To tie everything together, the last step is to define a service catalog item.
 
     The lab environment is very simple, there is only one VLAN available:
 
-    ***VLAN:*** rhevm
+    ***Network:*** ovirtmgmt
 
 1. Click on the next sub tab ***Customize***
 
-    This allows to reconfigure certain settings inside the virtual machine. For this lab, we keep them all empty
+    This allows to reconfigure certain settings inside the virtual machine. For the purpose of this lab, we keep them all empty
 
 1. Click on the last sub tab ***Schedule***
 
