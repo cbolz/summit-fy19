@@ -68,11 +68,11 @@ If you've never used RHPDS before, make sure you follow the [Lab Environment Acc
 
 After you logged in, navigate to ***Services*** -> ***Catalogs***. Open the "EMEA RHTE" Catalog.
 
-![EMEA RHTE Catalog](img/emea-rhte-catalog.png) 
+![EMEA RHTE Catalog](../../common/img/emea-rhte-catalog.png) 
 
 Click on the "EMEA RHTE CF Lab" and click on ***Order*** to start deployment. 
 
-![Order CF Lab](img/order-rhte-lab.png)
+![Order CF Lab](../../common/img/order-rhte-lab.png)
 
 ***Note:*** Give the lab up to 15 minutes to complete provisioning!
 
@@ -118,15 +118,15 @@ Let's first check the OpenStack Provider:
 
 1. Navigate to ***Compute*** -> ***Clouds*** -> ***Providers***
 
-    ![navigate to cloud providers](img/navigate-to-compute-clouds-providers.png)
+    ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
 1. You should see a tile icon labeled "RHEV". Click on it.
 
-    ![OpenStack provider tile icon](img/openstack-provider-tile.png)
+    ![OpenStack provider tile icon](../../common/img/openstack-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
-    ![re-check authentication](img/openstack-recheck-authentication.png)
+    ![re-check authentication](../../common/img/openstack-recheck-authentication.png)
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
@@ -138,15 +138,15 @@ Let's then check the RHV Provider:
 
 1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Providers***
 
-    ![navigate to cloud providers](img/navigate-to-compute-infrastructure-providers.png)
+    ![navigate to cloud providers](../../common/img/navigate-to-compute-infrastructure-providers.png)
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
-    ![OpenStack provider tile icon](img/rhv-provider-tile.png)
+    ![OpenStack provider tile icon](../../common/img/rhv-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
-    ![re-check authentication](img/rhv-recheck-authentication.png)
+    ![re-check authentication](../../common/img/rhv-recheck-authentication.png)
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
@@ -194,11 +194,11 @@ Follow these steps to design the service dialog:
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
 
-    ![navigate to Automation, Automate, Customization](img/navigate-to-customization.png)
+    ![navigate to Automation, Automate, Customization](../../common/img/navigate-to-customization.png)
 
 1. Navigate to ***Service Dialogs*** in the accordion on the left.
 
-    ![navigate to service dialogs](img/service-dialog-accordion.png)
+    ![navigate to service dialogs](../../common/img/service-dialog-accordion.png)
 
 1. Click on ***Configuration*** -> ***Add a new Dialog***
 
@@ -212,7 +212,7 @@ Follow these steps to design the service dialog:
 
     ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
 
-    ![create a service dialog](img/create-service-dialog.png)
+    ![create a service dialog](../../common/img/create-service-dialog.png)
 
 1. Click on the little plus icon in the menu on the top and select ***Add a new Tab to this Dialog***
 
@@ -224,7 +224,7 @@ Follow these steps to design the service dialog:
 
     ***Description:*** Generic Tab
 
-    ![add a new tab to the dialog](img/generic-tab.png)
+    ![add a new tab to the dialog](../../common/img/generic-tab.png)
 
 1. Click on the little plus icon and ***Add a new Box to this Tab***
 
@@ -236,7 +236,7 @@ Follow these steps to design the service dialog:
 
     ***Description:*** Generic Box
 
-    ![add a new box to the tab](img/generic-box.png)
+    ![add a new box to the tab](../../common/img/generic-box.png)
 
 1. Now we can add elements to this box. Click on ***Add a new Element to this Box***
 
@@ -267,7 +267,7 @@ Follow these steps to design the service dialog:
     
     We want the user to enter a text which then will be used to name the VM. This can be accomplished by selecting "Text Box" in the ***Type*** drop down list.
 
-    ![add a new element to ask for the VM name](img/element-vmname.png)
+    ![add a new element to ask for the VM name](../../common/img/element-vmname.png)
 
     The remaining options can be ignored for now.
 
@@ -297,7 +297,7 @@ Follow these steps to design the service dialog:
 
     ***Note:*** To be able to add a line to the table, click on the little "Add this entry" icon on the left of each row!
 
-    ![add entries to the drop down list](img/memory-dropdownlist.png)
+    ![add entries to the drop down list](../../common/img/memory-dropdownlist.png)
 
 1. We are finally done designing the dialog. Click on ***Add*** to save the dialog.
 
@@ -309,11 +309,11 @@ The following steps will create a Service Catalog.
 
 1. The next step is to create a Service Catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalogs*** in the accordion on the left
 
-    ![service catalogs](img/service-catalogs.png)
+    ![service catalogs](../../common/img/service-catalogs.png)
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -323,7 +323,7 @@ The following steps will create a Service Catalog.
 
     ***Description:*** Deploy Virtual Machines from the Catalog
 
-    ![add a new catalog](img/add-a-new-catalog.png)
+    ![add a new catalog](../../common/img/add-a-new-catalog.png)
 
 1. Click ***Add*** to save the Service Catalog
 
@@ -333,7 +333,7 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalog items*** in the accordion on the left.
 
@@ -343,7 +343,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     ***Virtual Machines:*** the Service Catalog we just created in the previous step
 
-    ![navigate to catalog items](img/navigate-to-catalog-items.png)
+    ![navigate to catalog items](../../common/img/navigate-to-catalog-items.png)
 
 1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
 
@@ -351,7 +351,7 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Chose the Catalog Item Type. For this example we want to use the Red Hat Virtualization Provider, so click on ***RHEV***
 
-    ![select catalog item type](img/select-catalog-item-type.png)
+    ![select catalog item type](../../common/img/select-catalog-item-type.png)
 
     ***Note:*** It can take a few seconds for the next screen to load.
 
@@ -379,7 +379,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     All other fields on this tab can remain unchanged.
 
-    ![adding a new catalog item](img/adding-a-new-catalog-item.png)
+    ![adding a new catalog item](../../common/img/adding-a-new-catalog-item.png)
 
     Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
@@ -444,7 +444,7 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Finally click on ***Add*** to save the Catalog Item
 
-    ![catalog item saved](img/catalog-item-saved.png)
+    ![catalog item saved](../../common/img/catalog-item-saved.png)
 
 ### Order the Simple Virtual Machine Service Catalog Item
 
@@ -452,15 +452,15 @@ For sure you want to test the Service Catalog Item you just created!
 
 1. Navigate to ***Services*** -> ***Catalogs*** and then click on ***Service Catalogs*** in the accordion on the left.
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. You should see the Service Catalog Item we just created:
 
-    ![all services](img/all-services.png)
+    ![all services](../../common/img/all-services.png)
 
 1. Click on the Item to see more details.
 
-    ![service item details](img/service-item-details.png)
+    ![service item details](../../common/img/service-item-details.png)
 
     Note that the Link for Red Hat Enterprise Linux in fact opens the Red Hat Homepage.
 
@@ -470,11 +470,11 @@ For sure you want to test the Service Catalog Item you just created!
 
     Chose an example virtual machine name and the amount of memory you would like to be allocated.
 
-    ![example-oder-simple-vm](img/example-order-simple-vm.png)
+    ![example-oder-simple-vm](../../common/img/example-order-simple-vm.png)
 
 1. You will be redirected to the request queue where you can see CloudForms working on your request.
 
-    ![simple vm ordered](img/simple-vm-ordered.png)
+    ![simple vm ordered](../../common/img/simple-vm-ordered.png)
 
     ***Note:*** Since we are using nested virtualization to run these labs, performance will be slow and it can take several minutes to complete the request (20-30 minutes).
 
@@ -488,11 +488,11 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
 
         URL: https://rhevm-<GUID>.rhpds.opentlc.com
 
-    ![rhv portal page](img/rhv-portal.png)
+    ![rhv portal page](../../common/img/rhv-portal.png)
 
 1. Click on ***Administrator Portal***
 
-    ![rhv admin portal](img/rhv-admin-portal.png)
+    ![rhv admin portal](../../common/img/rhv-admin-portal.png)
 
 1. Log in with these credentials:
 
@@ -504,15 +504,15 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
 
 1. Click on the tab ***Virtual Machines*** to see all existing virtual machines
 
-    ![vm overview](img/rhv-vm-overview.png)
+    ![vm overview](../../common/img/rhv-vm-overview.png)
 
 1. After a few moments you're virtual machine should automatically show up in the list.
 
-    ![lab VM showing up](img/rhv-lab-vm.png)
+    ![lab VM showing up](../../common/img/rhv-lab-vm.png)
 
     Note that while the virtual machine is created, the memory size is still 1 GB. This value is specified in the template therefore copied when creating the virtual machine. Only after the virtual machine was successfully cloned, CloudForms corrects the memory size.
 
-    ![lab VM complete](img/rhv-lab-vm-complete.png)
+    ![lab VM complete](../../common/img/rhv-lab-vm-complete.png)
 
 1. This concludes this first part of the lab
 
@@ -538,17 +538,17 @@ Before we start,  we want to make sure the embedded Ansible role is enabled and 
 
 1. Click on your user name on the top right and click on ***Configuration***
 
-    ![navigate to configuration](img/navigate-to-configuration.png)
+    ![navigate to configuration](../../common/img/navigate-to-configuration.png)
 
 1. Make sure the "Embedded Ansible" Role is enabled
 
-    ![ansible role enabled](img/ansible-role-enabled.png)
+    ![ansible role enabled](../../common/img/ansible-role-enabled.png)
 
 1. Click on ***Diagnostics*** in the accordion on the left and click on the ***Workers*** tab
 
 1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
 
-    ![ansible worker started](img/ansible-worker-started.png)
+    ![ansible worker started](../../common/img/ansible-worker-started.png)
 
 Logoff as demouser and login back as Admin
 
@@ -558,7 +558,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 1. Navigate to Automation, Ansible, Repositories.
 
-    ![navigate to Ansible repositories](img/navigate-to-ansible-repo.png)
+    ![navigate to Ansible repositories](../../common/img/navigate-to-ansible-repo.png)
 
 1. Click on ***Configuration***, ***Add New Repository***
 
@@ -572,7 +572,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***SCM Update Options:*** check "Update on Launch"
 
-    ![add a new repository](img/add-ansible-repository.png)
+    ![add a new repository](../../common/img/add-ansible-repository.png)
 
 1. Click on ***Add*** to save the settings
 
@@ -586,7 +586,7 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to service catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalogs*** in the accordion on the left
 
@@ -596,7 +596,7 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
     ***Description:*** Ansible Service Catalog Items
 
-    ![create ansible catalog](img/create-ansible-catalog.png)
+    ![create ansible catalog](../../common/img/create-ansible-catalog.png)
 
 1. Click ***Add*** to save the new catalog
 
@@ -604,13 +604,13 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
 1. Click on ***Catalog Items*** in the accordion on the left
 
-    ![navigate to service catalog items](img/add-catalog-item.png)
+    ![navigate to service catalog items](../../common/img/add-catalog-item.png)
 
 1. Click on ***Configuration*** -> ***Add a New Catalog Item***
 
 1. Select ***Ansible Playbook*** as "Catalog Item Type"
 
-    ![add catalog item ansible Playbook](img/add-catalog-item-ansible-playbook.png)
+    ![add catalog item ansible Playbook](../../common/img/add-catalog-item-ansible-playbook.png)
 
     ***Note:*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
 
@@ -648,7 +648,7 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
     ***Dialog name:*** create-user
 
-    ![create user service dialog](img/create-new-user-prov.png)
+    ![create user service dialog](../../common/img/create-new-user-prov.png)
 
 1. Click on the tab ***Retirement*** to switch to the second page of the form.
 
@@ -660,7 +660,7 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
     There are no variables needed for retirement and the ***Variables & Default Values*** can be left empty.
 
-    ![create user service dialog retirement](img/create-new-user-retire.png)
+    ![create user service dialog retirement](../../common/img/create-new-user-retire.png)
 
 1. Click on ***Add*** to save the catalog item
 
@@ -670,25 +670,25 @@ To make sure everything works as expected, we want to test the Catalog Item we j
 
 1. Navigate to the Service Catalog by clicking on ***Services*** -> ***Catalogs***
 
-    ![navigate to service catalog](img/navigate-to-service-catalog.png)
+    ![navigate to service catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Service Catalog*** in the accordion on the left
 
 1. Click on the Catalog Item you just created:
 
-    ![navigate to service catalog](img/service-catalog-overview-create-user.png)
+    ![navigate to service catalog](../../common/img/service-catalog-overview-create-user.png)
 
 1. Click ***Order***
 
 1. The default values in the form can be left alone. Optionally you can specify a different user name and password
 
-    ![create user order form](img/create-user-order-form.png)
+    ![create user order form](../../common/img/create-user-order-form.png)
 
 1. Click ***Submit***
 
     After clicking "Submit" you will be redirected to the Request Queue.
 
-    ![request queue after ordering create user](img/request-queue-create-user.png)
+    ![request queue after ordering create user](../../common/img/request-queue-create-user.png)
 
 ### Monitor create user Playbook execution
 
@@ -696,27 +696,27 @@ When executing an Ansible Playbook with the embedded role in CloudForms, a "Serv
 
 1. Navigate to ***Services*** -> ***My Services***
 
-    ![navigate to my services](img/navigate-to-my-services.png)
+    ![navigate to my services](../../common/img/navigate-to-my-services.png)
 
 1. You should see a new tile representing the Ansible Playbook Service you just ordered
 
     ***Note:*** If you don't see the tile yet, wait a minute and try again.
 
-    ![create user service tile](img/my-service-create-user-tile.png)
+    ![create user service tile](../../common/img/my-service-create-user-tile.png)
 
 1. After clicking on the icon, we can see more details about the service which was created
 
-    ![create user service details](img/create-user-service-details.png)
+    ![create user service details](../../common/img/create-user-service-details.png)
 
     Since this Service does not create a Virtual Machine, the box "VMs" will always say "No Records found"
 
 1. Click on the ***Provisioning*** tab to see the output of the Ansible Playbook
 
-    ![ansible Playbook output](img/ansible-playbook-output.png)
+    ![ansible Playbook output](../../common/img/ansible-playbook-output.png)
 
     If the Playbook execution has not completed, you can click the reload icon to refresh the information. The ***Reload*** icon is represented by a little arrow, left of the ***Configuration*** menu.
 
-    ![reload icon](img/reload-icon.png)
+    ![reload icon](../../common/img/reload-icon.png)
 
     ***Note:*** If the Playbook execution has not started yet, you might not see any details in the "Provisioning" tab. Wait a minute and reload once more.
 
@@ -726,19 +726,19 @@ To make sure the user was really created, follow these steps.
 
 1. Click on your username on the top right and click on ***Configuration***
 
-    ![navigate to configuration](img/navigate-to-configuration.png)
+    ![navigate to configuration](../../common/img/navigate-to-configuration.png)
 
 1. Click on ***Access Control*** in the accordion on the left
 
-    ![navigate to access control](img/access-control.png)
+    ![navigate to access control](../../common/img/access-control.png)
 
 1. Click on ***Users*** and you should see the user you just created (in this screenshot the user is called "example")
 
-    ![user example exists](img/user-example.png)
+    ![user example exists](../../common/img/user-example.png)
 
 1. OPTIONALLY: If you want, you can log out of CloudForms and try to log in with the user you just created. Click on your username on the top right and ***Logout***.
 
-    ![logout](img/logout.png)
+    ![logout](../../common/img/logout.png)
 
 ### Build a Service Catalog to deploy Virtual Machines
 
@@ -746,13 +746,13 @@ In this second part of the lab we want to use an Ansible Playbook to deploy a Vi
 
 1. Click on ***Catalog Items*** in the accordion on the left
 
-    ![navigate to service catalog items](img/add-catalog-item.png)
+    ![navigate to service catalog items](../../common/img/add-catalog-item.png)
 
 1. Click on ***Configuration*** -> ***Add a New Catalog Item***
 
 1. Select ***Ansible Playbook*** as "Catalog Item Type"
 
-    ![add catalog item ansible Playbook](img/add-catalog-item-ansible-playbook.png)
+    ![add catalog item ansible Playbook](../../common/img/add-catalog-item-ansible-playbook.png)
 
     ***Note:*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
 
@@ -832,11 +832,11 @@ In this second part of the lab we want to use an Ansible Playbook to deploy a Vi
 
     ***Dialog name:*** provision-vm-vcenter
 
-    ![create user service dialog](img/vm-from-template-prov.png)
+    ![create user service dialog](../../common/img/vm-from-template-prov.png)
 
 1. Click on ***Add*** to save the Service Catalog Item. It can take a few moments for the changes to be saved.
 
-    ![catalog item was created](img/vm-prov-catalog-item-created.png)
+    ![catalog item was created](../../common/img/vm-prov-catalog-item-created.png)
 
 ### Order the Virtual Machine Provisioning Service Catalog Item
 
@@ -844,23 +844,23 @@ Once more, we want to test the result and see everything works as expected.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to service catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on the Service Catalog Item we just created "Provision Virtual Machine"
 
-    ![provision virtual machine catalog item](img/provision-vm-catalog-item.png)
+    ![provision virtual machine catalog item](../../common/img/provision-vm-catalog-item.png)
 
 1. Click ***Order***
 
 1. If you specified the dialog elements like described before, your form should look like this and all the provided default values can be accepted.
 
-    ![provision virtual machines details](img/provision-vm-details.png)
+    ![provision virtual machines details](../../common/img/provision-vm-details.png)
 
 1. Click on ***Submit***
 
     After you click on "Submit" you will be redirected to the requests queue.
 
-    ![requests queue after ordering provision VM](img/requests-queue-after-vm-prov.png)
+    ![requests queue after ordering provision VM](../../common/img/requests-queue-after-vm-prov.png)
 
 ### Monitor VM provisioning Playbook execution
 
@@ -868,27 +868,27 @@ When executing an Ansible Playbook with the embedded role in CloudForms, a "Serv
 
 1. Navigate to ***Services*** -> ***My Services***
 
-    ![navigate to my services](img/navigate-to-my-services.png)
+    ![navigate to my services](../../common/img/navigate-to-my-services.png)
 
 1. You should see a new tile representing the Ansible Playbook Service you just ordered
 
     ***Note:*** If you don't see the tile yet, wait a minute and try again.
 
-    ![create user service tile](img/my-service-provision-vm-tile.png)
+    ![create user service tile](../../common/img/my-service-provision-vm-tile.png)
 
 1. After clicking on the icon, we can see more details about the service which was created
 
-    ![create user service details](img/vm-prov-service-details.png)
+    ![create user service details](../../common/img/vm-prov-service-details.png)
 
     Since this Service does not create a Virtual Machine, the box "VMs" will always say "No Records found"
 
 1. Click on the ***Provisioning*** tab to see the output of the Ansible Playbook
 
-    ![ansible Playbook output](img/vm-prov-ansible-Playbook-output.png)
+    ![ansible Playbook output](../../common/img/vm-prov-ansible-Playbook-output.png)
 
     If the Playbook execution has not completed, you can click the reload icon to refresh the information. The ***Reload*** icon is represented by a little arrow, left of the ***Configuration*** menu.
 
-    ![reload icon](img/reload-icon.png)
+    ![reload icon](../../common/img/reload-icon.png)
 
 ### Extend CloudForms builtin Capabilities
 
@@ -902,13 +902,13 @@ In this lab you have so far learned how to use Ansible Playbooks to orchestrate 
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Import/Export***
 
-    ![navigate to automate import/export](img/navigate-to-automate-import-export.png)
+    ![navigate to automate import/export](../../common/img/navigate-to-automate-import-export.png)
 
 1. Use the following URL to access the Git repository:
 
     [https://github.com/cbolz/partner-conference-2017-labs.git](https://github.com/cbolz/partner-conference-2017-labs.git)
 
-    ![adding the Automate Git repository](img/adding-automate-git.png)
+    ![adding the Automate Git repository](../../common/img/adding-automate-git.png)
 
 1. Click ***Submit***. It will take a few moments to check the Git repository.
 
@@ -916,11 +916,11 @@ In this lab you have so far learned how to use Ansible Playbooks to orchestrate 
 
     For this lab, we stick with the defaults and click on ***Submit***
 
-    ![select Automate tag or branch](img/select-automate-tag-branch.png)
+    ![select Automate tag or branch](../../common/img/select-automate-tag-branch.png)
 
 1. The first import can take a few moments. After that you should see the following confirmation:
 
-    ![after first Automate import](img/after-first-automate-import.png)
+    ![after first Automate import](../../common/img/after-first-automate-import.png)
 
 ### Verify Automate import
 
@@ -928,7 +928,7 @@ We want to make sure the Automate Code was properly imported.
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Explorer***
 
-    ![navigate to Automate Explorer](img/navigate-to-automate-explorer.png)
+    ![navigate to Automate Explorer](../../common/img/navigate-to-automate-explorer.png)
 
 1. "Automate" code is organized in "Datastores". Two Datastores are shipped with CloudForms:
 
@@ -939,7 +939,7 @@ We want to make sure the Automate Code was properly imported.
 
     The screenshot was created after expanding all folders (which are actually called "Namespaces" and "Classes":
 
-    ![Automate with custom method](img/automate-with-custom-method.png)
+    ![Automate with custom method](../../common/img/automate-with-custom-method.png)
 
 This concludes the preparation for the next part of the lab.
 
@@ -949,11 +949,11 @@ The Service Dialog we created so far, is not ideal for most use cases. We want u
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
 
-    ![navigate to customization](img/navigate-to-customization.png)
+    ![navigate to customization](../../common/img/navigate-to-customization.png)
 
 1. Click on ***Service Dialog*** in the accordion on the left
 
-    ![navigate to service dialogs](img/service-dialog-accordion.png)
+    ![navigate to service dialogs](../../common/img/service-dialog-accordion.png)
 
 1. Click on the Dialog which was created in the previous step "provision-vm-vcenter"
 
@@ -977,7 +977,7 @@ The Service Dialog we created so far, is not ideal for most use cases. We want u
 
     Click on the Box "Options" and then on the little trash bin icon to delete it and all its child elements.
 
-    ![delete options box](img/delete-options-box.png)
+    ![delete options box](../../common/img/delete-options-box.png)
 
     ***Note:*** Make sure you have highlighted the correct element! If you deleted the wrong element by accident, you can click on ***Cancel*** and start over.
 
@@ -985,11 +985,11 @@ The Service Dialog we created so far, is not ideal for most use cases. We want u
 
     Click on the Element "esxi_host" and unselect the "visible" box
 
-    ![make host invisible](img/esxi-visibility.png)
+    ![make host invisible](../../common/img/esxi-visibility.png)
 
 1. The same applies for the "Datacenter". In this lab, there is only one.
 
-    ![make datacenter invisible](img/datacenter-visibility.png)
+    ![make datacenter invisible](../../common/img/datacenter-visibility.png)
 
 1. To finish the our optimizations, we want to make the vCenter a dynamic drop down. Instead of providing possible values as a hard coded list, or asking the user for manual input, we can use program code to create a list of applicable options.
 
@@ -997,17 +997,17 @@ The Service Dialog we created so far, is not ideal for most use cases. We want u
 
     Click on the Element "vcenter_hostname" and change the type to "Drop down list". Then click the check box "Dynamic". This will change the form and show us new fields:
 
-    ![form after selecting dynamic](img/vcenter-dynamic-checked.png)
+    ![form after selecting dynamic](../../common/img/vcenter-dynamic-checked.png)
 
     Click on "Entry Point". A window will pop up which allows us to specify which method instance should be called to populate this Element.
 
     Select the Instance called "get_vcenter_list" and click ***Apply***.
 
-    ![select get_vcenter_list instance](img/get_vcenter_list-instance.png)
+    ![select get_vcenter_list instance](../../common/img/get_vcenter_list-instance.png)
 
     The resulting Service Dialog Element should look like this:
 
-    ![vcenter dynamic drop down list](img/vcenter-dynamic-drop-down.png)
+    ![vcenter dynamic drop down list](../../common/img/vcenter-dynamic-drop-down.png)
 
 1. Click on ***Add** to save all changes
 
@@ -1017,17 +1017,17 @@ We have to change the Service Catalog Item to use the Service Dialog we just cre
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to service catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Navigate to ***Catalog Items*** in the accordion on the left and click on the "Provision Virtual Machine" Service Catalog Item
 
-    ![navigate to catalog items](img/vm-prov-service-catalog-item.png)
+    ![navigate to catalog items](../../common/img/vm-prov-service-catalog-item.png)
 
 1. Click on ***Configuration*** -> ***Edit this Item***
 
 1. In the ***Dialog*** Section of the UI, change the value from "provision-vm-vcenter" to "provision-vm-vcenter-v2"
 
-    ![change dialog to provision-vm-vcenter-v2](img/dialog-vm-provision-vcenter-v2.png)
+    ![change dialog to provision-vm-vcenter-v2](../../common/img/dialog-vm-provision-vcenter-v2.png)
 
 1. Click ***Save*** to commit the changes
 
@@ -1037,17 +1037,17 @@ We want to see how the resulting Service Catalog Item looks like.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to service catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Make sure you are on the "Service Catalogs" tab in the accordion on the left
 
 1. Order the "Provision Virtual Machine" Service Catalog Item
 
-    ![provision virtual machine](img/provision-vm-catalog-item.png)
+    ![provision virtual machine](../../common/img/provision-vm-catalog-item.png)
 
 1. Note the Service Dialog has changed compared to before. You should notice a few fields are gone and the vCenter is now a drop down list. "vCenter" should already be selected for you.
 
-    ![new provision virtual machine dialog](img/order-new-virtual-machine-dialog.png)
+    ![new provision virtual machine dialog](../../common/img/order-new-virtual-machine-dialog.png)
 
 1. If you want, you can go ahead and submit the order
 
@@ -1065,13 +1065,13 @@ First we need to create a Catalog to store the service in, do this by clicking S
 
 1. Click on ***Catalog Items*** in the accordion on the left
 
-    ![navigate to service catalog items](img/add-catalog-item.png)
+    ![navigate to service catalog items](../../common/img/add-catalog-item.png)
 
 1. Click on ***Configuration*** -> ***Add a New Catalog Item***
 
 1. Select ***Ansible Playbook*** as "Catalog Item Type"
 
-    ![add catalog item ansible Playbook](img/add-catalog-item-ansible-playbook.png)
+    ![add catalog item ansible Playbook](../../common/img/add-catalog-item-ansible-playbook.png)
 
     ***Note:*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
 
@@ -1113,21 +1113,21 @@ First we need to create a Catalog to store the service in, do this by clicking S
 
     ***Dialog name:*** vm_reconfig
 
-    ![vm-reconfig-service](img/vm-reconfig-service.png)
+    ![vm-reconfig-service](../../common/img/vm-reconfig-service.png)
 
 ### Creating Control Action
 
 1. Navigate to ***Control*** -> ***Explorer*** and click on the ***Actions*** accordion
 
-    ![control-explorer](img/control-explorer.png)
+    ![control-explorer](../../common/img/control-explorer.png)
 
 1. Click on the ***Actions*** accordion
 
-    ![actions](img/actions.png)
+    ![actions](../../common/img/actions.png)
 
 1. Select Configuration/Add a new Action
 
-    ![add-new-action](img/add-new-action.png)
+    ![add-new-action](../../common/img/add-new-action.png)
 
 1. Fill out the form as follows
 
@@ -1144,7 +1144,7 @@ First we need to create a Catalog to store the service in, do this by clicking S
     - Run the playbook in the service on the machine that raises the event.
     - Comma Delimited list of Hosts.
 
-    ![create-action-form](img/create-action-form.png)
+    ![create-action-form](../../common/img/create-action-form.png)
 
 1. Click Add
 
@@ -1154,27 +1154,27 @@ First we need to create a Catalog to store the service in, do this by clicking S
 
 1. Navigate to ***Policies** and then select ***VM Control Policies***
 
-    ![control-policies](img/control-policies.png)
+    ![control-policies](../../common/img/control-policies.png)
 
 1. Select Configuration/Add a New VM and Instance Control policy
 
-    ![add-new-control-policy](img/add-new-control-policy.png)
+    ![add-new-control-policy](../../common/img/add-new-control-policy.png)
 
 1. In the form you just need to provide the ***Description***
 
     ***Description:*** Reset VM for CPU and Memory
 
-    ![add-new-control-policy-form](img/add-new-control-policy-form.png)
+    ![add-new-control-policy-form](../../common/img/add-new-control-policy-form.png)
 
 ### Setting Event Assignment
 
 1. Once added click Configuration/Edit this Events Assignment
 
-    ![edit-event-asignments](img/edit-event-asignments.png)
+    ![edit-event-asignments](../../common/img/edit-event-asignments.png)
 
 1. Scroll down and select “VM Settings Change” under the VM Configuration
 
-    ![vm-settings-change](img/vm-settings-change.png)
+    ![vm-settings-change](../../common/img/vm-settings-change.png)
 
 1. Click Save
 
@@ -1182,15 +1182,15 @@ First we need to create a Catalog to store the service in, do this by clicking S
 
 1. Click on the Event that is now save to the policy
 
-    ![event](img/event.png)
+    ![event](../../common/img/event.png)
 
 1. Select Configuration/Edit Actions for the Policy Event
 
-    ![edit-actions](img/edit-actions.png)
+    ![edit-actions](../../common/img/edit-actions.png)
 
 1. Scroll the Available Actions For Conditions that are TRUE and move the Action you just created to the Selected Actions
 
-    ![actions-for-conditions](img/actions-for-conditions.png)
+    ![actions-for-conditions](../../common/img/actions-for-conditions.png)
 
 1. Click Save
 
@@ -1202,11 +1202,11 @@ For a policy to work, it needs a policy profile to be attached to. The policy pr
 
 1. Navigate to ***Control*** -> ***Explorer*** -> ***Policy Profiles***
 
-    ![navigate-policy-profiles](img/navigate-policy-profiles.png)
+    ![navigate-policy-profiles](../../common/img/navigate-policy-profiles.png)
 
 1. Click Configuration/Add New Policy Profile
 
-    ![add-new-policy-profile](img/add-new-policy-profile.png)
+    ![add-new-policy-profile](../../common/img/add-new-policy-profile.png)
 
 1. Provide a ***Description***
 
@@ -1214,7 +1214,7 @@ For a policy to work, it needs a policy profile to be attached to. The policy pr
 
 1. Move the “Reset VM for CPU and Memory” policy from available to Profile Policies list.
 
-    ![move-policy](img/move-policy.png)
+    ![move-policy](../../common/img/move-policy.png)
 
 1. Click Save
 
@@ -1222,17 +1222,17 @@ For a policy to work, it needs a policy profile to be attached to. The policy pr
 
 1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
 
-    ![navigate-compute-infrastructure-vms](img/navigate-compute-infrastructure-vms.png)
+    ![navigate-compute-infrastructure-vms](../../common/img/navigate-compute-infrastructure-vms.png)
 
 1. Select a Power Off VM
 
 1. Go to ***Policy*** -> ***Manage Policies***
 
-    ![assign-policy-vm](img/assign-policy-vm.png)
+    ![assign-policy-vm](../../common/img/assign-policy-vm.png)
 
 1. Select the “Desired State Policy Profile”
 
-    ![assign-policy-vm2](img/assign-policy-vm2.png)
+    ![assign-policy-vm2](../../common/img/assign-policy-vm2.png)
 
 1. Click Save
 
@@ -1250,21 +1250,21 @@ Start by going to vSphere Web Client and selecting the VM that you identified fo
 
     ***Memory:*** 4096 MB
 
-    ![vmware-edit-settings](img/vmware-edit-settings.png)
+    ![vmware-edit-settings](../../common/img/vmware-edit-settings.png)
 
     You can see the vSphere Web Client task running to change the CPU and Memory.
 
 1. Go back to the CloudForms console and navigate to ***Services*** -> ***Requests***
 
-    ![navigate-to-services-requests](img/navigate-to-services-requests.png)
+    ![navigate-to-services-requests](../../common/img/navigate-to-services-requests.png)
 
 1. Wait until your request (service) is finished
 
-    ![policy-service](img/policy-service.png)
+    ![policy-service](../../common/img/policy-service.png)
 
 1. Go back to the vCenter console and verify that is has 1 CPU and 1 GB of RAM
 
-    ![verify-vmware-vm](img/verify-vmware-vm.png)
+    ![verify-vmware-vm](../../common/img/verify-vmware-vm.png)
 
 ## Custom buttons calling Ansible Playbooks
 

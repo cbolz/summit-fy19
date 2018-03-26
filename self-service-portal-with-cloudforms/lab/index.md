@@ -61,11 +61,11 @@ If you've never used RHPDS before, make sure you follow the [Lab Environment Acc
 
 After you logged in, navigate to ***Services*** -> ***Catalogs***. Open the "EMEA RHTE" Catalog.
 
-![EMEA RHTE Catalog](img/emea-rhte-catalog.png) 
+![EMEA RHTE Catalog](../../common/img/emea-rhte-catalog.png) 
 
 Click on the "EMEA RHTE CF Lab" and click on ***Order*** to start deployment. 
 
-![Order CF Lab](img/order-rhte-lab.png)
+![Order CF Lab](../../common/img/order-rhte-lab.png)
 
 ***Note:*** Give the lab up to 15 minutes to complete provisioning!
 
@@ -111,15 +111,15 @@ Let's first check the OpenStack Provider:
 
 1. Navigate to ***Compute*** -> ***Clouds*** -> ***Providers***
 
-    ![navigate to cloud providers](img/navigate-to-compute-clouds-providers.png)
+    ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
 1. You should see a tile icon labeled "RHEV". Click on it.
 
-    ![OpenStack provider tile icon](img/openstack-provider-tile.png)
+    ![OpenStack provider tile icon](../../common/img/openstack-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
-    ![re-check authentication](img/openstack-recheck-authentication.png)
+    ![re-check authentication](../../common/img/openstack-recheck-authentication.png)
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
@@ -131,15 +131,15 @@ Let's then check the RHV Provider:
 
 1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Providers***
 
-    ![navigate to cloud providers](img/navigate-to-compute-infrastructure-providers.png)
+    ![navigate to cloud providers](../../common/img/navigate-to-compute-infrastructure-providers.png)
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
-    ![OpenStack provider tile icon](img/rhv-provider-tile.png)
+    ![OpenStack provider tile icon](../../common/img/rhv-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
-    ![re-check authentication](img/rhv-recheck-authentication.png)
+    ![re-check authentication](../../common/img/rhv-recheck-authentication.png)
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
@@ -151,15 +151,15 @@ Let's finally check the OpenShift Provider:
 
 1. Navigate to ***Compute*** -> ***Containers*** -> ***Providers***
 
-    ![navigate to container providers](img/navigate-to-compute-container-providers.png)
+    ![navigate to container providers](../../common/img/navigate-to-compute-container-providers.png)
 
 1. You should see a tile icon labeled "OpenShift". Click on it.
 
-    ![OpenShift provider tile icon](img/openshift-provider-tile.png)
+    ![OpenShift provider tile icon](../../common/img/openshift-provider-tile.png)
 
 1. Click on ***Authentication*** -> ***Re-check Authentication Status***
 
-    ![re-check authentication](img/openshift-recheck-authentcation.png)
+    ![re-check authentication](../../common/img/openshift-recheck-authentcation.png)
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
@@ -209,11 +209,11 @@ Follow these steps to design the service dialog:
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
 
-    ![navigate to Automation, Automate, Customization](img/navigate-to-customization.png)
+    ![navigate to Automation, Automate, Customization](../../common/img/navigate-to-customization.png)
 
 1. Navigate to ***Service Dialogs*** in the accordion on the left.
 
-    ![navigate to service dialogs](img/service-dialog-accordion.png)
+    ![navigate to service dialogs](../../common/img/service-dialog-accordion.png)
 
 1. Click on ***Configuration*** -> ***Add a new Dialog***
 
@@ -227,7 +227,7 @@ Follow these steps to design the service dialog:
 
     ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
 
-    ![create a service dialog](img/create-service-dialog.png)
+    ![create a service dialog](../../common/img/create-service-dialog.png)
 
 1. Click on the little plus icon in the menu on the top and select ***Add a new Tab to this Dialog***
 
@@ -239,7 +239,7 @@ Follow these steps to design the service dialog:
 
     ***Description:*** Generic Tab
 
-    ![add a new tab to the dialog](img/generic-tab.png)
+    ![add a new tab to the dialog](../../common/img/generic-tab.png)
 
 1. Click on the little plus icon and ***Add a new Box to this Tab***
 
@@ -251,7 +251,7 @@ Follow these steps to design the service dialog:
 
     ***Description:*** Generic Box
 
-    ![add a new box to the tab](img/generic-box.png)
+    ![add a new box to the tab](../../common/img/generic-box.png)
 
 1. Now we can add elements to this box. Click on ***Add a new Element to this Box***
 
@@ -282,7 +282,7 @@ Follow these steps to design the service dialog:
 
     We want the user to enter a text which then will be used to name the VM. This can be accomplished by selecting "Text Box" in the ***Type*** drop down list.
 
-    ![add a new element to ask for the VM name](img/element-vmname.png)
+    ![add a new element to ask for the VM name](../../common/img/element-vmname.png)
 
     The remaining options can be ignored for now.
 
@@ -312,7 +312,7 @@ Follow these steps to design the service dialog:
 
     ***Note:*** To be able to add a line to the table, click on the little "Add this entry" icon on the left of each row!
 
-    ![add entries to the drop down list](img/memory-dropdownlist.png)
+    ![add entries to the drop down list](../../common/img/memory-dropdownlist.png)
 
 1. We are finally done designing the dialog. Click on ***Add*** to save the dialog.
 
@@ -324,11 +324,11 @@ The following steps will create a Service Catalog.
 
 1. The next step is to create a Service Catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalogs*** in the accordion on the left
 
-    ![service catalogs](img/service-catalogs.png)
+    ![service catalogs](../../common/img/service-catalogs.png)
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -338,7 +338,7 @@ The following steps will create a Service Catalog.
 
     ***Description:*** Deploy Virtual Machines from the Catalog
 
-    ![add a new catalog](img/add-a-new-catalog.png)
+    ![add a new catalog](../../common/img/add-a-new-catalog.png)
 
 1. Click ***Add*** to save the Service Catalog
 
@@ -348,7 +348,7 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalog items*** in the accordion on the left.
 
@@ -358,7 +358,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     ***Virtual Machines:*** the Service Catalog we just created in the previous step
 
-    ![navigate to catalog items](img/navigate-to-catalog-items.png)
+    ![navigate to catalog items](../../common/img/navigate-to-catalog-items.png)
 
 1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
 
@@ -366,7 +366,7 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Chose the Catalog Item Type. For this example we want to use the Red Hat Virtualization Provider, so click on ***RHEV***
 
-    ![select catalog item type](img/select-catalog-item-type.png)
+    ![select catalog item type](../../common/img/select-catalog-item-type.png)
 
     ***Note:*** It can take a few seconds for the next screen to load.
 
@@ -394,7 +394,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     All other fields on this tab can remain unchanged.
 
-    ![adding a new catalog item](img/adding-a-new-catalog-item.png)
+    ![adding a new catalog item](../../common/img/adding-a-new-catalog-item.png)
 
     Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
@@ -459,7 +459,7 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Finally click on ***Add*** to save the Catalog Item
 
-    ![catalog item saved](img/catalog-item-saved.png)
+    ![catalog item saved](../../common/img/catalog-item-saved.png)
 
 ### Order the Simple Virtual Machine Service Catalog Item
 
@@ -467,15 +467,15 @@ For sure you want to test the Service Catalog Item you just created!
 
 1. Navigate to ***Services*** -> ***Catalogs*** and then click on ***Service Catalogs*** in the accordion on the left.
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. You should see the Service Catalog Item we just created:
 
-    ![all services](img/all-services.png)
+    ![all services](../../common/img/all-services.png)
 
 1. Click on the Item to see more details.
 
-    ![service item details](img/service-item-details.png)
+    ![service item details](../../common/img/service-item-details.png)
 
     Note that the Link for Red Hat Enterprise Linux in fact opens the Red Hat Homepage.
 
@@ -485,11 +485,11 @@ For sure you want to test the Service Catalog Item you just created!
 
     Chose an example virtual machine name and the amount of memory you would like to be allocated.
 
-    ![example-oder-simple-vm](img/example-order-simple-vm.png)
+    ![example-oder-simple-vm](../../common/img/example-order-simple-vm.png)
 
 1. You will be redirected to the request queue where you can see CloudForms working on your request.
 
-    ![simple vm ordered](img/simple-vm-ordered.png)
+    ![simple vm ordered](../../common/img/simple-vm-ordered.png)
 
     ***Note:*** Since we are using nested virtualization to run these labs, performance will be slow and it can take several minutes to complete the request (20-30 minutes).
 
@@ -503,11 +503,11 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
 
         URL: https://rhevm-<GUID>.rhpds.opentlc.com
 
-    ![rhv portal page](img/rhv-portal.png)
+    ![rhv portal page](../../common/img/rhv-portal.png)
 
 1. Click on ***Administrator Portal***
 
-    ![rhv admin portal](img/rhv-admin-portal.png)
+    ![rhv admin portal](../../common/img/rhv-admin-portal.png)
 
 1. Log in with these credentials:
 
@@ -519,15 +519,15 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
 
 1. Click on the tab ***Virtual Machines*** to see all existing virtual machines
 
-    ![vm overview](img/rhv-vm-overview.png)
+    ![vm overview](../../common/img/rhv-vm-overview.png)
 
 1. After a few moments you're virtual machine should automatically show up in the list.
 
-    ![lab VM showing up](img/rhv-lab-vm.png)
+    ![lab VM showing up](../../common/img/rhv-lab-vm.png)
 
     Note that while the virtual machine is created, the memory size is still 1 GB. This value is specified in the template therefore copied when creating the virtual machine. Only after the virtual machine was successfully cloned, CloudForms corrects the memory size.
 
-    ![lab VM complete](img/rhv-lab-vm-complete.png)
+    ![lab VM complete](../../common/img/rhv-lab-vm-complete.png)
 
 1. This concludes this first part of the lab
 
@@ -573,11 +573,11 @@ The following procedure will import a HEAT template, create a service dialog and
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to services catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to services catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Orchestration Templates*** in the accordion on the left
 
-    ![orchestration templates](img/orchestration-templates.png)
+    ![orchestration templates](../../common/img/orchestration-templates.png)
 
     You should see one existing templates which is provided by CloudForms out of the box. It's a special predefined template to provision virtual machines on Microsoft Azure.
 
@@ -593,7 +593,7 @@ The following procedure will import a HEAT template, create a service dialog and
 
     Copy and paste the HEAT Template you downloaded before into the large text area below those fields. Make sure you copy the entire HEAT template by opening the [RAW page](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml) of the file on Github.
 
-    ![wordpress template](img/wordpress-heat-template.png)
+    ![wordpress template](../../common/img/wordpress-heat-template.png)
 
     ***Note:*** The screenshot is truncated! Make sure you copy the entire HEAT Template! The first line should be:
 
@@ -605,7 +605,7 @@ The following procedure will import a HEAT template, create a service dialog and
 
 1. Click ***Add*** to save the orchestration template
 
-    ![orchestration template saves](img/orchestration-template-saves.png)
+    ![orchestration template saves](../../common/img/orchestration-template-saves.png)
 
 ### Create a Service Dialog from a HEAT template
 
@@ -615,17 +615,17 @@ Earlier in this lab you learned how to manually create a Service Dialog. Now we 
 
 1. Click on ***Configuration*** -> ***Create Service Dialog from Orchestration Template***
 
-    ![create service dialog from wordpress heat template](img/create-service-dialog-from-wordpress.png)
+    ![create service dialog from wordpress heat template](../../common/img/create-service-dialog-from-wordpress.png)
 
 1. Enter a name for the new Service Dialog
 
     ***Service Dialog Name:*** Wordpress HEAT Template
 
-    ![create service dialog from orchestration template](img/servicedialog-from-heat.png)
+    ![create service dialog from orchestration template](../../common/img/servicedialog-from-heat.png)
 
 1. Click on ***Save*** to create the Service Dialog
 
-    ![service dialog from orchestration template created](img/servicedialog-from-heat-created.png)
+    ![service dialog from orchestration template created](../../common/img/servicedialog-from-heat-created.png)
 
 ### Verify the Service Dialog
 
@@ -633,33 +633,33 @@ The Service Dialog was automatically created. We want to verify it was created p
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
 
-    ![navigate to Automation, Automate, Customization](img/navigate-to-customization.png)
+    ![navigate to Automation, Automate, Customization](../../common/img/navigate-to-customization.png)
 
 1. Navigate to ***Service Dialogs*** in the accordion on the left.
 
-    ![navigate to service dialogs](img/service-dialog-accordion-after-heat.png)
+    ![navigate to service dialogs](../../common/img/service-dialog-accordion-after-heat.png)
 
 1. Click on the new Service Dialog "Wordpress HEAT Template"
 
 1. A preview will show how the Service Dialog will look like, when it's used in a Service Catalog Item.
 
-    ![service dialog preview](img/service-dialog-heat-preview.png)
+    ![service dialog preview](../../common/img/service-dialog-heat-preview.png)
 
 1. The preview shows us that the Service Dialog is using a default image called "fedora-20.x86_64". We do not have such an image and want to change the Service Dialog accordingly.
 
 1. Click on ***Configuration*** -> ***Edit this Dialog***. Navigate to the element called "Image"
 
-    ![edit the image name](img/edit-service-dialog-heat.png)
+    ![edit the image name](../../common/img/edit-service-dialog-heat.png)
 
 1. Change the value of the field "Default Value"
 
     ***Default Value:*** rhel7.2
 
-    ![change the image name](img/service-dialog-heat-image-name.png)
+    ![change the image name](../../common/img/service-dialog-heat-image-name.png)
 
 1. Commit the changes by clicking on ***Save***
 
-    ![after saving the changes](img/service-dialog-heat-updated-preview.png)
+    ![after saving the changes](../../common/img/service-dialog-heat-updated-preview.png)
 
 ### Build a HEAT Service Catalog
 
@@ -667,11 +667,11 @@ The following steps will create a service catalog.
 
 1. The next step is to create a service catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. On this screen click on ***Catalogs*** on the left
 
-    ![service catalogs](img/service-catalogs.png)
+    ![service catalogs](../../common/img/service-catalogs.png)
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -681,7 +681,7 @@ The following steps will create a service catalog.
 
     ***Description:*** Deploy HEAT Templates from the Catalog
 
-    ![add a new catalog](img/add-a-new-catalog-heat.png)
+    ![add a new catalog](../../common/img/add-a-new-catalog-heat.png)
 
 1. Click ***Add*** to save the Service Catalog
 
@@ -691,7 +691,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalog items*** in the accordion on the left.
 
@@ -703,13 +703,13 @@ To put everything together we create a Service Catalog Item similar to before.
 
     ***HEAT Templates:*** the Service Catalog you just created
 
-    ![navigate to catalog items](img/navigate-to-catalog-items-heat.png)
+    ![navigate to catalog items](../../common/img/navigate-to-catalog-items-heat.png)
 
 1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
 
 1. Chose the Catalog Item Type. For this example we want to use HEAT on OpenStack which is an Orchestration provider, so click on ***Orchestration***
 
-    ![select catalog item type](img/select-catalog-item-type-heat.png)
+    ![select catalog item type](../../common/img/select-catalog-item-type-heat.png)
 
 1. The next dialog will ask for the details for the new Catalog Item
 
@@ -743,7 +743,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     All other fields on this tab can remain unchanged.
 
-    ![service catalog item details](img/service-item-details-heat.png)
+    ![service catalog item details](../../common/img/service-item-details-heat.png)
 
     Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
@@ -751,7 +751,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
 1. Finally click on ***Add*** to save the Service Catalog Item
 
-    ![catalog item saved](img/catalog-item-saved-heat.png)
+    ![catalog item saved](../../common/img/catalog-item-saved-heat.png)
 
 ### Order the HEAT Wordpress Catalog Item
 
@@ -759,15 +759,15 @@ For sure you want to test the Catalog Item you just created!
 
 1. Navigate to ***Services*** -> ***Catalogs*** and then click on ***Service Catalogs*** in the accordion on the left.
 
-    ![navigate to services, catalog](img/navigate-to-service-catalog.png)
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. You should see the Service Catalog Item we just created:
 
-    ![all services](img/all-services-heat.png)
+    ![all services](../../common/img/all-services-heat.png)
 
 1. Click on the Service Catalog Item to see more details.
 
-    ![service item details](img/order-wordpress-item.png)
+    ![service item details](../../common/img/order-wordpress-item.png)
 
 1. Click on ***Order***
 
@@ -783,7 +783,7 @@ For sure you want to test the Catalog Item you just created!
 
     For all other fields the provided default values can be accepted. Note that the image name is "rhel7.2" as you specified in your dialog.
 
-    ![order HEAT template](img/order-wordpress-heat-template.png)
+    ![order HEAT template](../../common/img/order-wordpress-heat-template.png)
 
     Click on ***Submit*** to start the deployment.
 
@@ -791,7 +791,7 @@ For sure you want to test the Catalog Item you just created!
 
     ***Note:*** Since we are using nested virtualization to run these labs, performs will be slow and it can take several minutes to complete the request (20-30 minutes).
 
-    ![after ordering heat service catalog item](img/after-ordering-heat.png)
+    ![after ordering heat service catalog item](../../common/img/after-ordering-heat.png)
 
 ### Verify provisioning in OpenStack
 
@@ -807,23 +807,23 @@ Let's log into OpenStack to see what's happening there.
 
     ***Password:*** r3dh4t1!
 
-    ![dashboard after login](img/osp-after-login.png)
+    ![dashboard after login](../../common/img/osp-after-login.png)
 
 1. Navigate to ***Project*** in the menu bar on the top
 
-    ![navigate to project](img/osp-navigate-to-project.png)
+    ![navigate to project](../../common/img/osp-navigate-to-project.png)
 
 1. Navigate to ***Orchestration*** -> ***Stacks***
 
-    ![navigate to orchestration stacks](img/osp-navigate-to-stacks.png)
+    ![navigate to orchestration stacks](../../common/img/osp-navigate-to-stacks.png)
 
 1. You should see your stack. It might already be completed or still in progress. If you can't see it yet, wait a minute and reload the page.
 
-    ![stack completed](img/osp-stack-completed.png)
+    ![stack completed](../../common/img/osp-stack-completed.png)
 
 1. Click on the stack to get the details
 
-    ![stack details](img/osp-stack-details.png)
+    ![stack details](../../common/img/osp-stack-details.png)
 
 This concludes this section of the lab.
 
@@ -869,15 +869,15 @@ For this lab, we first want to create a role which we want to use for testing.
 
 1. Navigate to ***Configuration*** on the top right menu
 
-    ![navigate to configuration](img/navigate-to-configuration.png)
+    ![navigate to configuration](../../common/img/navigate-to-configuration.png)
 
 1. Click on ***Access Control*** in the accordion on the left
 
-    ![access control](img/navigate-to-access-control.png)
+    ![access control](../../common/img/navigate-to-access-control.png)
 
 1. Click on ***roles*** and ***Configuration*** -> ***Add a new role***
 
-    ![add a new role](img/add-a-new-role.png)
+    ![add a new role](../../common/img/add-a-new-role.png)
 
 1. We want to define a new role, which has enough privileges to order and interact with Service Catalog Items.
 
@@ -895,13 +895,13 @@ For this lab, we first want to create a role which we want to use for testing.
 
     The resulting dialog should look like this:
 
-    ![defined self server role](img/define-self-service-role.png)
+    ![defined self server role](../../common/img/define-self-service-role.png)
 
 1. Click ***Add*** to save the new role
 
 1. Now we want to create a group associated to this role. Click on ***groups*** and ***Configuration*** -> ***Add a new group***
 
-    ![add a new group](img/add-new-group.png)
+    ![add a new group](../../common/img/add-new-group.png)
 
 ### Create a new Group
 
@@ -923,7 +923,7 @@ Next we want to create a group and assign it to the role we just created.
 
     ***Note:*** It is important to only select this particular tag and do not click on any other additional tags!
 
-    ![define new group](img/define-new-group.png)
+    ![define new group](../../common/img/define-new-group.png)
 
 1. Click on ***Add*** to create this new group
 
@@ -933,7 +933,7 @@ Finally we want to create a user which is a member of the group we just created.
 
 1. Click on ***users*** and ***Configuration*** -> ***Add a new user***
 
-    ![add a new user](img/add-new-user.png)
+    ![add a new user](../../common/img/add-new-user.png)
 
 1. Create a new user with these parameters:
 
@@ -951,7 +951,7 @@ Finally we want to create a user which is a member of the group we just created.
 
     ***group:*** Self Service Engineering
 
-    ![add new user Joe Doe](img/add-user-joe-doe.png)
+    ![add new user Joe Doe](../../common/img/add-user-joe-doe.png)
 
     Click on ***Add*** to create the user
 
@@ -965,7 +965,7 @@ Let's see what happens if we log into CloudForms as "Joe Doe".
 
 1. Log out of CloudForms by clicking on the user name on the top right and click on ***Logout***
 
-    ![logout](img/logout.png)
+    ![logout](../../common/img/logout.png)
 
 1. Log in as user Joe Doe:
 
@@ -973,19 +973,19 @@ Let's see what happens if we log into CloudForms as "Joe Doe".
 
     ***Password:*** r3dh4t1!
 
-    ![login as Joe Doe](img/login-as-joe-doe.png)
+    ![login as Joe Doe](../../common/img/login-as-joe-doe.png)
 
 1. You should notice that most of the menus are gone now. On the top level menu on the left, we can only click on ***Services*** and have only four sub menus available.
 
 1. Navigate to the service catalog
 
-    ![navigate to service catalog](img/navigate-to-service-catalog-joe-doe.png)
+    ![navigate to service catalog](../../common/img/navigate-to-service-catalog-joe-doe.png)
 
 1. You should notice that there are no Catalog Items available! Although we have defined some Catalog Items earlier in this lab, none of them are available to the "Self Service Engineering" group.
 
 1. Let's logout again
 
-    ![logout](img/logout.png)
+    ![logout](../../common/img/logout.png)
 
 ### Grant access to certain Catalog Items
 
@@ -995,23 +995,23 @@ We want to make one Catalog Item available to all users which are members of the
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to services catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to services catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalog Items*** in the accordion on the left
 
-    ![navigate to catalog items](img/navigate-to-catalog-items-heat.png)
+    ![navigate to catalog items](../../common/img/navigate-to-catalog-items-heat.png)
 
 1. Click on ***Virtual Machines*** and ***Simple VM***
 
-    ![catalog item simple vm details](img/catalog-item-simple-vm-details.png)
+    ![catalog item simple vm details](../../common/img/catalog-item-simple-vm-details.png)
 
 1. Click on ***Policy*** -> ***Edit Tags***
 
-    ![catalog item edit tags](img/catalog-item-edit-tags.png)
+    ![catalog item edit tags](../../common/img/catalog-item-edit-tags.png)
 
 1. Assign the Tag "Department" / "Engineering" to the Catalog Item
 
-    ![assign department engineering tag](img/assign-department-engineering-tag.png)
+    ![assign department engineering tag](../../common/img/assign-department-engineering-tag.png)
 
 1. Click ***Save*** to commit the changes
 
@@ -1021,19 +1021,19 @@ We want to do another test and see if the user Joe Doe can now see and other the
 
 1. Log out
 
-    ![logout](img/logout.png)
+    ![logout](../../common/img/logout.png)
 
 1. Log in as Joe Doe
 
-    ![login as Joe Doe](img/login-as-joe-doe.png)
+    ![login as Joe Doe](../../common/img/login-as-joe-doe.png)
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
-    ![navigate to service catalogs](img/navigate-to-service-catalog.png)
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
 
 1. Now you should see one Service Catalog Item: "Simple VM" - but no other Service Catalog Items.
 
-    ![service catalog](img/service-catalog-joe-doe.png)
+    ![service catalog](../../common/img/service-catalog-joe-doe.png)
 
 1. If you want, you can order the Service Catalog Item and should see that it will be deployed perfectly.
 

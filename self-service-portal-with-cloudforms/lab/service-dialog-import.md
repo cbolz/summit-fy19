@@ -4,11 +4,11 @@
 
 1. Navigate to ***Automation***, ***Automate***, ***Customization***
 
-    ![navigate to Automation, Automate, Customization](img/navigate-to-customization.png)
+    ![navigate to Automation, Automate, Customization](../../common/img/navigate-to-customization.png)
 
 1. In the menu on the left, click on ***Import/Export***
 
-    ![navigate to import/export](img/dialog-import-export.png)
+    ![navigate to import/export](../../common/img/dialog-import-export.png)
 
 1. Download the service dialog [YAML definition from Github](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/service-dialog/simple-vm.yml) and save it locally. Make sure the filename ends with .yml
 
@@ -16,6 +16,6 @@
 
     If you are asked for confirmation, make sure to check the checkbox next to the dialog and click on "Commit"
 
-    ![confirm the import](img/dialog-import-export-confirmation.png)
+    ![confirm the import](../../common/img/dialog-import-export-confirmation.png)
 
 1. Go back to the lab guide
