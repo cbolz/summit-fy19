@@ -202,8 +202,8 @@ The following chapters will guide you through the process step-by-step.
 
 For this example we will create a Service Dialog which will ask the user for two parameters:
 
-* the name of the new virtual machine
-* how much memory should be allocated to the new virtual machine
+- the name of the new virtual machine
+- how much memory should be allocated to the new virtual machine
 
 Follow these steps to design the service dialog:
 
@@ -223,39 +223,19 @@ Follow these steps to design the service dialog:
 
     ***Description***: Simple VM provisioning dialog
 
-    ***Note:*** Make sure ***Submit*** and ***Cancel*** are both checked
-
     ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
 
     ![create a service dialog](../../common/img/create-service-dialog.png)
 
-1. Click on the little plus icon in the menu on the top and select ***Add a new Tab to this Dialog***
+1. Add a new text box by using drag and drop of the "Text Box" symbol
 
-    Tabs can be used to make complex Service Dialogs easier to navigate and fill out. They are often used to logically structure related questions (e.g. "General Configuration", "Network Configuration", "user Configuration").
+    ![add a text box](../../common/img/service-dialog-add-a-textbox.png)
 
-    For this lab, we will keep it simple:
+1. Click the pen icon to edit the text box
 
-    ***Label:*** Generic
+    ![edit text box](../../common/img/service-dialog-edit-textbox.png)
 
-    ***Description:*** Generic Tab
-
-    ![add a new tab to the dialog](../../common/img/generic-tab.png)
-
-1. Click on the little plus icon and ***Add a new Box to this Tab***
-
-    Boxes are used to visually group related dialog elements. For example in the network configuration Service Dialog a box could be used to group all IPv4 related questions, and another box to group all IPv6 related questions.
-
-    For this lab we create a simple box:
-
-    ***Label:*** Generic
-
-    ***Description:*** Generic Box
-
-    ![add a new box to the tab](../../common/img/generic-box.png)
-
-1. Now we can add elements to this box. Click on ***Add a new Element to this Box***
-
-    The first element will allow the user to specify a VM name:
+1. The first element will allow the user to specify a VM name. Modify the following fields:
 
     The Label is the name of the element as it will be shown in the UI:
 
@@ -265,9 +245,9 @@ Follow these steps to design the service dialog:
 
     ***Name:*** option_0_vm_name
 
-    The description is some text which will be shown if the mouse pointer is hovering over this element. It can be used to provide additional information to the user to fill out this field:
+    The help is some text which will be shown if the clicks the little question mark icon next to the element. It can be used to provide additional information to the user to fill out this field:
 
-    ***Description:*** Specify the name of the new virtual machine
+    ***Help:*** Specify the name of the new virtual machine
 
     CloudForms allows us to design Service Dialogs comprised of many different types of Elements:
 
@@ -280,13 +260,21 @@ Follow these steps to design the service dialog:
     - Text Area Box: allows the user to enter relatively large amounts of text (multiple lines), could be used for example to provide description information
     - Text Box: allows the user for short amounts of text (one line), in this example we use this element to ask the user for a name of the virtual machine
 
-    We want the user to enter a text which then will be used to name the VM. This can be accomplished by selecting "Text Box" in the ***Type*** drop down list.
-
-    ![add a new element to ask for the VM name](../../common/img/element-vmname.png)
-
     The remaining options can be ignored for now.
 
-1. We want to add a second element where the user can chose the memory size of the new VM. Click once more on ***Add a new Element to this Box***.
+    ![updated name field](../../common/img/service-dialog-updated-textbox.png)
+
+1. Click ***Save*** to save the Field Details
+
+1. Add a new Dropdown field by using drag and drop of the "Dropdown" symbol
+
+    ![add dropdown element](../../common/img/service-dialog-add-dropdown.png)
+
+1. Click the pen icon to edit the dropdown field
+
+    ![edit dropdown](../../common/img/service-dialog-edit-dropdown.png)
+
+1. Modify the following fields:
 
     ***Label:*** Memory size
 
