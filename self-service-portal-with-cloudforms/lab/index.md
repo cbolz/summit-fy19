@@ -676,7 +676,7 @@ Let's verify the Service Catalog Item actually works.
 
 1. Fill out the form as follows:
 
-    ***Add To Existing Project:*** <select> (this should already be selected since it is the default)
+    ***Add To Existing Project:*** &lt;select&gt; (this should already be selected since it is the default)
 
     ***(or) Add To New Project:*** service-catalog-demo
 
