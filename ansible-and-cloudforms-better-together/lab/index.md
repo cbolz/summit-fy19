@@ -12,7 +12,7 @@
         - [Introduction to Ansible](#introduction-to-ansible)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
-        - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
+    - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
         - [Create a Service Catalog for Ansible Playbooks](#create-a-service-catalog-for-ansible-playbooks)
         - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook)
         - [Order the "create user" Service Catalog Item](#order-the-create-user-service-catalog-item)
@@ -119,7 +119,7 @@ This integration allows customers to build service catalogs from Ansible Playboo
 
 ### Make sure embedded Ansible role is enabled and running
 
-Before we start,  we want to make sure the embedded Ansible role is enabled and running.
+Before we start, we want to make sure the embedded Ansible role is enabled and running.
 
 1. Log into your CloudForms Appliance
 
@@ -127,7 +127,7 @@ Before we start,  we want to make sure the embedded Ansible role is enabled and 
 
     ![navigate to configuration](../../common/img/navigate-to-configuration.png)
 
-1. Make sure the "Embedded Ansible" Role is enabled
+1. Make sure the "Embedded Ansible" and the "Git Repositories Owner" Roles are enabled
 
     ![ansible role enabled](../../common/img/ansible-role-enabled.png)
 
@@ -136,8 +136,6 @@ Before we start,  we want to make sure the embedded Ansible role is enabled and 
 1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
-
-Logoff as demouser and login back as Admin
 
 ### Add a Git repository of Ansible Playbooks
 
@@ -155,9 +153,11 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***Description:*** Example Playbooks
 
-    ***URL:*** [https://github.com/cbolz/rhte-fy18.git](https://github.com/cbolz/rhte-fy18.git)
+    ***URL:*** [https://github.com/cbolz/summit-fy19.git](https://github.com/cbolz/summit-fy19.git)
 
     ***SCM Update Options:*** check "Update on Launch"
+
+    Update on Launch causes CloudForms to check for new Playbooks are updated Playbooks before a Playbook is executed.
 
     ![add a new repository](../../common/img/add-ansible-repository.png)
 
@@ -165,7 +165,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 ***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
 
-### Build a Service Catalog to create and delete users
+## Build a Service Catalog to create and delete users
 
 In this lab we will use an Ansible Playbook to create a local user in CloudForms. This example will also demonstrate how we can define a retirement process as well. In CloudForms' understanding of complete life cycle management, every object has a provisioning and a retirement workflow.
 
