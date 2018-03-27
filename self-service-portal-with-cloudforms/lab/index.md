@@ -18,9 +18,14 @@
         - [Build a Virtual Machine Service Catalog Item](#build-a-virtual-machine-service-catalog-item)
         - [Order the Simple Virtual Machine Service Catalog Item](#order-the-simple-virtual-machine-service-catalog-item)
         - [Verify the order](#verify-the-order)
-        - [Ansible Example](#ansible-example)
-        - [OpenShift example](#openshift-example)
-        - [HEAT Provisioning example](#heat-provisioning-example)
+    - [Ansible Example](#ansible-example)
+    - [OpenShift example](#openshift-example)
+        - [Create Service Dialog from OpenShift Template](#create-service-dialog-from-openshift-template)
+        - [Create a Service Catalog](#create-a-service-catalog)
+        - [Create a OpenShift Template Service Catalog Item](#create-a-openshift-template-service-catalog-item)
+        - [Order the OpenShift Template](#order-the-openshift-template)
+        - [Verify provisioning of OpenShift application](#verify-provisioning-of-openshift-application)
+    - [HEAT Provisioning example](#heat-provisioning-example)
         - [Prepare the HEAT Template](#prepare-the-heat-template)
         - [Import the HEAT Template](#import-the-heat-template)
         - [Create a Service Dialog from a HEAT template](#create-a-service-dialog-from-a-heat-template)
@@ -93,11 +98,11 @@ The lab is comprised of a number of systems:
 
     ***Note:*** IF you don't use HTTPS when connecting to OpenStack Horizon, you will only see the Default Apache Welcome Page (no automatic redirect). Make sure you use HTTPS to access Horizon.
 
-- VMware vCenter
+- Red Hat OpenShift Container Platform
 
-        URL: https://vcenter-<GUID>.rhpds.opentlc.com
+        URL: https://ose-<GUID>.rhpds.opentlc.com
 
-        User: root / password: r3dh4t1!
+        User: admin / password: r3dh4t1!
 
 The ID &lt;GUID&gt; is unique to your lab environment.
 
@@ -487,13 +492,15 @@ For sure you want to test the Service Catalog Item you just created!
 
 ### Verify the order
 
+TODO: Update this section
+
 In the requests queue you can click on ***Reload*** to see how CloudForms processes the order. If you click the button a few times, you should see the status is progressing.
 
 We want to log into Red Hat Virtualization to see how the virtual machine is created:
 
 1. Open the Red Hat Virtualization Web UI in a new browser window or tab.
 
-        URL: https://rhevm-<GUID>.rhpds.opentlc.com
+        URL: https://rhvm-<GUID>.rhpds.opentlc.com
 
     ![rhv portal page](../../common/img/rhv-portal.png)
 
@@ -523,15 +530,193 @@ We want to log into Red Hat Virtualization to see how the virtual machine is cre
 
 1. This concludes this first part of the lab
 
-### Ansible Example
+## Ansible Example
 
 TODO: Explain how to create a catalog item based on an Ansible Playbook
 
-### OpenShift example
+## OpenShift example
 
-TODO: Explain how to create a catalog item based on an OpenShift Template
+Since version 4.6 CloudForms can offer OpenShift application deployments based templates in the Service Catalog. To make the necessary steps simple, an administrator can create a Service Dialog from an existing OpenShift template with just a few mouse clicks. 
 
-### HEAT Provisioning example
+### Create Service Dialog from OpenShift Template
+
+CloudForms can create a Service Dialog from an OpenShift template very easily.
+
+1. Navigate to ***Compute*** -> ***Containers*** -> ***Container Templates***
+
+    ![navigate to container templates](../../common/img/navigate-to-container-templates.png)
+
+    You will see a list of all currently available templates. CloudForms makes sure the list is up to date by periodically running a refresh in the background.
+
+1. Click on the "cakephp-mysql-example" template
+
+    ![cakephp-mysql-example](../../common/img/container-template-cakephp-mysql-example.png)
+
+1. Click on ***Configuration*** -> ***Create Service Dialog from Container Template***
+
+    ![create service dialog](../../common/img/container-template-cakephp-mysql-example-create-service-dialog.png)
+
+1. Give it a name and click ***Save***
+
+    ***Service Dialog Name:*** cakephp-mysql-example
+
+    ![naming service dialog](../../common/img/container-template-cakephp-mysql-example-name-service-dialog.png)
+
+1. ***OPTIONAL:*** You can find the resulting dialog in ***Automation*** -> ***Automate*** -> ***Customization*** and then under ***Service Dialogs***
+
+### Create a Service Catalog
+
+The following steps will create a service catalog.
+
+1. The next step is to create a service catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
+
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
+
+1. On this screen click on ***Catalogs*** on the left
+
+    ![service catalogs](../../common/img/service-catalogs.png)
+
+    ***Note:*** You might already have some catalogs from previous labs.
+
+1. Click on ***Configuration*** and ***Add a New Catalog***
+
+1. Fill out name and description:
+
+    ***Name:*** OpenShift Templates
+
+    ***Description:*** Deploy OpenShift Templates from the Catalog
+
+    ![add a new catalog](../../common/img/add-a-new-catalog-openshift.png)
+
+### Create a OpenShift Template Service Catalog Item
+
+To put everything together we create a Service Catalog Item similar to before.
+
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
+
+1. Click on ***Catalog items*** in the accordion on the left.
+
+    You should already see three Service Catalogs:
+
+    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
+
+    ***Virtual Machines:*** the Service Catalog we created in the first part of the lab
+
+    ***OpenShift Templates:*** the Service Catalog you just created in the previous step
+
+    ![navigate to catalog items](../../common/img/navigate-to-catalog-items-heat.png)
+
+1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
+
+1. Chose the Catalog Item Type. For this example we want to use HEAT on OpenStack which is an Orchestration provider, so click on ***OpenShift Template***
+
+    ![select catalog item type](../../common/img/select-catalog-item-type-openshift.png)
+
+1. The next dialog will ask for the details for the new Catalog Item
+
+    The name of the Catalog Item shown in the UI:
+
+    ***Name:*** CakePHP
+
+    A more descriptive text about the Catalog Item:
+
+    ***Description:*** CakePHP without persistent storage
+
+    Check the "Display in Catalog" box. If not selected, the Catalog Item will not be visible to users. This can be used for Items which are either still in draft mode, or should only be ordered as a part of a bundle.
+
+    ***Display in Catalog:*** check this box
+
+    Select the previously created Service Catalog:
+
+    ***Catalog:*** OpenShift Templates
+
+    Select the previously created Service Dialog:
+
+    ***Dialog:*** cakephp-mysql-example
+
+    Select on which provider the HEAT Template should be executed:
+
+    ***Provider:*** OpenShift
+
+    The template to execute:
+
+    ***Container Template:*** cakephp-mysql-example
+
+    All other fields on this tab can remain unchanged.
+
+    ![service catalog item details](../../common/img/service-item-details-openshift.png)
+
+    Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
+
+1. ***OPTIONAL:*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
+
+1. Finally click on ***Add*** to save the Service Catalog Item
+
+    ![catalog item saved](../../common/img/catalog-item-saved-openshift.png)
+
+### Order the OpenShift Template
+
+Let's verify the Service Catalog Item actually works.
+
+1. Navigate to ***Services*** -> ***Catalogs*** and then click on ***Service Catalogs*** in the accordion on the left.
+
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
+
+1. You should see the Service Catalog Item we just created:
+
+    ![all services](../../common/img/all-services-openshift.png)
+
+1. Click on the Service Catalog Item to see more details.
+
+    ![service item details](../../common/img/order-cakephp-item.png)
+
+1. Click on ***Order***
+
+1. Fill out the form as follows:
+
+    ***Add To Existing Project:*** <select> (this should already be selected since it is the default)
+
+    ***(or) Add To New Project:*** service-catalog-demo
+
+    ![order CakePHP](../../common/img/order-cakephp.png)
+
+1. ***OPTIONAL:*** Review the other fields of the form and pay attention to the tool tips (the little question mark icons). Feel free to adjust some of the fields or leave the default values unchanged
+
+1. Click on ***Submit***
+
+### Verify provisioning of OpenShift application
+
+TODO: Verify if I need a provider refresh
+
+After a few minutes you should see your new project and the associated containers, pods and service in the CloudForms Web Interface.
+
+1. Navigate to ***Compute*** -> ***Containers*** -> ***Projects***
+
+    ![navigate to container projects](../../common/img/navigate-to-container-projects.png)
+
+1. Review the list of available projects and click on ***service-catalog-demo*** which is the project created by CloudForms after placing your order
+
+    ![select service catalog demo project](../../common/img/navigate-to-demo-project.png)
+
+    ***Note:*** if your project is not listed yet, try again a minute or two later
+
+1. The project dashboard wil look similar to the one below. There will be no metrics at this point of time and hence some of the widgets will report "No data available"
+
+    ![project dashboard](../../common/img/openshift-demo-project-dashboard.png)
+
+1. Click on the topology view icon on the top right to see the relationships between the objects in this project
+
+    ![open topology map](../../common/img/openshift-project-topology.png)
+
+1. The topology view is a visual representation of all objects related to the currently selected project. Topology views are available for several objects in CloudForms including Virtual Machines, Networks and Storage.
+
+    ![project topology view](../../common/img/openshift-project-topology-view.png)
+
+    ***Note:*** Since the topology view is rendered from live data, it can look slightly different in your lab, depending on the progress of the provisioning (which might still run in background) or availability status of services, pods and containers. 
+
+## HEAT Provisioning example
 
 In the first part of the lab you have learned:
 
@@ -548,10 +733,11 @@ In the previous lab, we had to create a Service Dialog manually. With HEAT, Clou
 
 Before we can import the template into CloudForms, we need to download it or have it open in a separate browser window.
 
-***Note:*** Please used the forked version of the HEAT Template, which has an additional field "Network" defined. Without this field, running the HEAT Template will fail with an error indicating that mulitple networks are available and hence a network has to be specified.
+***Note:*** Please use the forked version of the HEAT Template, which has an additional field "Network" defined. Without this field, running the HEAT Template will fail with an error indicating that mulitple networks are available and hence a network has to be specified.
 
 1. Go to the template on the Github project page.
 
+TODO: Update the link with master branch from: https://github.com/cbolz/summit-fy19/blob/self-service-update-46/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml
     [https://github.com/cbolz/partner-conference-2017-labs/blob/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml](https://github.com/cbolz/partner-conference-2017-labs/blob/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml)
 
 1. Make sure to open the file in "RAW" mode or use this link:
@@ -570,8 +756,6 @@ The following procedure will import a HEAT template, create a service dialog and
 1. Click on ***Orchestration Templates*** in the accordion on the left
 
     ![orchestration templates](../../common/img/orchestration-templates.png)
-
-    You should see one existing templates which is provided by CloudForms out of the box. It's a special predefined template to provision virtual machines on Microsoft Azure.
 
 1. Create a new Orchestration template by clicking on ***Configuration*** -> ***Create new Orchestration Template***
 
@@ -639,17 +823,19 @@ The Service Dialog was automatically created. We want to verify it was created p
 
 1. The preview shows us that the Service Dialog is using a default image called "fedora-20.x86_64". We do not have such an image and want to change the Service Dialog accordingly.
 
-1. Click on ***Configuration*** -> ***Edit this Dialog***. Navigate to the element called "Image"
+1. Click on ***Configuration*** -> ***Edit this Dialog***. Navigate to the element called "Image" and click the little pen icon next to it.
 
     ![edit the image name](../../common/img/edit-service-dialog-heat.png)
 
-1. Change the value of the field "Default Value"
+1. Click on ***Options*** and then change the value of the field "Default Value"
 
-    ***Default Value:*** rhel7.2
+    ***Default Value:*** rhel7
 
     ![change the image name](../../common/img/service-dialog-heat-image-name.png)
 
 1. Commit the changes by clicking on ***Save***
+
+1. You should see an updated preview of your dialog with the new default value "rhel7" in the "Image" field
 
     ![after saving the changes](../../common/img/service-dialog-heat-updated-preview.png)
 
@@ -664,6 +850,8 @@ The following steps will create a service catalog.
 1. On this screen click on ***Catalogs*** on the left
 
     ![service catalogs](../../common/img/service-catalogs.png)
+
+    ***Note:*** You might already have some catalogs from previous labs.
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -692,6 +880,8 @@ To put everything together we create a Service Catalog Item similar to before.
     ***Unassigned:*** Catalog Items which are not published yet, will be listed here
 
     ***Virtual Machines:*** the Service Catalog we created in the first part of the lab
+
+    ***OpenShift Templates:*** the Service Catalog you create in the OpenShift part of this lab
 
     ***HEAT Templates:*** the Service Catalog you just created
 
@@ -739,7 +929,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
-1. OPTIONAL: Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
+1. ***OPTIONAL:*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
 
 1. Finally click on ***Add*** to save the Service Catalog Item
 
@@ -762,6 +952,8 @@ For sure you want to test the Catalog Item you just created!
     ![service item details](../../common/img/order-wordpress-item.png)
 
 1. Click on ***Order***
+
+TODO: I can not test this, because the dynamic dialog "available_tenants" does not work (only reports "default" and no other tenant)
 
 1. Fill out the form:
 
