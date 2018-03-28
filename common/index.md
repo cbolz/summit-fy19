@@ -1,3 +1,3 @@
 # Red Hat CloudForms: an introduction
 
-current version is here: [CloudForms Introduction](./CloudFormsIntroduction.pdf)
+You never used CloudForms before and want to start with a quick overview and introduction? The [CloudForms Introduction](./CloudFormsIntroduction.pdf) PDF gives you a quick tour.
