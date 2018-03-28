@@ -502,7 +502,17 @@ While the VM is cloned from template, it does not show up in the CloudForms inve
 
     ![navigate to all VMs](../../common/img/navigate-compute-infrastructure-vms.png)
 
-TODO: add screenshots about service ordering and resulting VM
+1. You should see a VM with the name "test" in the overview
+
+    ***Note:*** If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically.
+
+    ![all virtual machines](../../common/img/infrastructure-vm-overview.png)
+
+1. Click on the new VM "test" to see the VM details
+
+    ![test VM details](../../common/img/infrastructure-test-vm-details.png)
+
+1. This concludes this part of the lab.
 
 ## Ansible Example
 
