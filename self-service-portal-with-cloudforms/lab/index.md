@@ -480,7 +480,9 @@ For sure you want to test the Service Catalog Item you just created!
 
 1. The Service Dialog we created earlier will be presented and ask for the name of the virtual machine and the memory size. As you can see, the name is a free text field, and the memory size is a drop down list.
 
-    Chose an example virtual machine name and the amount of memory you would like to be allocated.
+    ***VM Name:*** test
+
+    ***Memory Size:*** 2 GB
 
     ![example-oder-simple-vm](../../common/img/example-order-simple-vm.png)
 
@@ -492,43 +494,15 @@ For sure you want to test the Service Catalog Item you just created!
 
 ### Verify the order
 
-TODO: Update this section
-
 In the requests queue you can click on ***Reload*** to see how CloudForms processes the order. If you click the button a few times, you should see the status is progressing.
 
-We want to log into Red Hat Virtualization to see how the virtual machine is created:
+While the VM is cloned from template, it does not show up in the CloudForms inventory. Watch the request queue and after the VM was cloned, check the result.
 
-1. Open the Red Hat Virtualization Web UI in a new browser window or tab.
+1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
 
-        URL: https://rhvm-<GUID>.rhpds.opentlc.com
+    ![navigate to all VMs](../../common/img/navigate-compute-infrastructure-vms.png)
 
-    ![rhv portal page](../../common/img/rhv-portal.png)
-
-1. Click on ***Administrator Portal***
-
-    ![rhv admin portal](../../common/img/rhv-admin-portal.png)
-
-1. Log in with these credentials:
-
-        ***user:*** admin
-
-        ***Password:*** r3dh4t1!
-
-    Make sure the profile is set to "internal".
-
-1. Click on the tab ***Virtual Machines*** to see all existing virtual machines
-
-    ![vm overview](../../common/img/rhv-vm-overview.png)
-
-1. After a few moments you're virtual machine should automatically show up in the list.
-
-    ![lab VM showing up](../../common/img/rhv-lab-vm.png)
-
-    Note that while the virtual machine is created, the memory size is still 1 GB. This value is specified in the template therefore copied when creating the virtual machine. Only after the virtual machine was successfully cloned, CloudForms corrects the memory size.
-
-    ![lab VM complete](../../common/img/rhv-lab-vm-complete.png)
-
-1. This concludes this first part of the lab
+TODO: add screenshots about service ordering and resulting VM
 
 ## Ansible Example
 
