@@ -8,29 +8,20 @@
     - [Verify Lab](#verify-lab)
         - [OpenStack Provider status](#openstack-provider-status)
         - [Red Hat Virtualization Provider status](#red-hat-virtualization-provider-status)
-    - [Build a Service Catalog with CloudForms](#build-a-service-catalog-with-cloudforms)
-        - [What's the value of having a service catalog?](#whats-the-value-of-having-a-service-catalog)
-        - [Service Basics](#service-basics)
-        - [Virtual Machine Provisioning example](#virtual-machine-provisioning-example)
-        - [Build a VM Provisioning Service Dialog](#build-a-vm-provisioning-service-dialog)
-        - [Build a VM Provisioning Service Catalog](#build-a-vm-provisioning-service-catalog)
-        - [Build a Virtual Machine Service Catalog Item](#build-a-virtual-machine-service-catalog-item)
-        - [Order the Simple Virtual Machine Service Catalog Item](#order-the-simple-virtual-machine-service-catalog-item)
-        - [Verify the order](#verify-the-order)
     - [CloudForms with Ansible batteries included](#cloudforms-with-ansible-batteries-included)
         - [Introduction to Ansible](#introduction-to-ansible)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
-        - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
+    - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
         - [Create a Service Catalog for Ansible Playbooks](#create-a-service-catalog-for-ansible-playbooks)
         - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook)
         - [Order the "create user" Service Catalog Item](#order-the-create-user-service-catalog-item)
         - [Monitor create user Playbook execution](#monitor-create-user-playbook-execution)
         - [Verify Playbook results](#verify-playbook-results)
-        - [Build a Service Catalog to deploy Virtual Machines](#build-a-service-catalog-to-deploy-virtual-machines)
+    - [Build a Service Catalog to deploy Virtual Machines](#build-a-service-catalog-to-deploy-virtual-machines)
         - [Order the Virtual Machine Provisioning Service Catalog Item](#order-the-virtual-machine-provisioning-service-catalog-item)
         - [Monitor VM provisioning Playbook execution](#monitor-vm-provisioning-playbook-execution)
-        - [Extend CloudForms builtin Capabilities](#extend-cloudforms-builtin-capabilities)
+    - [Extend CloudForms builtin Capabilities](#extend-cloudforms-builtin-capabilities)
         - [Add a Git repository for Automate](#add-a-git-repository-for-automate)
         - [Verify Automate import](#verify-automate-import)
         - [Optimize the Dialog](#optimize-the-dialog)
@@ -60,53 +51,15 @@
 
 ### Access the lab environment
 
-Navigate to the RHPDS Portal and order the "Getting Well With CloudForms" in the catalog "Cloud Infrastructure Demos".
+Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.g.
 
-[https://rhpds.redhat.com](https://rhpds.redhat.com)
-
-If you've never used RHPDS before, make sure you follow the [Lab Environment Access Instructions](https://mojo.redhat.com/docs/DOC-1133834). In particular, request an account on the [OPENTLC Account Management Request Access](https://account.opentlc.com/account/requestAccessForm.php) page. If you only forgot your password, follow the instructions on the [OPENTLC Account Management](https://account.opentlc.com/account/) page.
-
-After you logged in, navigate to ***Services*** -> ***Catalogs***. Open the "EMEA RHTE" Catalog.
-
-![EMEA RHTE Catalog](../../common/img/emea-rhte-catalog.png) 
-
-Click on the "EMEA RHTE CF Lab" and click on ***Order*** to start deployment. 
-
-![Order CF Lab](../../common/img/order-rhte-lab.png)
-
-***Note:*** Give the lab up to 15 minutes to complete provisioning!
-
-You will receive an email with the list of all virtual machines which have been deployed as part of the lab. 
-
-The lab is comprised of a number of systems:
-
-- Red Hat CloudForms Management Engine
+To access the Red Hat CloudForms Management Engine use the URL and credentials below:
 
         URL: https://cf-<GUID>.rhpds.opentlc.com
 
         User: admin / password: r3dh4t1!
 
-- Red Hat Enterprise Virtualization Manager
-
-        URL: https://rhevm-<GUID>.rhpds.opentlc.com
-
-        User: admin@internal / password: r3dh4t1!
-
-- Red Hat OpenStack Platform
-
-        URL: https://osp-<GUID>.rhpds.opentlc.com
-
-        User: admin / password: r3dh4t1!
-
-    ***Note:*** IF you don't use HTTPS when connecting to OpenStack Horizon, you will only see the Default Apache Welcome Page (no automatic redirect). Make sure you use HTTPS to access Horizon.
-
-- VMware vCenter
-
-        URL: https://vcenter-<GUID>.rhpds.opentlc.com
-
-        User: root / password: r3dh4t1!
-
-The ID &lt;GUID&gt; is unique to your lab environment.
+The ID &lt;GUID&gt; is unique to your lab environment and was presented to you on the browser start page!
 
 ***Note:*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
 
@@ -150,372 +103,6 @@ Let's then check the RHV Provider:
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
-## Build a Service Catalog with CloudForms
-
-This lab will guide you through the process of creating a service catalog in CloudForms.
-
-### What's the value of having a service catalog?
-
-One of the features a Cloud Management Platform provides, is a self service user interface. Here users can order, manage and retire services. Services are categorized in catalogs, where they can be organized and easily consumed.
-
-By providing a service catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
-
-### Service Basics
-
-But first some basics. Four items are required to make a service available to users from the CloudForms self service portal:
-
-1. A Provisioning Dialog which presents the basic configuration options for a virtual machine or instance.
-1. A Service Dialog where you allow users to configure virtual machine or instance options.
-1. A Service Catalog which is used to group Services Catalog Items together.
-1. A Service Catalog Item (the actual Service) which combines a Service Dialog, a Provisioning Dialog and some additional meta data in the Service Catalog.
-
-We can also use Role Based Access Control to make certain Service Catalog Items available to specific groups of users.
-
-### Virtual Machine Provisioning example
-
-The first example will guide you through the process of offering a Service Catalog Item to provision a simple virtual machine. This will include:
-
-- Design a Service Dialog: a form which will ask the user for the necessary input data
-- Create a Service Catalog: this will allow to organize services in a structured way
-- Publish a Service Catalog Item: puts everything together and build the item which users can order
-
-The previous chapter mentions a fourth object, the Provisioning Dialog. We do not have to create one, since there are examples shipped with the product, which does everything we need.
-
-The following chapters will guide you through the process step-by-step.
-
-### Build a VM Provisioning Service Dialog
-
-For this example we will create a Service Dialog which will ask the user for two parameters:
-
-* the name of the new virtual machine
-* how much memory should be allocated to the new virtual machine
-
-Follow these steps to design the service dialog:
-
-1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
-
-    ![navigate to Automation, Automate, Customization](../../common/img/navigate-to-customization.png)
-
-1. Navigate to ***Service Dialogs*** in the accordion on the left.
-
-    ![navigate to service dialogs](../../common/img/service-dialog-accordion.png)
-
-1. Click on ***Configuration*** -> ***Add a new Dialog***
-
-1. Chose a label and description:
-
-    ***Label***: Simple VM
-
-    ***Description***: Simple VM provisioning dialog
-
-    ***Note:*** Make sure ***Submit*** and ***Cancel*** are both checked
-
-    ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
-
-    ![create a service dialog](../../common/img/create-service-dialog.png)
-
-1. Click on the little plus icon in the menu on the top and select ***Add a new Tab to this Dialog***
-
-    Tabs can be used to make complex Service Dialogs easier to navigate and fill out. They are often used to logically structure related questions (e.g. "General Configuration", "Network Configuration", "user Configuration").
-
-    For this lab, we will keep it simple:
-
-    ***Label:*** Generic
-
-    ***Description:*** Generic Tab
-
-    ![add a new tab to the dialog](../../common/img/generic-tab.png)
-
-1. Click on the little plus icon and ***Add a new Box to this Tab***
-
-    Boxes are used to visually group related dialog elements. For example in the network configuration Service Dialog a box could be used to group all IPv4 related questions, and another box to group all IPv6 related questions.
-
-    For this lab we create a simple box:
-
-    ***Label:*** Generic
-
-    ***Description:*** Generic Box
-
-    ![add a new box to the tab](../../common/img/generic-box.png)
-
-1. Now we can add elements to this box. Click on ***Add a new Element to this Box***
-
-    The first element will allow the user to specify a VM name:
-
-    The Label is the name of the element as it will be shown in the UI:
-
-    ***Label:*** VM Name
-
-    The name will be used for the internal variable of the provisioning workflow:
-
-    ***Name:*** option_0_vm_name
-
-    The description is some text which will be shown if the mouse pointer is hovering over this element. It can be used to provide additional information to the user to fill out this field:
-
-    ***Description:*** Specify the name of the new virtual machine
-
-    CloudForms allows us to design Service Dialogs comprised of many different types of Elements:
-    
-    - Check box: allows to user to check or uncheck the element, often used to ask for additional optional data
-    - Date Control: allows the user to select a date from a calender widget. Often used for retirement or other date related options
-    - Date/Time Control: same as Date Control, but also allows to specify a time, for example used to specify an automated shutdown or if a change should be scheduled for later
-    - Drop Down List: allows the user to select one or multiple options from a list, for example to chose from a list of available networks, applications, cost centers and many more
-    - Radio Button: Similar to the check box, but only one of the options can be selected, for example the base OS version (RHEL 6 or RHEL 7, but never more than one)
-    - Tag Control: a special element which allows the user to chose from available tags. More about tagging later in this lab
-    - Text Area Box: allows the user to enter relatively large amounts of text (multiple lines), could be used for example to provide description information
-    - Text Box: allows the user for short amounts of text (one line), in this example we use this element to ask the user for a name of the virtual machine
-    
-    We want the user to enter a text which then will be used to name the VM. This can be accomplished by selecting "Text Box" in the ***Type*** drop down list.
-
-    ![add a new element to ask for the VM name](../../common/img/element-vmname.png)
-
-    The remaining options can be ignored for now.
-
-1. We want to add a second element where the user can chose the memory size of the new VM. Click once more on ***Add a new Element to this Box***.
-
-    ***Label:*** Memory size
-
-    ***Name:*** option_0_vm_memory
-
-    ***Description:*** Select how much memory the virtual machine should have
-
-    ***Type:*** Drop Down List
-
-    A element of type "Drop Down List" allows the user to select one of the predefined values. To create the list of selectable values, scroll down to the table "Entries" and add the following lines:
-
-    ***Value:*** 2048
-
-    ***Description:*** 2 GB
-
-    ***Value:*** 4096
-
-    ***Description:*** 4 GB
-
-    ***Value:*** 8192
-
-    ***Description:*** 8 GB
-
-    ***Note:*** To be able to add a line to the table, click on the little "Add this entry" icon on the left of each row!
-
-    ![add entries to the drop down list](../../common/img/memory-dropdownlist.png)
-
-1. We are finally done designing the dialog. Click on ***Add*** to save the dialog.
-
-    ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [Github](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/service-dialog/simple-vm.yml) and import it. Follow the instructions on how to [import a service dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
-
-### Build a VM Provisioning Service Catalog
-
-The following steps will create a Service Catalog.
-
-1. The next step is to create a Service Catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
-
-    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
-
-1. Click on ***Catalogs*** in the accordion on the left
-
-    ![service catalogs](../../common/img/service-catalogs.png)
-
-1. Click on ***Configuration*** and ***Add a New Catalog***
-
-1. Fill out name and description:
-
-    ***Name:*** Virtual Machines
-
-    ***Description:*** Deploy Virtual Machines from the Catalog
-
-    ![add a new catalog](../../common/img/add-a-new-catalog.png)
-
-1. Click ***Add*** to save the Service Catalog
-
-### Build a Virtual Machine Service Catalog Item
-
-To tie everything together, the last step is to define a service catalog item.
-
-1. Navigate to ***Services*** -> ***Catalogs***
-
-    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
-
-1. Click on ***Catalog items*** in the accordion on the left.
-
-    You should already see two Service Catalogs:
-
-    ***Unassigned:*** Catalog items which are not published yet, will be listed here
-
-    ***Virtual Machines:*** the Service Catalog we just created in the previous step
-
-    ![navigate to catalog items](../../common/img/navigate-to-catalog-items.png)
-
-1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
-
-    Catalog Bundles are used for multi tier applications and consist of many Catalog Items. Since we do not have any existing Catalog Items, we can not create a Bundle.
-
-1. Chose the Catalog Item Type. For this example we want to use the Red Hat Virtualization Provider, so click on ***RHEV***
-
-    ![select catalog item type](../../common/img/select-catalog-item-type.png)
-
-    ***Note:*** It can take a few seconds for the next screen to load.
-
-1. The next dialog will ask for the details of the new Service Catalog Item:
-
-    The name of the Service Catalog Item shown in the UI:
-
-    ***Name:*** Simple VM
-
-    A more descriptive text about the Service Catalog Item:
-
-    ***Description:*** A simple Linux Virtual Machine
-
-    Check the "Display in Catalog" box. If not selected, the Service Catalog Item will not be visible to users. This can be used for Items which are either still in draft mode, or should only be ordered as a part of a bundle:
-
-    ***Display in Catalog:*** check this box
-
-    Select the previously created Service Catalog:
-
-    ***Catalog:***  Virtual Machines
-
-    Select the previously created Service Dialog:
-
-    ***Dialog:*** Simple VM
-
-    All other fields on this tab can remain unchanged.
-
-    ![adding a new catalog item](../../common/img/adding-a-new-catalog-item.png)
-
-    Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
-
-1. Click on the ***Details*** tab. You can provide some more descriptive explanation about the service here. We can even use basic HTML formatting in this box.
-
-        <h1>Simple VM</h1>
-        <p>When ordering this item, the user will be provided some simple questions to specify the hostname and memory size of the requested virtual machine.</p>
-
-        <p>The VM will be deployed with <a href=http://www.redhat.com>Red Hat Enterprise Linux 7</a>.
-
-1. The ***Request Info*** tab of the dialog allows us to provide all the settings we want to use when provisioning a virtual machine from this Service Catalog Item.
-
-    Select the template used for provisioning:
-
-    ***Selected VM:*** rhel73
-
-    For automatic naming chose "changeme"
-
-    ***Naming:*** changeme
-
-    If no name is specified, this will cause CloudForms to automatically assign a name based on "cfme" as a prefix. The name will be expanded with a unique ID starting with 001.
-
-1. Click on the sub tab ***Environment***
-
-    Although it sounds the most convenient option, we can not use "Choose Automatically". This will require the definition of a provisioning scope, which we haven't done yet. Instead we we set the appropriate values manually.
-
-    The datacenter of our Red Hat Virtualization Provider:
-
-    ***Datacenter:*** Default
-
-    The cluster in the Red Hat Virtualization Datacenter:
-
-    ***Cluster:*** Default
-
-    The host which will perform the actual tasks and where the VM will initially run on:
-
-    ***Host:*** rhelkvm
-
-    The storage domain to store the VM
-
-    ***Datastore:*** vmstore00
-
-1. Click on the next sub tab ***Hardware***
-
-    For the purpose of the lab, the provided defaults are fine.
-
-1. Click on the next sub tab ***Network***
-
-    The lab environment is very simple, there is only one VLAN available:
-
-    ***VLAN:*** rhevm
-
-1. Click on the next sub tab ***Customize***
-
-    This allows to reconfigure certain settings inside the virtual machine. For this lab, we keep them all empty
-
-1. Click on the last sub tab ***Schedule***
-
-    This allows us to delay provisioning to a later time, for example during the night or off hours. We can also set a retirement date. After notifying the user and allowing him or her to extend the lifespan of the virtual machine, retirement will shutdown and, by default, delete the virtual machine.
-
-    For the purpose of the lab, we keep these settings unchanged.
-
-1. Finally click on ***Add*** to save the Catalog Item
-
-    ![catalog item saved](../../common/img/catalog-item-saved.png)
-
-### Order the Simple Virtual Machine Service Catalog Item
-
-For sure you want to test the Service Catalog Item you just created!
-
-1. Navigate to ***Services*** -> ***Catalogs*** and then click on ***Service Catalogs*** in the accordion on the left.
-
-    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
-
-1. You should see the Service Catalog Item we just created:
-
-    ![all services](../../common/img/all-services.png)
-
-1. Click on the Item to see more details.
-
-    ![service item details](../../common/img/service-item-details.png)
-
-    Note that the Link for Red Hat Enterprise Linux in fact opens the Red Hat Homepage.
-
-1. Click on ***Order***
-
-1. The Service Dialog we created earlier will be presented and ask for the name of the virtual machine and the memory size. As you can see, the name is a free text field, and the memory size is a drop down list.
-
-    Chose an example virtual machine name and the amount of memory you would like to be allocated.
-
-    ![example-oder-simple-vm](../../common/img/example-order-simple-vm.png)
-
-1. You will be redirected to the request queue where you can see CloudForms working on your request.
-
-    ![simple vm ordered](../../common/img/simple-vm-ordered.png)
-
-    ***Note:*** Since we are using nested virtualization to run these labs, performance will be slow and it can take several minutes to complete the request (20-30 minutes).
-
-### Verify the order
-
-In the requests queue you can click on ***Reload*** to see how CloudForms processes the order. If you click the button a few times, you should see the status is progressing.
-
-We want to log into Red Hat Virtualization to see how the virtual machine is created:
-
-1. Open the Red Hat Virtualization Web UI in a new browser window or tab.
-
-        URL: https://rhevm-<GUID>.rhpds.opentlc.com
-
-    ![rhv portal page](../../common/img/rhv-portal.png)
-
-1. Click on ***Administrator Portal***
-
-    ![rhv admin portal](../../common/img/rhv-admin-portal.png)
-
-1. Log in with these credentials:
-
-        ***user:*** admin
-
-        ***Password:*** r3dh4t1!
-
-    Make sure the profile is set to "internal".
-
-1. Click on the tab ***Virtual Machines*** to see all existing virtual machines
-
-    ![vm overview](../../common/img/rhv-vm-overview.png)
-
-1. After a few moments you're virtual machine should automatically show up in the list.
-
-    ![lab VM showing up](../../common/img/rhv-lab-vm.png)
-
-    Note that while the virtual machine is created, the memory size is still 1 GB. This value is specified in the template therefore copied when creating the virtual machine. Only after the virtual machine was successfully cloned, CloudForms corrects the memory size.
-
-    ![lab VM complete](../../common/img/rhv-lab-vm-complete.png)
-
-1. This concludes this first part of the lab
-
 ## CloudForms with Ansible batteries included
 
 ***TODO: Replace this with a better example, we won't have vCenter in this lab***
@@ -532,7 +119,7 @@ This integration allows customers to build service catalogs from Ansible Playboo
 
 ### Make sure embedded Ansible role is enabled and running
 
-Before we start,  we want to make sure the embedded Ansible role is enabled and running.
+Before we start, we want to make sure the embedded Ansible role is enabled and running.
 
 1. Log into your CloudForms Appliance
 
@@ -540,7 +127,7 @@ Before we start,  we want to make sure the embedded Ansible role is enabled and 
 
     ![navigate to configuration](../../common/img/navigate-to-configuration.png)
 
-1. Make sure the "Embedded Ansible" Role is enabled
+1. Make sure the "Embedded Ansible" and the "Git Repositories Owner" Roles are enabled
 
     ![ansible role enabled](../../common/img/ansible-role-enabled.png)
 
@@ -549,8 +136,6 @@ Before we start,  we want to make sure the embedded Ansible role is enabled and 
 1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
-
-Logoff as demouser and login back as Admin
 
 ### Add a Git repository of Ansible Playbooks
 
@@ -568,9 +153,11 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***Description:*** Example Playbooks
 
-    ***URL:*** [https://github.com/cbolz/rhte-fy18.git](https://github.com/cbolz/rhte-fy18.git)
+    ***URL:*** [https://github.com/cbolz/summit-fy19.git](https://github.com/cbolz/summit-fy19.git)
 
     ***SCM Update Options:*** check "Update on Launch"
+
+    Update on Launch causes CloudForms to check for new Playbooks are updated Playbooks before a Playbook is executed.
 
     ![add a new repository](../../common/img/add-ansible-repository.png)
 
@@ -578,7 +165,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 ***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
 
-### Build a Service Catalog to create and delete users
+## Build a Service Catalog to create and delete users
 
 In this lab we will use an Ansible Playbook to create a local user in CloudForms. This example will also demonstrate how we can define a retirement process as well. In CloudForms' understanding of complete life cycle management, every object has a provisioning and a retirement workflow.
 
@@ -740,7 +327,7 @@ To make sure the user was really created, follow these steps.
 
     ![logout](../../common/img/logout.png)
 
-### Build a Service Catalog to deploy Virtual Machines
+## Build a Service Catalog to deploy Virtual Machines
 
 In this second part of the lab we want to use an Ansible Playbook to deploy a Virtual Machine in VMware vCenter. The necessary Playbook should already be in your repository.
 
@@ -890,7 +477,7 @@ When executing an Ansible Playbook with the embedded role in CloudForms, a "Serv
 
     ![reload icon](../../common/img/reload-icon.png)
 
-### Extend CloudForms builtin Capabilities
+## Extend CloudForms builtin Capabilities
 
 In this lab you have so far learned how to use Ansible Playbooks to orchestrate and execute configuration actions. CloudForms is internally using a powerful and extensible framework that defines what happens "under the hood". This feature is called "Automate". "Automate" allows us to understand how things are done and even more interestingly, it allows us to add features which are not coming out of the box.
 

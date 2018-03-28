@@ -56,55 +56,15 @@
 
 ### Access the lab environment
 
-TODO: This has to be updated with the Summit specific instructions
+Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.g.
 
-Navigate to the RHPDS Portal and order the "Getting Well With CloudForms" in the catalog "Cloud Infrastructure Demos".
-
-[https://rhpds.redhat.com](https://rhpds.redhat.com)
-
-If you've never used RHPDS before, make sure you follow the [Lab Environment Access Instructions](https://mojo.redhat.com/docs/DOC-1133834). In particular, request an account on the [OPENTLC Account Management Request Access](https://account.opentlc.com/account/requestAccessForm.php) page. If you only forgot your password, follow the instructions on the [OPENTLC Account Management](https://account.opentlc.com/account/) page.
-
-After you logged in, navigate to ***Services*** -> ***Catalogs***. Open the "EMEA RHTE" Catalog.
-
-![EMEA RHTE Catalog](../../common/img/emea-rhte-catalog.png) 
-
-Click on the "EMEA RHTE CF Lab" and click on ***Order*** to start deployment. 
-
-![Order CF Lab](../../common/img/order-rhte-lab.png)
-
-***Note:*** Give the lab up to 15 minutes to complete provisioning!
-
-You will receive an email with the list of all virtual machines which have been deployed as part of the lab. 
-
-The lab is comprised of a number of systems:
-
-- Red Hat CloudForms Management Engine
+To access the Red Hat CloudForms Management Engine use the URL and credentials below:
 
         URL: https://cf-<GUID>.rhpds.opentlc.com
 
         User: admin / password: r3dh4t1!
 
-- Red Hat Enterprise Virtualization Manager
-
-        URL: https://rhevm-<GUID>.rhpds.opentlc.com
-
-        User: admin@internal / password: r3dh4t1!
-
-- Red Hat OpenStack Platform
-
-        URL: https://osp-<GUID>.rhpds.opentlc.com
-
-        User: admin / password: r3dh4t1!
-
-    ***Note:*** IF you don't use HTTPS when connecting to OpenStack Horizon, you will only see the Default Apache Welcome Page (no automatic redirect). Make sure you use HTTPS to access Horizon.
-
-- Red Hat OpenShift Container Platform
-
-        URL: https://ose-<GUID>.rhpds.opentlc.com
-
-        User: admin / password: r3dh4t1!
-
-The ID &lt;GUID&gt; is unique to your lab environment.
+The ID &lt;GUID&gt; is unique to your lab environment and was presented to you on the browser start page!
 
 ***Note:*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
 
