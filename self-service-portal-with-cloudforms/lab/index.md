@@ -37,16 +37,16 @@
     - [Advanced labs](#advanced-labs)
         - [Use the Self Service user Interface](#use-the-self-service-user-interface)
         - [Use role Based Access Control to publish Service Catalog](#use-role-based-access-control-to-publish-service-catalog)
-        - [User Groups](#user-groups)
-        - [Roles](#roles)
-        - [More details](#more-details)
-        - [Create a Role](#create-a-role)
-        - [Create a new Group](#create-a-new-group)
-        - [Create a new User](#create-a-new-user)
-        - [Test user Joe Doe](#test-user-joe-doe)
-        - [Grant access to certain Catalog Items](#grant-access-to-certain-catalog-items)
-        - [Test once more as Joe Doe](#test-once-more-as-joe-doe)
-    - [Even more?](#even-more)
+            - [User Groups](#user-groups)
+            - [Roles](#roles)
+            - [More details](#more-details)
+            - [Create a Role](#create-a-role)
+            - [Create a new Group](#create-a-new-group)
+            - [Create a new User](#create-a-new-user)
+            - [Test user Joe Doe](#test-user-joe-doe)
+            - [Grant access to certain Catalog Items](#grant-access-to-certain-catalog-items)
+            - [Test once more as Joe Doe](#test-once-more-as-joe-doe)
+        - [Even more?](#even-more)
 
 <!-- /TOC -->
 
@@ -98,7 +98,7 @@ Let's then check the RHV Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-infrastructure-providers.png)
 
-1. You should see a tile icon labeled "OpenStack". Click on it.
+1. You should see a tile icon labeled "RHV". Click on it.
 
     ![OpenStack provider tile icon](../../common/img/rhv-provider-tile.png)
 
@@ -184,9 +184,9 @@ Follow these steps to design the service dialog:
 
 1. Chose a label and description:
 
-    ***Label***: Simple VM
+    ***Dialog's name***: Simple VM
 
-    ***Description***: Simple VM provisioning dialog
+    ***Dialog's Description***: Simple VM provisioning dialog
 
     ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
 
@@ -370,9 +370,11 @@ To tie everything together, the last step is to define a service catalog item.
 
     For automatic naming chose "changeme"
 
-    ***Naming:*** changeme
+    ***VM Name:*** changeme
 
     If no name is specified, this will cause CloudForms to automatically assign a name based on "cfme" as a prefix. The name will be expanded with a unique ID starting with 001.
+
+    Also make sure the ***Provision Type*** is "Native Clone" and do not change this value.
 
 1. Click on the sub tab ***Environment***
 
@@ -554,7 +556,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
 1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
 
-1. Chose the Catalog Item Type. For this example we want to use HEAT on OpenStack which is an Orchestration provider, so click on ***OpenShift Template***
+1. Chose the Catalog Item Type. For this example we want to use OpenShift, so click on ***OpenShift Template***
 
     ![select catalog item type](../../common/img/select-catalog-item-type-openshift.png)
 
@@ -580,7 +582,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     ***Dialog:*** cakephp-mysql-example
 
-    Select on which provider the HEAT Template should be executed:
+    Select on which provider the OpenShift Template should be executed:
 
     ***Provider:*** OpenShift
 
@@ -671,7 +673,7 @@ In the first part of the lab you have learned:
 
 In the second part of the lab, we want to use HEAT to create a new instance and to provision an application inside the instance. We are using the probably most popular example: [Wordpress](www.wordpress.org). The HEAT template we use, can be found in the [OpenStack Git Repository](https://github.com/openstack/heat-templates/blob/master/hot/F20/WordPress_Native.yaml).
 
-In the previous lab, we had to create a Service Dialog manually. With HEAT, CloudFormations and Microsoft ARM Templates, CloudForms can automatically create a Service Dialog for us. We can still edit this automatically created Service Dialog, to adjust it to our needs.
+Earlier in this lab, we had to create a Service Dialog manually. For a number of templates CloudForms can create a Service Dialog automatically. In this lab we will see how we can create a Service Dialog from a HEAT template. We can still edit this automatically created Service Dialog to adjust it to our needs.
 
 ### Prepare the HEAT Template
 
@@ -909,7 +911,7 @@ TODO: I can not test this, because the dynamic dialog "available_tenants" does n
 
     ***Stack Name:*** wordpress001
 
-    For all other fields the provided default values can be accepted. Note that the image name is "rhel7.2" as you specified in your dialog.
+    For all other fields the provided default values can be accepted. Note that the image name is "rhel7" as you specified in your dialog.
 
     ![order HEAT template](../../common/img/order-wordpress-heat-template.png)
 
@@ -920,40 +922,6 @@ TODO: I can not test this, because the dynamic dialog "available_tenants" does n
     ***Note:*** Since we are using nested virtualization to run these labs, performs will be slow and it can take several minutes to complete the request (20-30 minutes).
 
     ![after ordering heat service catalog item](../../common/img/after-ordering-heat.png)
-
-### Verify provisioning in OpenStack
-
-Let's log into OpenStack to see what's happening there.
-
-1. Log into OpenStack:
-
-    [https://osp-&lt;GUID&gt;.https://osp-<GUID>.rhpds.opentlc.com](https://osp-&lt;GUID&gt;.https://osp-<GUID>.rhpds.opentlc.com)
-
-    ***Note:*** Make sure you use the HTTPS URL!
-
-    ***username:*** admin
-
-    ***Password:*** r3dh4t1!
-
-    ![dashboard after login](../../common/img/osp-after-login.png)
-
-1. Navigate to ***Project*** in the menu bar on the top
-
-    ![navigate to project](../../common/img/osp-navigate-to-project.png)
-
-1. Navigate to ***Orchestration*** -> ***Stacks***
-
-    ![navigate to orchestration stacks](../../common/img/osp-navigate-to-stacks.png)
-
-1. You should see your stack. It might already be completed or still in progress. If you can't see it yet, wait a minute and reload the page.
-
-    ![stack completed](../../common/img/osp-stack-completed.png)
-
-1. Click on the stack to get the details
-
-    ![stack details](../../common/img/osp-stack-details.png)
-
-This concludes this section of the lab.
 
 ## Advanced labs
 
@@ -977,21 +945,25 @@ CloudForms offers a very granular system for role Based Access Control (RBAC). T
 
 In this advanced lab we want only specific Catalog Items to be available for certain user groups. CloudForms is using tags to identify objects. For example, if a Service Catalog Item is tagged as "Department Engineering" only users which are in a group which is also tagged as "Department Engineering" will see and be able to order this Catalog Item.
 
-### User Groups
+***Note:*** The following parts of the lab are using the "Operations UI" or "Classic UI". Make sure to switch back to it by using the original URL:
+
+[https://cf-&lt;GUID&gt;.labs.rhepds.com/](https://cf-&lt;GUID&gt;.labs.rhepds.com/)
+
+#### User Groups
 
 A user is always member of at least one user group. The group defines the visibility granted to all member users. For example, members of the group "Department Engineering" can see all objects tagged with this tag.
 
-### Roles
+#### Roles
 
 The role defines which actions are allowed to groups associated to this role. For example the role can grant the privilege to start or stop Virtual Machines, manage Service Catalog items, or define and use reports.
 
 Since roles can be associated to multiple groups, they can be reused. A user in Department Engineering might have the same privileges as a user in Department Sales, but they will see different objects which they can interact with.
 
-### More details
+#### More details
 
 If you want to learn more about CloudForms' Role Based Access Control, you can read the [official product documentation](https://access.redhat.com/documentation/en/red-hat-cloudforms/). The chapter [access control](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/general_configuration/configuration#access-control) in the [General Configuration](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/general_configuration/) Guide also provides more background information. Last but not least, there is a good summary about [Using Tags for Access Control](http://cloudformsblog.redhat.com/2016/10/13/using-tags-for-access-control/) on the [official CloudForms Blog](http://cloudformsblog.redhat.com).
 
-### Create a Role
+#### Create a Role
 
 For this lab, we first want to create a role which we want to use for testing.
 
@@ -1031,7 +1003,7 @@ For this lab, we first want to create a role which we want to use for testing.
 
     ![add a new group](../../common/img/add-new-group.png)
 
-### Create a new Group
+#### Create a new Group
 
 Next we want to create a group and assign it to the role we just created.
 
@@ -1055,7 +1027,7 @@ Next we want to create a group and assign it to the role we just created.
 
 1. Click on ***Add*** to create this new group
 
-### Create a new User
+#### Create a new User
 
 Finally we want to create a user which is a member of the group we just created.
 
@@ -1083,7 +1055,7 @@ Finally we want to create a user which is a member of the group we just created.
 
     Click on ***Add*** to create the user
 
-### Test user Joe Doe
+#### Test user Joe Doe
 
 So far we have not assigned any objects to the new group, but we have granted very specific rights to members of that group.
 
@@ -1115,7 +1087,7 @@ Let's see what happens if we log into CloudForms as "Joe Doe".
 
     ![logout](../../common/img/logout.png)
 
-### Grant access to certain Catalog Items
+#### Grant access to certain Catalog Items
 
 We want to make one Catalog Item available to all users which are members of the "Self Service Engineering" group.
 
@@ -1143,7 +1115,7 @@ We want to make one Catalog Item available to all users which are members of the
 
 1. Click ***Save*** to commit the changes
 
-### Test once more as Joe Doe
+#### Test once more as Joe Doe
 
 We want to do another test and see if the user Joe Doe can now see and other the Catalog Item.
 
@@ -1165,7 +1137,7 @@ We want to do another test and see if the user Joe Doe can now see and other the
 
 1. If you want, you can order the Service Catalog Item and should see that it will be deployed perfectly.
 
-## Even more?
+### Even more?
 
 If you're already done and still have some time left, here are some ideas for advanced labs:
 
