@@ -2,6 +2,8 @@
 
 ***Only follow these instructions if you were unable to create the service dialog manually!***
 
+TODO: This might become obsolete!
+
 1. Navigate to ***Automation***, ***Automate***, ***Customization***
 
     ![navigate to Automation, Automate, Customization](../../common/img/navigate-to-customization.png)
