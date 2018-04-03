@@ -449,6 +449,9 @@ Once more, we want to test the result and see everything works as expected.
 
 1. If you specified the dialog elements like described before, your form should look like this and all the provided default values can be accepted.
 
+TODO: # avaleror: Maybe showing that this info can be hidden could be interesting ?? I´ve seen that later you show this, but I still think that commenting here as an intro could be handy.
+
+
     ![provision virtual machines details](../../common/img/provision-vm-details.png)
 
 1. Click on ***Submit***
@@ -495,6 +498,9 @@ In this lab you have so far learned how to use Ansible Playbooks to orchestrate 
 
 TODO: Do we need a new project with better code examples? The Automate code doesn't make sense anymore either, since it returns a list of vCenters - which we don't use anymore
 
+TODO: # avaleror: Maybe would be interesing explain a little bit that the Git Respositories Owner has been activated for this point, and the implications that it have.
+
+
 "Automate" code can either be developed and written directly in the CloudForms Web UI, or it can be imported from a Git repository. We will do the latter:
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Import/Export***
@@ -533,6 +539,8 @@ We want to make sure the Automate Code was properly imported.
     - RedHat: These methods are only shipped with Red Hat CloudForms and are supported by Red Hat
 
     You can now see an additional third Datastore called "Lab", which is the one you just imported. Users can create as many additional datastores as they want, but they can not modify or delete the two datastores shipped with the product. Datastores are stacked and prioritized which allows separation of out of the box functionality from custom code.
+
+TODO:  # avaleror: Name of new Domain is not Lab at this moment, keep in mind to change it. Probably comment to students that git Domain it´s locked and they can't modify it from CF UI, and they have to modfy it outside CF and push changes to git repo.
 
     The screenshot was created after expanding all folders (which are actually called "Namespaces" and "Classes":
 
@@ -599,6 +607,8 @@ The Service Dialog we created so far, is not ideal for most use cases. We want u
     Click on "Entry Point". A window will pop up which allows us to specify which method instance should be called to populate this Element.
 
     Select the Instance called "get_vcenter_list" and click ***Apply***.
+
+TODO:  # avaleror: Since code in this method is pretty simple maybe showing and commenting a little bit, would help students to understand whats is happening in the background ???
 
     ![select get_vcenter_list instance](../../common/img/get_vcenter_list-instance.png)
 
