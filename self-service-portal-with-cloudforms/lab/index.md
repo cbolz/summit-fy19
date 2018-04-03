@@ -56,7 +56,7 @@
 
 ### Access the lab environment
 
-Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.g.
+Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.
 
 To access the Red Hat CloudForms Management Engine use the URL and credentials below:
 
@@ -78,7 +78,7 @@ Let's first check the OpenStack Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
-1. You should see a tile icon labeled "RHEV". Click on it.
+1. You should see a tile icon labeled "OpenStack". Click on it.
 
     ![OpenStack provider tile icon](../../common/img/openstack-provider-tile.png)
 
