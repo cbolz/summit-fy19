@@ -273,7 +273,7 @@ Follow these steps to design the service dialog:
 
 1. We are finally done designing the dialog. Click on ***Save*** to save the dialog.
 
-    ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [Github](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/service-dialog/simple-vm.yml) and import it. Follow the instructions on how to [import a service dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
+    ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a service dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
 
 ### Build a VM Provisioning Service Catalog
 
@@ -679,13 +679,11 @@ Before we can import the template into CloudForms, we need to download it or hav
 
 ***Note:*** Please use the forked version of the HEAT Template, which has an additional field "Network" defined. Without this field, running the HEAT Template will fail with an error indicating that mulitple networks are available and hence a network has to be specified.
 
-1. Go to the template on the Github project page.
-
-TODO: Update the link with master branch from: https://github.com/cbolz/summit-fy19/blob/self-service-update-46/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml
-    [https://github.com/cbolz/partner-conference-2017-labs/blob/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml](https://github.com/cbolz/partner-conference-2017-labs/blob/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml)
+1. Go to the template on the GitHub project page.
+    [https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml)
 
 1. Make sure to open the file in "RAW" mode or use this link:
-    [https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml)
+    [https://raw.githubusercontent.com/cbolz/summit-fy19/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml](https://raw.githubusercontent.com/cbolz/summit-fy19/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml)
 
 1. Download the HEAT Template or open it in a separate browser window so you can copy and paste it into the CloudForms Web UI
 
@@ -711,7 +709,7 @@ The following procedure will import a HEAT template, create a service dialog and
 
     ***Template Type:*** OpenStack Heat
 
-    Copy and paste the HEAT Template you downloaded before into the large text area below those fields. Make sure you copy the entire HEAT template by opening the [RAW page](https://raw.githubusercontent.com/cbolz/partner-conference-2017-labs/master/cloudforms-service-catalog-lab/HEAT/WordPress_Native.yaml) of the file on Github.
+    Copy and paste the HEAT Template you downloaded before into the large text area below those fields. Make sure you copy the entire HEAT template by opening the [RAW page](https://raw.githubusercontent.com/cbolz/summit-fy19/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml) of the file on GitHub.
 
     ![wordpress template](../../common/img/wordpress-heat-template.png)
 

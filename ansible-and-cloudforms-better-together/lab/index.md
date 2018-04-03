@@ -141,13 +141,17 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 ### Add a Git repository of Ansible Playbooks
 
-To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as Github, GitLab or others. Other Source Control Management Systems like Subversion or Mercurial are planned for later versions.
+To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as GitHub, GitLab or others. Other Source Control Management Systems like Subversion or Mercurial are planned for later versions.
 
 1. Navigate to Automation, Ansible, Repositories.
 
     ![navigate to Ansible repositories](../../common/img/navigate-to-ansible-repo.png)
 
 1. Click on ***Configuration***, ***Add New Repository***
+
+    ![Add new repository](../../common/img/embedded-ansible-add-git-repository.png)
+
+    ***Note:*** If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
 
 1. Fill in the form.
 
@@ -331,6 +335,8 @@ To make sure the user was really created, follow these steps.
 
 ## Build a Service Catalog to deploy Virtual Machines
 
+TODO: This should be replaced by a better example, since we do not want to use vCenter in any lab.
+
 In this second part of the lab we want to use an Ansible Playbook to deploy a Virtual Machine in VMware vCenter. The necessary Playbook should already be in your repository.
 
 1. Click on ***Catalog Items*** in the accordion on the left
@@ -487,7 +493,7 @@ In this lab you have so far learned how to use Ansible Playbooks to orchestrate 
 
 ### Add a Git repository for Automate
 
-TODO: Do we need a new project with better code examples?
+TODO: Do we need a new project with better code examples? The Automate code doesn't make sense anymore either, since it returns a list of vCenters - which we don't use anymore
 
 "Automate" code can either be developed and written directly in the CloudForms Web UI, or it can be imported from a Git repository. We will do the latter:
 
