@@ -29,7 +29,7 @@
         - [Test the new Service Dialog](#test-the-new-service-dialog)
     - [Policies and Ansible](#policies-and-ansible)
         - [Creating the Service](#creating-the-service)
-        - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook-1)
+        - [Create a Service Catalog Item for the Policy Playbook](#create-a-service-catalog-item-for-the-policy-playbook)
         - [Creating Control Action](#creating-control-action)
         - [Create VM Control Policy](#create-vm-control-policy)
         - [Setting Event Assignment](#setting-event-assignment)
@@ -51,7 +51,7 @@
 
 ### Access the lab environment
 
-Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.g.
+Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.
 
 To access the Red Hat CloudForms Management Engine use the URL and credentials below:
 
@@ -73,7 +73,7 @@ Let's first check the OpenStack Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
-1. You should see a tile icon labeled "RHEV". Click on it.
+1. You should see a tile icon labeled "OpenStack". Click on it.
 
     ![OpenStack provider tile icon](../../common/img/openstack-provider-tile.png)
 
@@ -113,9 +113,9 @@ This lab will guide you through the process of using the new embedded Ansible fe
 
 Today, every business is a digital business. Technology is your innovation engine, and delivering your applications faster helps you win. Historically, that required a lot of manual effort and complicated coordination. But today, there is Ansible - the simple, yet powerful IT automation engine that thousands of companies are using to drive complexity out of their environments and accelerate DevOps initiatives.
 
-Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.5, has a new "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
+Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
 
-This integration allows customers to build service catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them.
+This integration allows customers to build service catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The user interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
 
 ### Make sure embedded Ansible role is enabled and running
 
@@ -135,11 +135,13 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
 
+    ***Note:*** The git role is not represented by a specific worker process.
+
     ![ansible worker started](../../common/img/ansible-worker-started.png)
 
 ### Add a Git repository of Ansible Playbooks
 
-To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as Github, Gitlab or others. Other repository types like Subversion or Mercurial are planned for later versions.
+To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as Github, GitLab or others. Other Source Control Management Systems like Subversion or Mercurial are planned for later versions.
 
 1. Navigate to Automation, Ansible, Repositories.
 
@@ -485,6 +487,8 @@ In this lab you have so far learned how to use Ansible Playbooks to orchestrate 
 
 ### Add a Git repository for Automate
 
+TODO: Do we need a new project with better code examples?
+
 "Automate" code can either be developed and written directly in the CloudForms Web UI, or it can be imported from a Git repository. We will do the latter:
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Import/Export***
@@ -519,10 +523,10 @@ We want to make sure the Automate Code was properly imported.
 
 1. "Automate" code is organized in "Datastores". Two Datastores are shipped with CloudForms:
 
-    * ManageIQ: These methods are a verbatim copy of the Open Source Community version
-    * RedHat: These methods are only shipped with Red Hat CloudForms and are supported by Red Hat
+    - ManageIQ: These methods are a verbatim copy of the Open Source Community version
+    - RedHat: These methods are only shipped with Red Hat CloudForms and are supported by Red Hat
 
-    You can now see an additional third Datastore called "PConf17", which is the one you just imported. Users can create as many additional datastores as they want, but they can not modify or delete the two datastores shipped with the product. Datastores are stacked and prioritized which allows separation of out of the box functionality from custom code.
+    You can now see an additional third Datastore called "Lab", which is the one you just imported. Users can create as many additional datastores as they want, but they can not modify or delete the two datastores shipped with the product. Datastores are stacked and prioritized which allows separation of out of the box functionality from custom code.
 
     The screenshot was created after expanding all folders (which are actually called "Namespaces" and "Classes":
 
@@ -640,7 +644,7 @@ We want to see how the resulting Service Catalog Item looks like.
 
 ## Policies and Ansible
 
-In this lab we will cover how to create an action in CoudForms that executes an Ansible Playbook. 
+In this lab we will cover how to create an action in CoudForms that executes an Ansible Playbook.
 
 ### Creating the Service
 
@@ -648,7 +652,7 @@ Control Policies drive Control Actions. Ansible Playbooks can now be executed as
 
 First we need to create a Catalog to store the service in, do this by clicking Services/Catalogs and create new by clicking Configuration button and selecting Add New Catalog.
 
-### Create a Service Catalog Item for the Playbook
+### Create a Service Catalog Item for the Policy Playbook
 
 1. Click on ***Catalog Items*** in the accordion on the left
 
@@ -827,11 +831,11 @@ For a policy to work, it needs a policy profile to be attached to. The policy pr
 
 ### Testing the Policy Profile
 
-We will see the output in CloudForms in the form of a service in my services as well as the actual VM inventory will change. To see more real time, it's advised during testing to open the policy.log file on the CloudForms appliance. This shows when events are caught by CloudForms and confirms the policy matches. 
+We will see the output in CloudForms in the form of a service in my services as well as the actual VM inventory will change. To see more real time, it's advised during testing to open the policy.log file on the CloudForms appliance. This shows when events are caught by CloudForms and confirms the policy matches.
 
 Start by going to vSphere Web Client and selecting the VM that you identified for your service and policy earlier.
 
-1. Go to the vCenter console, pick the VM you assigned the Policy and modify the CPU and Memory values to 
+1. Go to the vCenter console, pick the VM you assigned the Policy and modify the CPU and Memory values to
 
     ***CPU:*** 3
 
