@@ -1,6 +1,6 @@
 # README
 
-This content was presented in a lab at the Red Hat Summit 2019 in San Francisco.
+This content was presented in a lab at the Red Hat Summit 2018 in San Francisco.
 
 ***The content is currently in development and should not be used!***
 
