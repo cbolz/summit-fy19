@@ -107,7 +107,7 @@ This will validate the credentials are correct, and it will also restart the pro
 
 ***TODO: Replace this with a better example, we won't have vCenter in this lab***
 
-This lab will guide you through the process of using the new embedded Ansible features of CloudForms 4.5.
+This lab will guide you through the process of using the new embedded Ansible features of CloudForms 4.6.
 
 ### Introduction to Ansible
 

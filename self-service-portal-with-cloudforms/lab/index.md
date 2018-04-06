@@ -19,9 +19,16 @@
         - [Order the Simple Virtual Machine Service Catalog Item](#order-the-simple-virtual-machine-service-catalog-item)
         - [Verify the order](#verify-the-order)
     - [Ansible Example](#ansible-example)
+        - [Introduction to Ansible](#introduction-to-ansible)
+        - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
+        - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
+        - [Store Virtual Machine Credentials](#store-virtual-machine-credentials)
+        - [Create a Service Catalog](#create-a-service-catalog)
+        - [Create a Service Catalog Item](#create-a-service-catalog-item)
+        - [Test the Service Catalog Item](#test-the-service-catalog-item)
     - [OpenShift example](#openshift-example)
         - [Create Service Dialog from OpenShift Template](#create-service-dialog-from-openshift-template)
-        - [Create a Service Catalog](#create-a-service-catalog)
+        - [Create a Service Catalog](#create-a-service-catalog-1)
         - [Create a OpenShift Template Service Catalog Item](#create-a-openshift-template-service-catalog-item)
         - [Order the OpenShift Template](#order-the-openshift-template)
         - [Verify provisioning of OpenShift application](#verify-provisioning-of-openshift-application)
@@ -33,7 +40,6 @@
         - [Build a HEAT Service Catalog](#build-a-heat-service-catalog)
         - [Build a HEAT Service Catalog Item](#build-a-heat-service-catalog-item)
         - [Order the HEAT Wordpress Catalog Item](#order-the-heat-wordpress-catalog-item)
-        - [Verify provisioning in OpenStack](#verify-provisioning-in-openstack)
     - [Advanced labs](#advanced-labs)
         - [Use the Self Service user Interface](#use-the-self-service-user-interface)
         - [Use role Based Access Control to publish Service Catalog](#use-role-based-access-control-to-publish-service-catalog)
@@ -478,7 +484,229 @@ While the VM is cloned from template, it does not show up in the CloudForms inve
 
 ## Ansible Example
 
-TODO: Explain how to create a catalog item based on an Ansible Playbook
+This lab will guide you through the process of creating a Service Catalog Item based on an Ansible Playbook.
+
+### Introduction to Ansible
+
+Today, every business is a digital business. Technology is your innovation engine, and delivering your applications faster helps you win. Historically, that required a lot of manual effort and complicated coordination. But today, there is Ansible - the simple, yet powerful IT automation engine that thousands of companies are using to drive complexity out of their environments and accelerate DevOps initiatives.
+
+Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
+
+This integration allows customers to build service catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The user interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
+
+### Make sure embedded Ansible role is enabled and running
+
+Before we start, we want to make sure the embedded Ansible role is enabled and running.
+
+1. Log into your CloudForms Appliance
+
+1. Click on your user name on the top right and click on ***Configuration***
+
+    ![navigate to configuration](../../common/img/navigate-to-configuration.png)
+
+1. Make sure the "Embedded Ansible" and the "Git Repositories Owner" Roles are enabled
+
+    ![ansible role enabled](../../common/img/ansible-role-enabled.png)
+
+1. Click on ***Diagnostics*** in the accordion on the left and click on the ***Workers*** tab
+
+1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
+
+    ***Note:*** The git role is not represented by a specific worker process.
+
+    ![ansible worker started](../../common/img/ansible-worker-started.png)
+
+### Add a Git repository of Ansible Playbooks
+
+To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as GitHub, GitLab or others. Other Source Control Management Systems like Subversion or Mercurial are planned for later versions.
+
+1. Navigate to Automation, Ansible, Repositories.
+
+    ![navigate to Ansible repositories](../../common/img/navigate-to-ansible-repo.png)
+
+1. Click on ***Configuration***, ***Add New Repository***
+
+    ![Add new repository](../../common/img/embedded-ansible-add-git-repository.png)
+
+    ***Note:*** If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
+
+1. Fill in the form.
+
+    ***Name:*** Github
+
+    ***Description:*** Example Playbooks
+
+    ***URL:*** [https://github.com/cbolz/summit-fy19.git](https://github.com/cbolz/summit-fy19.git)
+
+    ***SCM Update Options:*** check "Update on Launch"
+
+    Update on Launch causes CloudForms to check for new Playbooks are updated Playbooks before a Playbook is executed.
+
+    ![add a new repository](../../common/img/add-ansible-repository.png)
+
+1. Click on ***Add*** to save the settings
+
+***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
+
+### Store Virtual Machine Credentials
+
+Ansible is using SSH by default to perform actions on the target machine. To be able to login, it has to know the login credentials.
+
+1. Navigate to ***Automation*** -> ***Ansible*** -> ***Credentials***
+
+    ![navigate to Ansible credentials](../../common/img/navigate-to-ansible-credentials.png)
+
+1. Click on ***Configuration*** -> ***Add a new Credential***
+
+    ![add new credentials](../../common/img/ansible-add-credentials.png)
+
+1. Use the following settings:
+
+    ***Name:*** Virtual Machine credentials
+
+    ***Credential type:*** Machine
+
+    ***Username:*** root
+
+    ***Password:*** r3dh4t1!
+
+    ![provide VM credentials](../../common/img/ansible-vm-credentials.png)
+
+1. Click ***Add** to save the credentials
+
+    Once more this is an action which is preformed in the background and it can take a few seconds until you can see the new credentials in the Web UI.
+
+TODO: Do we need a step to verify there is at least one running VM?
+
+### Create a Service Catalog
+
+To offer a Service Catalog Item to users, they have to be organized in Service Catalogs. Create one by following these steps:
+
+1. The next step is to create a service catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
+
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
+
+1. On this screen click on ***Catalogs*** on the left
+
+    ![service catalogs](../../common/img/service-catalogs.png)
+
+    ***Note:*** You might already have some catalogs from previous labs.
+
+1. Click on ***Configuration*** and ***Add a New Catalog***
+
+1. Fill out name and description:
+
+    ***Name:*** Ansible
+
+    ***Description:*** Order Ansible Playbooks from a Service Catalog
+
+    ![add a new catalog](../../common/img/add-a-new-catalog-ansible.png)
+
+1. Click on ***Add*** to save the new Catalog
+
+### Create a Service Catalog Item
+
+In the following step we create a Service Catalog Item which will execute an Ansible Playbook.
+
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
+
+1. Navigate to ***Catalog Items*** in the accordion on the left
+
+    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items.png)
+
+1. Click on ***Configuration*** -> ***Add a New Catalog Item***
+
+    ![create new catalog item](../../common/img/create-new-catalog-item.png)
+
+1. Select ***Ansible Playbook*** as Catalog Item Type
+
+    ![select ansible playbook as type](../../common/img/ansible-playbook-catalog-item-type.png)
+
+1. Use the following parameters when defining the Service Catalog Item:
+
+    ***Name:*** Install Package
+
+    ***Description:*** Install Package via Ansible Playbook
+
+    ***Display in Catalog:*** Yes
+
+    ***Catalog:*** Ansible
+
+    ***Repository:*** Github
+
+    ***Playbook:*** playbooks/InstallPackage.yml
+
+    ***Machine Credentials:*** Virtual Machine credentials
+
+    ***Variables & Default Values***: add one new entry with:
+
+    ***Variable:*** package_name
+
+    ***Default Value:*** httpd
+
+    Click the little plus ("+") icon to save the row.
+
+    ***Dialog:*** Create New
+
+    Use "InstallPackage" as the name of the Dialog. 
+
+    ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage.png)
+
+1. Click ***Add** to save all changes
+
+### Test the Service Catalog Item
+
+We want to make sure the resulting Service Catalog Item actually works.
+
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
+
+1. Click on ***Service Catalogs*** in the accordion on the left, if not already selected
+
+    ![navigate to Ansible Service Catalog](../../common/img/navigate-to-ansible-service-catalog.png)
+
+1. Select the "Install Package" Service Catalog Item
+
+    ![select install package Service Catalog Item](../../common/img/select-install-package-item.png)
+
+1. Click ***Order***
+
+1. Select the following options:
+
+    ***Machine Credentials:*** Virtual Machine Credentials
+
+    ***Hosts:*** localhost (should already be the default)
+
+    ***package_name:*** httpd (should already be the default)
+
+    ![parameters for the Ansible InstsallPackage Playboosk](../../common/img/installpackage-order.png)
+
+1. Click on ***Submit***
+
+1. After submitting your order, you will be redirected to the Requests Queue. You should also see pop up notifications on the top right informing you about the progress of your order.
+
+1. OPTIONAL: Click on ***Refresh*** to monitor the progress of your order
+
+1. Navigate to ***Services*** -> ***My Services***
+
+    ![navigate to My Services](../../common/img/navigate-to-my-services.png)
+
+1. Every time a user places an order a object under "My Services" gets created. You should see one tile labeled "Install Package"
+
+    ![My Service Install Package](../../common/img/my-services-installpackage-tile.png)
+
+1. Click on the tile icon to get more details
+
+    ![My Service Install Package Details](../../common/img/my-services-installpackage-details.png)
+
+1. Click on the tab ***Provisioning*** to see details of the Ansible Playbook run
+
+    ![My Service Install Package Provisioning](../../common/img/my-services-installpackage-provisioning.png)
+
+    ***Note:*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
 
 ## OpenShift example
 
