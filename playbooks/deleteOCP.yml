@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: local
   vars: 
-    manageiq_url: https://1cfme46-summitrhpdsl1077l1-vwmoc4gz.srv.ravcloud.com
+    manageiq_url: https://1cfme46-summitcloudformswi-aic4lddc.srv.ravcloud.com
     manageiq_user: admin
   vars_prompt:
     - name: "manageiq_password"
