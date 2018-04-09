@@ -23,12 +23,12 @@
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
         - [Store Virtual Machine Credentials](#store-virtual-machine-credentials)
-        - [Create a Service Catalog](#create-a-service-catalog)
+        - [Create an Ansible Service Catalog](#create-an-ansible-service-catalog)
         - [Create a Service Catalog Item](#create-a-service-catalog-item)
         - [Test the Service Catalog Item](#test-the-service-catalog-item)
     - [OpenShift example](#openshift-example)
         - [Create Service Dialog from OpenShift Template](#create-service-dialog-from-openshift-template)
-        - [Create a Service Catalog](#create-a-service-catalog-1)
+        - [Create an OpenShift Service Catalog](#create-an-openshift-service-catalog)
         - [Create a OpenShift Template Service Catalog Item](#create-a-openshift-template-service-catalog-item)
         - [Order the OpenShift Template](#order-the-openshift-template)
         - [Verify provisioning of OpenShift application](#verify-provisioning-of-openshift-application)
@@ -578,7 +578,7 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
 TODO: Do we need a step to verify there is at least one running VM?
 
-### Create a Service Catalog
+### Create an Ansible Service Catalog
 
 To offer a Service Catalog Item to users, they have to be organized in Service Catalogs. Create one by following these steps:
 
@@ -738,7 +738,7 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
 1. ***OPTIONAL:*** You can find the resulting dialog in ***Automation*** -> ***Automate*** -> ***Customization*** and then under ***Service Dialogs***
 
-### Create a Service Catalog
+### Create an OpenShift Service Catalog
 
 The following steps will create a service catalog.
 
