@@ -28,7 +28,7 @@ parameters:
   network:     
     type: string
     description: Network used by the server
-    default: private
+    default: internal
   db_name:
     type: string
     description: WordPress database name
