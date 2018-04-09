@@ -132,9 +132,19 @@ Let's finally check the OpenShift Provider:
 
     ![re-check authentication](../../common/img/openshift-recheck-authentcation.png)
 
-This will validate the credentials are correct, and it will also restart the provider specific background processes.
+    This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
+1. Click on the little icon ***Summary View*** in the top right
+
+    ![OpenShift provider summary button](../../common/img/navigate-to-openshift-provider-summary-view.png)
+
+1. Check Summary View
+
+    ![OpenShift Provider Summary View](../../common/img/openshift-provider-summary-view.png)
+
+    After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
+
+    ***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
 ## Build a Service Catalog with CloudForms
 
