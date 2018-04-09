@@ -586,8 +586,6 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
     Once more this is an action which is preformed in the background and it can take a few seconds until you can see the new credentials in the Web UI.
 
-TODO: Do we need a step to verify there is at least one running VM?
-
 ### Create an Ansible Service Catalog
 
 To offer a Service Catalog Item to users, they have to be organized in Service Catalogs. Create one by following these steps:
@@ -872,8 +870,6 @@ Let's verify the Service Catalog Item actually works.
 
 ### Verify provisioning of OpenShift application
 
-TODO: Verify if I need a provider refresh
-
 After a few minutes you should see your new project and the associated containers, pods and service in the CloudForms Web Interface.
 
 1. Navigate to ***Compute*** -> ***Containers*** -> ***Projects***
@@ -1134,8 +1130,6 @@ For sure you want to test the Catalog Item you just created!
     ![service item details](../../common/img/order-wordpress-item.png)
 
 1. Click on ***Order***
-
-TODO: I can not test this, because the dynamic dialog "available_tenants" does not work (only reports "default" and no other tenant)
 
 1. Fill out the form:
 
