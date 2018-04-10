@@ -596,7 +596,13 @@ To offer a Service Catalog Item to users, they have to be organized in Service C
 
 1. On this screen click on ***Catalogs*** on the left
 
-    ![service catalogs](../../common/img/service-catalogs.png)
+    You should already see three Service Catalogs:
+
+    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
+
+    ***Virtual Machines:*** the Service Catalog we created in the Virtual Machine part of the lab
+
+    ![service catalogs](../../common/img/service-catalogs-with-vms.png)
 
     ***Note:*** You might already have some catalogs from previous labs.
 
@@ -622,11 +628,11 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
 1. Navigate to ***Catalog Items*** in the accordion on the left
 
-    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items.png)
+    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items-with-vms-and-ansible.png)
 
 1. Click on ***Configuration*** -> ***Add a New Catalog Item***
 
-    ![create new catalog item](../../common/img/create-new-catalog-item.png)
+    ![create new catalog item](../../common/img/create-new-catalog-item-with-vms-and-ansible.png)
 
 1. Select ***Ansible Playbook*** as Catalog Item Type
 
@@ -756,9 +762,15 @@ The following steps will create a service catalog.
 
 1. On this screen click on ***Catalogs*** on the left
 
-    ![service catalogs](../../common/img/service-catalogs.png)
+    You should already see three Service Catalogs:
 
-    ***Note:*** You might already have some catalogs from previous labs.
+    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
+
+    ***Ansible:*** the Service Catalog we created in the Ansible part of the lab
+
+    ***Virtual Machines:*** the Service Catalog we created in the Virtual Machine part of the lab
+
+    ![service catalogs](../../common/img/service-catalogs-with-vms-and-ansible.png)
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -780,15 +792,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
 1. Click on ***Catalog items*** in the accordion on the left.
 
-    You should already see three Service Catalogs:
-
-    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
-
-    ***Virtual Machines:*** the Service Catalog we created in the first part of the lab
-
-    ***OpenShift Templates:*** the Service Catalog you just created in the previous step
-
-    ![navigate to catalog items](../../common/img/navigate-to-catalog-items-heat.png)
+    ![navigate to catalog items](../../common/img/navigate-to-catalog-items-with-vms-and-ansible-and-openshift.png)
 
 1. In the ***Configuration*** Menu, click on ***Add a New Catalog Item***
 
@@ -848,7 +852,7 @@ Let's verify the Service Catalog Item actually works.
 
 1. You should see the Service Catalog Item we just created:
 
-    ![all services](../../common/img/all-services-openshift.png)
+    ![all services](../../common/img/service-catalog-items-with-vms-ansible-openshift.png)
 
 1. Click on the Service Catalog Item to see more details.
 
@@ -1027,9 +1031,17 @@ The following steps will create a service catalog.
 
 1. On this screen click on ***Catalogs*** on the left
 
-    ![service catalogs](../../common/img/service-catalogs.png)
+    You should already see three Service Catalogs:
 
-    ***Note:*** You might already have some catalogs from previous labs.
+    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
+
+    ***Ansible:*** the Service Catalog we created in the Ansible part of the lab
+
+    ***OpenShift Templates:*** the Service Catalog we created in the OpenShift part of the lab
+
+    ***Virtual Machines:*** the Service Catalog we created in the Virtual Machine part of the lab
+
+    ![service catalogs](../../common/img/service-catalogs-with-vms-ansible-openshift.png)
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -1052,16 +1064,6 @@ To put everything together we create a Service Catalog Item similar to before.
     ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
 1. Click on ***Catalog items*** in the accordion on the left.
-
-    You should already see three Service Catalogs:
-
-    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
-
-    ***Virtual Machines:*** the Service Catalog we created in the first part of the lab
-
-    ***OpenShift Templates:*** the Service Catalog you create in the OpenShift part of this lab
-
-    ***HEAT Templates:*** the Service Catalog you just created
 
     ![navigate to catalog items](../../common/img/navigate-to-catalog-items-heat.png)
 
@@ -1371,11 +1373,9 @@ We want to do another test and see if the user Joe Doe can now see and other the
 
 If you're already done and still have some time left, here are some ideas for advanced labs:
 
-- try to retire the "create user" service catalog item and see if the user is indeed deleted
 - try to add other Playbooks, some examples can be found on the [Official Red Hat CloudForms Blog](http://cloudformsblog.redhat.com/2017/05/31/ansible-automation-inside-cloudforms/)
 - retire the virtual machine Service you ordered earlier, check what happens during retirement with the virtual machine (Is it shutdown? Deleted? Is there still a representation in the CloudForms Web UI?)
-- make the second Catalog Item available for Joe Doe as well
+- make the other Catalog Items available for Joe Doe as well
 - improve the Service Dialog and make the VM Name a mandatory field (right now, it's optional and can be left empty)
 - grant Joe Doe more privileges (for example, it would be nice if he could start and stop his virtual machines)
-- upload items to make the Service Catalog more appealing
-- use the new Self Service user Interface by trying the "/self_service" URL on your Appliance
+- upload images for the Service Catalog Items to make the Service Catalog more appealing
