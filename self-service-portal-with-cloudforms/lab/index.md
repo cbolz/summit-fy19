@@ -98,7 +98,13 @@ Let's first check the OpenStack Provider:
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
+Click the little arrow to reload the page. 
+
+    ![provider page reload](../../common/img/provider-reload.png)
+
+After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+
+***Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat Virtualization Provider status
 
@@ -118,7 +124,13 @@ Let's then check the RHV Provider:
 
 This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
+Click the little arrow to reload the page. 
+
+    ![provider page reload](../../common/img/provider-reload.png)
+
+After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+
+***Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat OpenShift Container Platform status
 
@@ -146,7 +158,13 @@ Let's finally check the OpenShift Provider:
 
     ![OpenShift Provider Summary View](../../common/img/openshift-provider-summary-view.png)
 
-    After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago".
+    Click the little arrow to reload the page. 
+
+    ![provider page reload](../../common/img/provider-reload.png)
+
+    After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+
+    ***Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
     ***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
