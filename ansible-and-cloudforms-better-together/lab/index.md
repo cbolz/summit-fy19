@@ -55,11 +55,15 @@ Your workstation was configured to show a start page which has instructions on h
 
 To access the Red Hat CloudForms Management Engine use the URL and credentials below:
 
-        URL: https://cf-<GUID>.rhpds.opentlc.com
+        URL: https://cf46-<GUID>.rhpds.opentlc.com
 
-        User: admin / password: r3dh4t1!
+        User: admin
 
-The ID &lt;GUID&gt; is unique to your lab environment and was presented to you on the browser start page!
+        Password: r3dh4t1!
+
+The ID &lt;GUID&gt; is unique to your lab environment and was presented to you on the browser start page! Replace the &lt;GUID&gt; with your lab specific value. For example, if your &lt;GUID&gt; would be "123a" the URL would become:
+
+        https://cf46-123a.rhpds.opentlc.com
 
 ***Note:*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
 
