@@ -309,6 +309,10 @@ Follow these steps to design the service dialog:
 
     ![add entries to the drop down list](../../common/img/memory-dropdownlist.png)
 
+1. Click ***Save*** to save the Field Details
+
+    ***Note:*** The memory values in the dialog editor will not reflect your changes immediately and will still show the original options One, Two, Three.
+
 1. We are finally done designing the dialog. Click on ***Save*** to save the dialog.
 
     ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a service dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
@@ -618,9 +622,7 @@ To offer a Service Catalog Item to users, they have to be organized in Service C
 
 1. On this screen click on ***Catalogs*** on the left
 
-    You should already see three Service Catalogs:
-
-    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
+    You should already see one Service Catalogs:
 
     ***Virtual Machines:*** the Service Catalog we created in the Virtual Machine part of the lab
 
@@ -690,7 +692,7 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
     ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage.png)
 
-1. Click ***Add** to save all changes
+1. Click ***Add*** to save all changes
 
 ### Test the Service Catalog Item
 
@@ -744,6 +746,8 @@ We want to make sure the resulting Service Catalog Item actually works.
 
     ***Note:*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
 
+1. This concludes this part of the lab.
+
 ## OpenShift example
 
 Since version 4.6 CloudForms can offer OpenShift application deployments based templates in the Service Catalog. To make the necessary steps simple, an administrator can create a Service Dialog from an existing OpenShift template with just a few mouse clicks. 
@@ -762,6 +766,8 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
     ![cakephp-mysql-example](../../common/img/container-template-cakephp-mysql-example.png)
 
+    ***Note:*** Verify you're NOT using the "cakephp-mysql-persistent" by accident. This template will fail because the OpenShift environment in this lab does not have persistent storage.
+
 1. Click on ***Configuration*** -> ***Create Service Dialog from Container Template***
 
     ![create service dialog](../../common/img/container-template-cakephp-mysql-example-create-service-dialog.png)
@@ -772,7 +778,7 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
     ![naming service dialog](../../common/img/container-template-cakephp-mysql-example-name-service-dialog.png)
 
-1. ***OPTIONAL:*** You can find the resulting dialog in ***Automation*** -> ***Automate*** -> ***Customization*** and then under ***Service Dialogs***
+1. ***OPTIONAL:*** You can find the automatically created dialog in ***Automation*** -> ***Automate*** -> ***Customization*** in the section ***Service Dialogs***.
 
 ### Create an OpenShift Service Catalog
 
@@ -784,9 +790,7 @@ The following steps will create a service catalog.
 
 1. On this screen click on ***Catalogs*** on the left
 
-    You should already see three Service Catalogs:
-
-    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
+    You should already see two Service Catalogs:
 
     ***Ansible:*** the Service Catalog we created in the Ansible part of the lab
 
@@ -803,6 +807,8 @@ The following steps will create a service catalog.
     ***Description:*** Deploy OpenShift Templates from the Catalog
 
     ![add a new catalog](../../common/img/add-a-new-catalog-openshift.png)
+
+1. Click ***Add*** to create the Service Catalog
 
 ### Create a OpenShift Template Service Catalog Item
 
@@ -890,7 +896,7 @@ Let's verify the Service Catalog Item actually works.
 
     ![order CakePHP](../../common/img/order-cakephp.png)
 
-1. ***OPTIONAL:*** Review the other fields of the form and pay attention to the tool tips (the little question mark icons). Feel free to adjust some of the fields or leave the default values unchanged
+1. ***OPTIONAL:*** Review the other fields of the form and pay attention to the tool tips (the little "i" icons). Feel free to adjust some of the fields or leave the default values unchanged
 
 1. Click on ***Submit***
 
@@ -920,7 +926,9 @@ After a few minutes you should see your new project and the associated container
 
     ![project topology view](../../common/img/openshift-project-topology-view.png)
 
-    ***Note:*** Since the topology view is rendered from live data, it can look slightly different in your lab, depending on the progress of the provisioning (which might still run in background) or availability status of services, pods and containers. 
+    ***Note:*** Since the topology view is rendered from live data, it can look slightly different in your lab, depending on the progress of the provisioning (which might still run in background) or availability status of services, pods and containers.
+
+1. This concludes this part of the lab.
 
 ## HEAT Provisioning example
 
@@ -1054,8 +1062,6 @@ The following steps will create a service catalog.
 1. On this screen click on ***Catalogs*** on the left
 
     You should already see three Service Catalogs:
-
-    ***Unassigned:*** Catalog Items which are not published yet, will be listed here
 
     ***Ansible:*** the Service Catalog we created in the Ansible part of the lab
 
