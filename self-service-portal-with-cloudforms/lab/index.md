@@ -80,6 +80,10 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
 ## Verify Lab
 
+Let's start by verifying the status of all providers. Use the URL example and login credentials provided above to log into your appliance.
+
+![CloudForms login page](../../common/img/cloudforms-login-page.png)
+
 ### OpenStack Provider status
 
 Let's first check the OpenStack Provider:
@@ -102,9 +106,9 @@ Let's first check the OpenStack Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-**Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat Virtualization Provider status
 
@@ -124,13 +128,17 @@ Let's then check the RHV Provider:
 
     This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
-    Click the little arrow to reload the page. 
+1. Switch to the ***Summary view*** by clicking the little icon on the top right
+
+    ![switch to RHV summary view](../../common/img/rhv-summary-view.png)
+
+1. Click the little arrow to reload the page.
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat OpenShift Container Platform status
 
@@ -162,9 +170,9 @@ Let's finally check the OpenShift Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
@@ -283,7 +291,7 @@ Follow these steps to design the service dialog:
 
     ***Name:*** option_0_vm_memory
 
-    ***Description:*** Select how much memory the virtual machine should have
+    ***Help:*** Select how much memory the virtual machine should have
 
 1. Switch to the ***Options*** tab of the dialog and add the following entries.
 
@@ -489,6 +497,8 @@ For sure you want to test the Service Catalog Item you just created!
     ***Memory Size:*** 2 GB
 
     ![example-oder-simple-vm](../../common/img/example-order-simple-vm.png)
+
+1. Click ***Submit*** to order the Virtual Machine
 
 1. You will be redirected to the request queue where you can see CloudForms working on your request.
 
@@ -1045,7 +1055,9 @@ The Service Dialog was automatically created. We want to verify it was created p
 
     ![change the image name](../../common/img/service-dialog-heat-image-name.png)
 
-1. Commit the changes by clicking on ***Save***
+1. Save the changes of the element by clicking on ***Save***
+
+1. Commit the changes of the dialog by clicking on ***Save***
 
 1. You should see an updated preview of your dialog with the new default value "rhel7" in the "Image" field
 
@@ -1157,7 +1169,7 @@ For sure you want to test the Catalog Item you just created!
 
 1. Click on the Service Catalog Item to see more details.
 
-    ![service item details](../../common/img/order-wordpress-item.png)
+    ![service item details](../../common/img/details-wordpress-item.png)
 
 1. Click on ***Order***
 

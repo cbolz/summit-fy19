@@ -8,6 +8,7 @@
     - [Verify Lab](#verify-lab)
         - [OpenStack Provider status](#openstack-provider-status)
         - [Red Hat Virtualization Provider status](#red-hat-virtualization-provider-status)
+        - [Red Hat OpenShift Container Platform status](#red-hat-openshift-container-platform-status)
     - [CloudForms with Ansible batteries included](#cloudforms-with-ansible-batteries-included)
         - [Introduction to Ansible](#introduction-to-ansible)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
@@ -69,6 +70,10 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
 ## Verify Lab
 
+Let's start by verifying the status of all providers. Use the URL example and login credentials provided above to log into your appliance.
+
+![CloudForms login page](../../common/img/cloudforms-login-page.png)
+
 ### OpenStack Provider status
 
 Let's first check the OpenStack Provider:
@@ -91,9 +96,9 @@ Let's first check the OpenStack Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-**Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat Virtualization Provider status
 
@@ -103,7 +108,7 @@ Let's then check the RHV Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-infrastructure-providers.png)
 
-1. You should see a tile icon labeled "OpenStack". Click on it.
+1. You should see a tile icon labeled "RHV". Click on it.
 
     ![OpenStack provider tile icon](../../common/img/rhv-provider-tile.png)
 
@@ -113,13 +118,53 @@ Let's then check the RHV Provider:
 
     This will validate the credentials are correct, and it will also restart the provider specific background processes.
 
+1. Switch to the ***Summary view*** by clicking the little icon on the top right
+
+    ![switch to RHV summary view](../../common/img/rhv-summary-view.png)
+
+1. Click the little arrow to reload the page.
+
+    ![provider page reload](../../common/img/provider-reload.png)
+
+After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+
+***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+
+### Red Hat OpenShift Container Platform status
+
+Let's finally check the OpenShift Provider:
+
+1. Navigate to ***Compute*** -> ***Containers*** -> ***Providers***
+
+    ![navigate to container providers](../../common/img/navigate-to-compute-container-providers.png)
+
+1. You should see a tile icon labeled "OpenShift". Click on it.
+
+    ![OpenShift provider tile icon](../../common/img/openshift-provider-tile.png)
+
+1. Click on ***Authentication*** -> ***Re-check Authentication Status***
+
+    ![re-check authentication](../../common/img/openshift-recheck-authentcation.png)
+
+    This will validate the credentials are correct, and it will also restart the provider specific background processes.
+
+1. Click on the little icon ***Summary View*** in the top right
+
+    ![OpenShift provider summary button](../../common/img/navigate-to-openshift-provider-summary-view.png)
+
+1. Check Summary View
+
+    ![OpenShift Provider Summary View](../../common/img/openshift-provider-summary-view.png)
+
     Click the little arrow to reload the page. 
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last update fields should report "less than a minute ago" or similar.
+After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last update does not refresh. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+
+***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
 ## CloudForms with Ansible batteries included
 
