@@ -216,7 +216,7 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as GitHub, GitLab or others. Other Source Control Management Systems like Subversion or Mercurial are planned for later versions.
 
-1. Navigate to Automation, Ansible, Repositories.
+1. Navigate to ***Automation*** -> ***Ansible*** -> ***Repositories***.
 
     ![navigate to Ansible repositories](../../common/img/navigate-to-ansible-repo.png)
 
@@ -242,7 +242,31 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 1. Click on ***Add*** to save the settings
 
-***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
+    ***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
+
+1. You can click on your username in the top right corner and then on ***Tasks*** to see all currently running tasks. Switch to ***All Tasks*** to see the progress of your Repository import.
+
+1. Verify the task completed successfully
+
+    ![after Ansible repo task compled](../../common/img/task-ansible-repo-import-completed.png)
+
+1. Navigate back to ***Automation*** -> ***Ansible*** -> ***Repositories***.
+
+    ![navigate to Ansible repositories](../../common/img/navigate-to-ansible-repo.png)
+
+1. Click on the ***Reload*** icon to refresh the screen. After the initial import completed, you will see the list of available repositories.
+
+    ![list of Ansible repositories](../../common/img/list-of-ansible-repos.png)
+
+1. Click on the repository to see the details.
+
+    ![Ansible repository details](../../common/img/ansible-repo-details.png)
+
+1. Click on ***Playbooks*** to see the list of automatically imported playbooks.
+
+    ![list of imported playbooks](../../common/img/ansible-list-of-playbooks.png)
+
+This confirms that all playbooks have been imported successfully.
 
 ### Store Virtual Machine Credentials
 
