@@ -13,6 +13,12 @@
         - [Introduction to Ansible](#introduction-to-ansible)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
+        - [Store Virtual Machine Credentials](#store-virtual-machine-credentials)
+        - [Create an Ansible Service Catalog](#create-an-ansible-service-catalog)
+        - [Create a Service Catalog Item](#create-a-service-catalog-item)
+        - [Test the Service Catalog Item](#test-the-service-catalog-item)
+    - [Add a button to a Virtual Machine](#add-a-button-to-a-virtual-machine)
+        - [Add a Button Group](#add-a-button-group)
     - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
         - [Create a Service Catalog for Ansible Playbooks](#create-a-service-catalog-for-ansible-playbooks)
         - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook)
@@ -100,6 +106,8 @@ After reloading the page, the provider tile should show a green check mark and t
 
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
+***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+
 ### Red Hat Virtualization Provider status
 
 Let's then check the RHV Provider:
@@ -129,6 +137,8 @@ Let's then check the RHV Provider:
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+
+***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat OpenShift Container Platform status
 
@@ -166,11 +176,11 @@ After reloading the page, the provider tile should show a green check mark and t
 
 ***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
+***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+
 ## CloudForms with Ansible batteries included
 
-***TODO: Replace this with a better example, we won't have vCenter in this lab***
-
-This lab will guide you through the process of using the new embedded Ansible features of CloudForms 4.6.
+This lab will guide you through the process of creating a Service Catalog Item based on an Ansible Playbook.
 
 ### Introduction to Ansible
 
@@ -233,6 +243,194 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 1. Click on ***Add*** to save the settings
 
 ***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
+
+### Store Virtual Machine Credentials
+
+Ansible is using SSH by default to perform actions on the target machine. To be able to login, it has to know the login credentials.
+
+1. Navigate to ***Automation*** -> ***Ansible*** -> ***Credentials***
+
+    ![navigate to Ansible credentials](../../common/img/navigate-to-ansible-credentials.png)
+
+1. Click on ***Configuration*** -> ***Add a new Credential***
+
+    ![add new credentials](../../common/img/ansible-add-credentials.png)
+
+1. Use the following settings:
+
+    ***Name:*** Virtual Machine credentials
+
+    ***Credential type:*** Machine
+
+    ***Username:*** root
+
+    ***Password:*** r3dh4t1!
+
+    ![provide VM credentials](../../common/img/ansible-vm-credentials.png)
+
+1. Click ***Add** to save the credentials
+
+    Once more this is an action which is preformed in the background and it can take a few seconds until you can see the new credentials in the Web UI.
+
+### Create an Ansible Service Catalog
+
+To offer a Service Catalog Item to users, they have to be organized in Service Catalogs. Create one by following these steps:
+
+1. The next step is to create a service catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
+
+    ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
+
+1. On this screen click on ***Catalogs*** on the left
+
+    You should already see one Service Catalogs:
+
+    ***Virtual Machines:*** the Service Catalog we created in the Virtual Machine part of the lab
+
+    ![service catalogs](../../common/img/service-catalogs-with-vms.png)
+
+    ***Note:*** You might already have some catalogs from previous labs.
+
+1. Click on ***Configuration*** and ***Add a New Catalog***
+
+1. Fill out name and description:
+
+    ***Name:*** Ansible
+
+    ***Description:*** Order Ansible Playbooks from a Service Catalog
+
+    ![add a new catalog](../../common/img/add-a-new-catalog-ansible.png)
+
+1. Click on ***Add*** to save the new Catalog
+
+### Create a Service Catalog Item
+
+In the following step we create a Service Catalog Item which will execute an Ansible Playbook.
+
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
+
+1. Navigate to ***Catalog Items*** in the accordion on the left
+
+    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items-with-vms-and-ansible.png)
+
+1. Click on ***Configuration*** -> ***Add a New Catalog Item***
+
+    ![create new catalog item](../../common/img/create-new-catalog-item-with-vms-and-ansible.png)
+
+1. Select ***Ansible Playbook*** as Catalog Item Type
+
+    ![select ansible playbook as type](../../common/img/ansible-playbook-catalog-item-type.png)
+
+1. Use the following parameters when defining the Service Catalog Item:
+
+    ***Name:*** Install Package
+
+    ***Description:*** Install Package via Ansible Playbook
+
+    ***Display in Catalog:*** Yes
+
+    ***Catalog:*** Ansible
+
+    ***Repository:*** Github
+
+    ***Playbook:*** playbooks/InstallPackage.yml
+
+    ***Machine Credentials:*** Virtual Machine credentials
+
+    ***Variables & Default Values***: add one new entry with:
+
+    ***Variable:*** package_name
+
+    ***Default Value:*** httpd
+
+    Click the little plus ("+") icon to save the row.
+
+    ***Dialog:*** Create New
+
+    Use "InstallPackage" as the name of the Dialog. 
+
+    ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage.png)
+
+1. Click ***Add*** to save all changes
+
+### Test the Service Catalog Item
+
+We want to make sure the resulting Service Catalog Item actually works.
+
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
+
+1. Click on ***Service Catalogs*** in the accordion on the left, if not already selected
+
+    ![navigate to Ansible Service Catalog](../../common/img/navigate-to-ansible-service-catalog.png)
+
+1. Select the "Install Package" Service Catalog Item
+
+    ![select install package Service Catalog Item](../../common/img/select-install-package-item.png)
+
+1. Click ***Order***
+
+1. Select the following options:
+
+    ***Machine Credentials:*** Virtual Machine Credentials
+
+    ***Hosts:*** localhost (should already be the default)
+
+    ***package_name:*** httpd (should already be the default)
+
+    ![parameters for the Ansible InstsallPackage Playboosk](../../common/img/installpackage-order.png)
+
+1. Click on ***Submit***
+
+1. After submitting your order, you will be redirected to the Requests Queue. You should also see pop up notifications on the top right informing you about the progress of your order.
+
+1. OPTIONAL: Click on ***Refresh*** to monitor the progress of your order
+
+1. Navigate to ***Services*** -> ***My Services***
+
+    ![navigate to My Services](../../common/img/navigate-to-my-services.png)
+
+1. Every time a user places an order a object under "My Services" gets created. You should see one tile labeled "Install Package"
+
+    ![My Service Install Package](../../common/img/my-services-installpackage-tile.png)
+
+1. Click on the tile icon to get more details
+
+    ![My Service Install Package Details](../../common/img/my-services-installpackage-details.png)
+
+1. Click on the tab ***Provisioning*** to see details of the Ansible Playbook run
+
+    ![My Service Install Package Provisioning](../../common/img/my-services-installpackage-provisioning.png)
+
+    ***Note:*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
+
+1. This concludes this part of the lab.
+
+## Add a button to a Virtual Machine
+
+Another advantage of the Ansible integration with CloudForms is the capability to run Ansible Playbooks on one or multiple Virtual Machines.
+
+CloudForms can easily be extended by adding additional menus and buttons. This allows seamless integration of customizations and making them available to end users.
+
+### Add a Button Group
+
+To add new button to the UI, we first need to create a Button Group. A Button Group is basically a new menu entry in the UI. Buttons and Button Groups can be assigned to several objects in CloudForms.
+
+1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
+
+    ![navigate to Customization](../../common/img/navigate-to-customization.png)
+
+1. Click on ***Buttons*** in the accordion on the left
+
+    ![navigate to buttons](../../common/img/navigate-to-buttons.png)
+
+1. Click on ***VM and Instance***
+
+    ![naviate to vm and instance](../../common/img/navigate-vm-ane-instance.png)
+
+1. 
 
 ## Build a Service Catalog to create and delete users
 

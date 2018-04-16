@@ -110,6 +110,8 @@ After reloading the page, the provider tile should show a green check mark and t
 
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
+***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+
 ### Red Hat Virtualization Provider status
 
 Let's then check the RHV Provider:
@@ -139,6 +141,8 @@ Let's then check the RHV Provider:
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+
+***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat OpenShift Container Platform status
 
@@ -175,6 +179,8 @@ After reloading the page, the provider tile should show a green check mark and t
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
+
+***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ## Build a Service Catalog with CloudForms
 
