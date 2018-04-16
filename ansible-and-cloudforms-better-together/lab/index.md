@@ -11,6 +11,7 @@
         - [Red Hat OpenShift Container Platform status](#red-hat-openshift-container-platform-status)
     - [CloudForms with Ansible batteries included](#cloudforms-with-ansible-batteries-included)
         - [Introduction to Ansible](#introduction-to-ansible)
+        - [Power on target VM](#power-on-target-vm)
         - [Make sure embedded Ansible role is enabled and running](#make-sure-embedded-ansible-role-is-enabled-and-running)
         - [Add a Git repository of Ansible Playbooks](#add-a-git-repository-of-ansible-playbooks)
         - [Store Virtual Machine Credentials](#store-virtual-machine-credentials)
@@ -19,21 +20,14 @@
         - [Test the Service Catalog Item](#test-the-service-catalog-item)
     - [Add a button to a Virtual Machine](#add-a-button-to-a-virtual-machine)
         - [Add a Button Group](#add-a-button-group)
+        - [Add a new Button to the Button Group](#add-a-new-button-to-the-button-group)
+        - [Test the Ansible Button Customization](#test-the-ansible-button-customization)
     - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
         - [Create a Service Catalog for Ansible Playbooks](#create-a-service-catalog-for-ansible-playbooks)
         - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook)
         - [Order the "create user" Service Catalog Item](#order-the-create-user-service-catalog-item)
         - [Monitor create user Playbook execution](#monitor-create-user-playbook-execution)
         - [Verify Playbook results](#verify-playbook-results)
-    - [Build a Service Catalog to deploy Virtual Machines](#build-a-service-catalog-to-deploy-virtual-machines)
-        - [Order the Virtual Machine Provisioning Service Catalog Item](#order-the-virtual-machine-provisioning-service-catalog-item)
-        - [Monitor VM provisioning Playbook execution](#monitor-vm-provisioning-playbook-execution)
-    - [Extend CloudForms builtin Capabilities](#extend-cloudforms-builtin-capabilities)
-        - [Add a Git repository for Automate](#add-a-git-repository-for-automate)
-        - [Verify Automate import](#verify-automate-import)
-        - [Optimize the Dialog](#optimize-the-dialog)
-        - [Update the Service Catalog Item](#update-the-service-catalog-item)
-        - [Test the new Service Dialog](#test-the-new-service-dialog)
     - [Policies and Ansible](#policies-and-ansible)
         - [Creating the Service](#creating-the-service)
         - [Create a Service Catalog Item for the Policy Playbook](#create-a-service-catalog-item-for-the-policy-playbook)
@@ -44,7 +38,6 @@
         - [Creating and Assigning Policy Profile](#creating-and-assigning-policy-profile)
         - [Assign the policy profile](#assign-the-policy-profile)
         - [Testing the Policy Profile](#testing-the-policy-profile)
-    - [Custom buttons calling Ansible Playbooks](#custom-buttons-calling-ansible-playbooks)
     - [Calling Ansible Playbooks from Automate](#calling-ansible-playbooks-from-automate)
     - [Advanced labs](#advanced-labs)
         - [Use the Self Service user Interface](#use-the-self-service-user-interface)
@@ -189,6 +182,36 @@ Today, every business is a digital business. Technology is your innovation engin
 Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
 
 This integration allows customers to build service catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The user interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
+
+### Power on target VM
+
+The following lab will use UI customizations to illustrate how easy it is to additional functionality to CloudForms. The example will use an Ansible Playbook which will be executed on a Virtual Machine. Ansible has to log into SSH on the VM and hence the VM has to be powered on. The following steps will power on a Virtual Machine which will be used as a target for the Ansible Playbook.
+
+1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
+
+    ![navigate to virtual machines](../../common/img/navigate-to-virtual-machines.png)
+
+1. Tiles represent the Virtual Machines. Note that the VM "cfme001" is turned off.
+
+    ![VM cfme001 is turned off](../../common/img/cfme-001-powered-off.png)
+
+1. Click on the tile icon "cfme001" to see the VM details.
+
+1. Click ***Power*** -> ***Power On*** to power on the Virtual Machine
+
+    ![cfme001 power on ](../../common/img/cfme-001-power-on.png)
+
+1. CloudForms will perform this action in the background and it will take a minute to complete. Click on the reload icon in the menu bar to reload the screen.
+
+    ![reload VM details](../../common/img/cfme-001-reload-details.png)
+
+1. Verify the VM is powered on or refresh the screen after an additional minute, until it is powered on
+
+    ![cfme001 powered on](../../common/img/cfme-001-powered-on.png)
+
+    ***Note:*** The VM should also report an IP address in the 192.168.1.0/24 network.
+
+Now our test VM is up and running and we can proceed with the next steps.
 
 ### Make sure embedded Ansible role is enabled and running
 
@@ -454,9 +477,105 @@ To add new button to the UI, we first need to create a Button Group. A Button Gr
 
     ![naviate to vm and instance](../../common/img/navigate-vm-ane-instance.png)
 
-1. 
+1. Click on ***Configuration*** -> ***Add a new Button Group***
+
+1. Enter the following data into the form:
+
+    ***Text:*** Tools
+
+    ***Hover Text:*** Additional tasks
+
+    ***Icon:*** search for the wrench symbol in ***Font Awesome***
+
+    ![pick Wrench symbol](../../common/img/wrench-symbol.png)
+
+    ![tools button group](../../common/img/tools-button-group.png)
+
+1. Click ***Add** to create the button group
+
+In the next chapter we will add a button to the group.
+
+### Add a new Button to the Button Group
+
+The previous step created a Button Group, or menu. Now we want add Buttons to the Group:
+
+1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
+
+    ![navigate to Customization](../../common/img/navigate-to-customization.png)
+
+    ***Note:*** You should already be in this menu if you followed the previous steps
+
+1. Click on the "Tools" Button Group you created in the previous lab
+
+    ![navigate to tools button group](../../common/img/tools-button-group-overview.png)
+
+1. Click on ***Configuration*** -> ***Add a new Button***
+
+    ![add a new button to group](../../common/img/add-new-button-to-group.png)
+
+1. Make the following adjustments:
+
+    ***Button Type:*** Ansible Playbook
+
+    ***Playbook Catalog Item:*** Install Package - this is the Service Catalog Item you created in the previous part of the lab
+
+    ***Inventory:*** Target Machine
+
+    ***Text:*** Install Package
+
+    ***Hover Text:*** Install additional package
+
+    ***Icon:*** Select the Software Package Icon at the "Font Fabulous" tab and click ***Apply***
+
+    ![select software package icon](../../common/img/select-software-package-icon.png)
+
+    ![create Ansible Button](../../common/img/create-ansible-button.png)
+
+1. Click ***Add*** to save the Button
+
+This adds a new Button to the Button Group "Tools".
+
+### Test the Ansible Button Customization
+
+We want to test the resulting customization and see how it works from a user point of view.
+
+1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
+
+    ![navigate to virtual machines](../../common/img/navigate-to-virtual-machines.png)
+
+1. Click on the cfme001 tile if not already selected
+
+    ![VM cfme001 is turned on](../../common/img/cfme-001-powered-on-ovwerview.png)
+
+1. On the details page of cfme001 note the new menu "Tools". Click to see the new button "Install Package"
+
+    ![VM with addtional tools menu](../../common/img/cfme-001-tools-button.png)
+
+1. Click on ***Tools*** -> ***Install Package***. 
+
+    ![Ansible button dialog](../../common/img/ansible-button-dialog.png)
+
+1. We can accept the values and click on ***Submit***
+
+1. Navigate to ***Services*** -> ***My Services***
+
+    ![navigate to Services, My Services](../../common/navigate-to-my-services.png)
+
+1. As a result of your action, a new "My Services" object was created. If you don't see it yet, wait a minute and click on the reload button.
+
+1. Click on the "Install Playbook" item to see the details
+
+    ![details of Ansible Playbook](../../common/img/my-service-ansible-playbook-details.png)
+
+1. Click on the ***Provisioning*** tab to see output from your Ansible Playbook
+
+    ![Ansible Playbook output](../../common/img/my-service-ansible-playbook-output.png)
+
+This concludes this part of the Ansible lab.
 
 ## Build a Service Catalog to create and delete users
+
+TODO: This should be replaced with a better example
 
 In this lab we will use an Ansible Playbook to create a local user in CloudForms. This example will also demonstrate how we can define a retirement process as well. In CloudForms' understanding of complete life cycle management, every object has a provisioning and a retirement workflow.
 
@@ -618,336 +737,14 @@ To make sure the user was really created, follow these steps.
 
     ![logout](../../common/img/logout.png)
 
-## Build a Service Catalog to deploy Virtual Machines
-
-TODO: This should be replaced by a better example, since we do not want to use vCenter in any lab.
-
-In this second part of the lab we want to use an Ansible Playbook to deploy a Virtual Machine in VMware vCenter. The necessary Playbook should already be in your repository.
-
-1. Click on ***Catalog Items*** in the accordion on the left
-
-    ![navigate to service catalog items](../../common/img/add-catalog-item.png)
-
-1. Click on ***Configuration*** -> ***Add a New Catalog Item***
-
-1. Select ***Ansible Playbook*** as "Catalog Item Type"
-
-    ![add catalog item ansible Playbook](../../common/img/add-catalog-item-ansible-playbook.png)
-
-    ***Note:*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
-
-1. Fill out the form to define the Service Catalog Item:
-
-    The name of the Service Catalog Item:
-
-    ***Name:*** Provision Virtual Machine
-
-    More description details about the Service Catalog Item
-
-    ***Description:*** Order this catalog item provision a Virtual Machine on VMware vCenter
-
-    Check this box to make the Service Catalog Item visible in the Service Catalog. This remains unselected for Service Catalog Items which are still in draft mode or should only be used as a part of a Service Catalog Bundle:
-
-    ***Display in Catalog:*** Yes (check the box)
-
-    The Service Catalog in which this Service Catalog Item should be listed:
-
-    ***Catalog:*** Ansible
-
-    The Git repository from which we want to run our Playbook:
-
-    ***Repository:*** Github
-
-    The name of the actual Playbook:
-
-    ***Playbook:*** create_vm_from_template.yml
-
-    Credentials used to run the Playbook:
-
-    ***Machine Credentials:*** CFME Default Credentials
-
-    If you want to run your Playbook against a Cloud Provider, you have to select which one:
-
-    ***Cloud Type:*** VMware
-
-    The credentials used to log into the Cloud Provider:
-
-    ***Cloud Credentials:*** vCenter
-
-    In the box ***Variables & Default Values*** we can enter the variables the Playbook requires. Those variables are defined in the Ansible Playbook. By specifying them here, CloudForms can populated those variables when somebody order the Service Catalog Item.
-
-    If you want to learn more about variables in Ansible Playbooks, have a look at the [Ansible Documentation](http://docs.ansible.com/ansible/playbooks_variables.html).
-
-    ***Variable:*** vcenter_hostname
-
-    ***Default:*** vcenter.example.com
-
-    Click on the little plus icon (+) to save the variable. Repeat the process for the second variable:
-
-    ***Variable:*** esxi_host
-
-    ***Default:*** 192.168.0.51
-
-    Click on the little plus icon (+) to save the variable. Repeat the process for the second variable:
-
-    ***Variable:*** datacenter
-
-    ***Default:*** DC01
-
-    Click on the little plus icon (+) to save the variable. Repeat the process for the second variable:
-
-    ***Variable:*** template
-
-    ***Default:*** rhel6tmpl
-
-    Click on the little plus icon (+) to save the variable. Repeat the process for the second variable:
-
-    ***Variable:*** vmname
-
-    ***Default:*** changeme
-
-    Click on the little plus icon (+) to save the variable.
-
-    ***Dialog:*** create new
-
-    ***Dialog name:*** provision-vm-vcenter
-
-    ![create user service dialog](../../common/img/vm-from-template-prov.png)
-
-1. Click on ***Add*** to save the Service Catalog Item. It can take a few moments for the changes to be saved.
-
-    ![catalog item was created](../../common/img/vm-prov-catalog-item-created.png)
-
-### Order the Virtual Machine Provisioning Service Catalog Item
-
-Once more, we want to test the result and see everything works as expected.
-
-1. Navigate to ***Services*** -> ***Catalogs***
-
-    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
-
-1. Click on the Service Catalog Item we just created "Provision Virtual Machine"
-
-    ![provision virtual machine catalog item](../../common/img/provision-vm-catalog-item.png)
-
-1. Click ***Order***
-
-1. If you specified the dialog elements like described before, your form should look like this and all the provided default values can be accepted.
-
-TODO: # avaleror: Maybe showing that this info can be hidden could be interesting ?? I´ve seen that later you show this, but I still think that commenting here as an intro could be handy.
-
-
-    ![provision virtual machines details](../../common/img/provision-vm-details.png)
-
-1. Click on ***Submit***
-
-    After you click on "Submit" you will be redirected to the requests queue.
-
-    ![requests queue after ordering provision VM](../../common/img/requests-queue-after-vm-prov.png)
-
-### Monitor VM provisioning Playbook execution
-
-When executing an Ansible Playbook with the embedded role in CloudForms, a "Service" object is automatically created. This service object gives us more details about the executed Playbook. It provides the output of the Playbook and it allows us to trigger retirement.
-
-1. Navigate to ***Services*** -> ***My Services***
-
-    ![navigate to my services](../../common/img/navigate-to-my-services.png)
-
-1. You should see a new tile representing the Ansible Playbook Service you just ordered
-
-    ***Note:*** If you don't see the tile yet, wait a minute and try again.
-
-    ![create user service tile](../../common/img/my-service-provision-vm-tile.png)
-
-1. After clicking on the icon, we can see more details about the service which was created
-
-    ![create user service details](../../common/img/vm-prov-service-details.png)
-
-    Since this Service does not create a Virtual Machine, the box "VMs" will always say "No Records found"
-
-1. Click on the ***Provisioning*** tab to see the output of the Ansible Playbook
-
-    ![ansible Playbook output](../../common/img/vm-prov-ansible-Playbook-output.png)
-
-    If the Playbook execution has not completed, you can click the reload icon to refresh the information. The ***Reload*** icon is represented by a little arrow, left of the ***Configuration*** menu.
-
-    ![reload icon](../../common/img/reload-icon.png)
-
-## Extend CloudForms builtin Capabilities
-
-In this lab you have so far learned how to use Ansible Playbooks to orchestrate and execute configuration actions. CloudForms is internally using a powerful and extensible framework that defines what happens "under the hood". This feature is called "Automate". "Automate" allows us to understand how things are done and even more interestingly, it allows us to add features which are not coming out of the box.
-
-"Automate" code can either be developed directly in the User Interface, or it can be imported from a Git repository. For this lab we want to keep things simple. We will add a Git repository with a simple method to make the Service Dialog easier to use.
-
-### Add a Git repository for Automate
-
-TODO: Do we need a new project with better code examples? The Automate code doesn't make sense anymore either, since it returns a list of vCenters - which we don't use anymore
-
-TODO: # avaleror: Maybe would be interesing explain a little bit that the Git Respositories Owner has been activated for this point, and the implications that it have.
-
-
-"Automate" code can either be developed and written directly in the CloudForms Web UI, or it can be imported from a Git repository. We will do the latter:
-
-1. Navigate to ***Automation*** -> ***Automate*** -> ***Import/Export***
-
-    ![navigate to automate import/export](../../common/img/navigate-to-automate-import-export.png)
-
-1. Use the following URL to access the Git repository:
-
-    [https://github.com/cbolz/partner-conference-2017-labs.git](https://github.com/cbolz/partner-conference-2017-labs.git)
-
-    ![adding the Automate Git repository](../../common/img/adding-automate-git.png)
-
-1. Click ***Submit***. It will take a few moments to check the Git repository.
-
-1. The "Branch/Tag" and "Branch" fields allow us to import different tags or branches, for example "Development", "Testing", "QA", etc.
-
-    For this lab, we stick with the defaults and click on ***Submit***
-
-    ![select Automate tag or branch](../../common/img/select-automate-tag-branch.png)
-
-1. The first import can take a few moments. After that you should see the following confirmation:
-
-    ![after first Automate import](../../common/img/after-first-automate-import.png)
-
-### Verify Automate import
-
-We want to make sure the Automate Code was properly imported.
-
-1. Navigate to ***Automation*** -> ***Automate*** -> ***Explorer***
-
-    ![navigate to Automate Explorer](../../common/img/navigate-to-automate-explorer.png)
-
-1. "Automate" code is organized in "Datastores". Two Datastores are shipped with CloudForms:
-
-    - ManageIQ: These methods are a verbatim copy of the Open Source Community version
-    - RedHat: These methods are only shipped with Red Hat CloudForms and are supported by Red Hat
-
-    You can now see an additional third Datastore called "Lab", which is the one you just imported. Users can create as many additional datastores as they want, but they can not modify or delete the two datastores shipped with the product. Datastores are stacked and prioritized which allows separation of out of the box functionality from custom code.
-
-TODO:  # avaleror: Name of new Domain is not Lab at this moment, keep in mind to change it. Probably comment to students that git Domain it´s locked and they can't modify it from CF UI, and they have to modfy it outside CF and push changes to git repo.
-
-    The screenshot was created after expanding all folders (which are actually called "Namespaces" and "Classes":
-
-    ![Automate with custom method](../../common/img/automate-with-custom-method.png)
-
-This concludes the preparation for the next part of the lab.
-
-### Optimize the Dialog
-
-The Service Dialog we created so far, is not ideal for most use cases. We want users to focus on getting their service as quickly and easily as possible. An ideal Service Dialog only asks the absolutely necessary questions. With this in mind, we can optimize the automatically created Service Dialog created in the previous part of the lab.
-
-1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
-
-    ![navigate to customization](../../common/img/navigate-to-customization.png)
-
-1. Click on ***Service Dialog*** in the accordion on the left
-
-    ![navigate to service dialogs](../../common/img/service-dialog-accordion.png)
-
-1. Click on the Dialog which was created in the previous step "provision-vm-vcenter"
-
-1. Click on ***Configuration*** -> ***Copy this Dialog***. We want to keep the original version of the Dialog, which will allow us to have a backup.
-
-1. Edit the Label and Description to something a bit more meaningful
-
-    ***Label:*** provision-vm-vcenter-v2
-
-    ***Description:*** Optimized version of the Service Dialog
-
-    ***Note:*** Do not click on ***Add*** yet, we want to do some more changes!
-
-1. We want to do several changes on this Dialog.
-
-    Change the Label to something more meaningful:
-
-    ***Label:*** provision-vm-vcenter-v2
-
-1. The elements in the "Options" box will always be left to the default values for our Service Catalog Item to work. Since our users are never going to change any of the field in the "Options" box, we can simply delete the entire box.
-
-    Click on the Box "Options" and then on the little trash bin icon to delete it and all its child elements.
-
-    ![delete options box](../../common/img/delete-options-box.png)
-
-    ***Note:*** Make sure you have highlighted the correct element! If you deleted the wrong element by accident, you can click on ***Cancel*** and start over.
-
-1. The ESXi host which will actually create the virtual machine, is always the same in this lab. We can hide the element to simplify the Dialog further.
-
-    Click on the Element "esxi_host" and unselect the "visible" box
-
-    ![make host invisible](../../common/img/esxi-visibility.png)
-
-1. The same applies for the "Datacenter". In this lab, there is only one.
-
-    ![make datacenter invisible](../../common/img/datacenter-visibility.png)
-
-1. To finish the our optimizations, we want to make the vCenter a dynamic drop down. Instead of providing possible values as a hard coded list, or asking the user for manual input, we can use program code to create a list of applicable options.
-
-    In this example, we want the list of available vCenters dynamically populated (Although there is still only one vCenter and the value is questionable at best. But it's a good example of CloudForms' capabilities nonetheless)
-
-    Click on the Element "vcenter_hostname" and change the type to "Drop down list". Then click the check box "Dynamic". This will change the form and show us new fields:
-
-    ![form after selecting dynamic](../../common/img/vcenter-dynamic-checked.png)
-
-    Click on "Entry Point". A window will pop up which allows us to specify which method instance should be called to populate this Element.
-
-    Select the Instance called "get_vcenter_list" and click ***Apply***.
-
-TODO:  # avaleror: Since code in this method is pretty simple maybe showing and commenting a little bit, would help students to understand whats is happening in the background ???
-
-    ![select get_vcenter_list instance](../../common/img/get_vcenter_list-instance.png)
-
-    The resulting Service Dialog Element should look like this:
-
-    ![vcenter dynamic drop down list](../../common/img/vcenter-dynamic-drop-down.png)
-
-1. Click on ***Add** to save all changes
-
-### Update the Service Catalog Item
-
-We have to change the Service Catalog Item to use the Service Dialog we just created.
-
-1. Navigate to ***Services*** -> ***Catalogs***
-
-    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
-
-1. Navigate to ***Catalog Items*** in the accordion on the left and click on the "Provision Virtual Machine" Service Catalog Item
-
-    ![navigate to catalog items](../../common/img/vm-prov-service-catalog-item.png)
-
-1. Click on ***Configuration*** -> ***Edit this Item***
-
-1. In the ***Dialog*** Section of the UI, change the value from "provision-vm-vcenter" to "provision-vm-vcenter-v2"
-
-    ![change dialog to provision-vm-vcenter-v2](../../common/img/dialog-vm-provision-vcenter-v2.png)
-
-1. Click ***Save*** to commit the changes
-
-### Test the new Service Dialog
-
-We want to see how the resulting Service Catalog Item looks like.
-
-1. Navigate to ***Services*** -> ***Catalogs***
-
-    ![navigate to service catalogs](../../common/img/navigate-to-service-catalog.png)
-
-1. Make sure you are on the "Service Catalogs" tab in the accordion on the left
-
-1. Order the "Provision Virtual Machine" Service Catalog Item
-
-    ![provision virtual machine](../../common/img/provision-vm-catalog-item.png)
-
-1. Note the Service Dialog has changed compared to before. You should notice a few fields are gone and the vCenter is now a drop down list. "vCenter" should already be selected for you.
-
-    ![new provision virtual machine dialog](../../common/img/order-new-virtual-machine-dialog.png)
-
-1. If you want, you can go ahead and submit the order
-
 ## Policies and Ansible
 
 In this lab we will cover how to create an action in CoudForms that executes an Ansible Playbook.
 
 ### Creating the Service
+
+TODO: This example is still based on a Playbook for VMware!
+I could use my "Fix SELinux" example and use a "disable SELinux" playbook to unconfigure so students can trigger it
 
 Control Policies drive Control Actions. Ansible Playbooks can now be executed as a control action, this is done by the control action calling a service. Therefore we need to create a service for the action to call.
 
@@ -1157,8 +954,6 @@ Start by going to vSphere Web Client and selecting the VM that you identified fo
 1. Go back to the vCenter console and verify that is has 1 CPU and 1 GB of RAM
 
     ![verify-vmware-vm](../../common/img/verify-vmware-vm.png)
-
-## Custom buttons calling Ansible Playbooks
 
 ## Calling Ansible Playbooks from Automate
 
