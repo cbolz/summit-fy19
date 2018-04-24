@@ -29,6 +29,11 @@
         - [Monitor create user Playbook execution](#monitor-create-user-playbook-execution)
         - [Verify Playbook results](#verify-playbook-results)
     - [Policies and Ansible](#policies-and-ansible)
+        - [About Smart State Analysis](#about-smart-state-analysis)
+        - [Smart State Analysis Profiles](#smart-state-analysis-profiles)
+        - [Create a custom Smart State Analysis Profile](#create-a-custom-smart-state-analysis-profile)
+        - [Modify the Smart State Analysis Profile](#modify-the-smart-state-analysis-profile)
+    - [Compliance Policies](#compliance-policies)
         - [Creating the Service](#creating-the-service)
         - [Create a Service Catalog Item for the Policy Playbook](#create-a-service-catalog-item-for-the-policy-playbook)
         - [Creating Control Action](#creating-control-action)
@@ -739,7 +744,96 @@ To make sure the user was really created, follow these steps.
 
 ## Policies and Ansible
 
-In this lab we will cover how to create an action in CoudForms that executes an Ansible Playbook.
+CloudForms can be used to verify systems meet enterprise compliance policies and can also enforce compliance by utilizing Ansible. In the following lab we will learn how to configure Smart State Analysis to verify SELinux is set to "Enforcing" mode and we will use Ansible to fix the configuration file, in case a virtual machine is not compliant.
+
+If you want to learn more about SELinux, the [Fedora project page](http://fedoraproject.org/wiki/SELinux) has a list of very good additional resources.
+
+### About Smart State Analysis
+
+[CloudForms](http://www.redhat.com/cloudforms) has a feature called "Smart State Analysis" which provides analysis capabilities for virtual disks of Virtual Machines, Instances, Templates or Images and retrieve data about the installed Operating System, applications, local users and groups and even more. This is implemented completely without the need of additional agents and as a consequence is independent of the VM power state.
+
+Smart State can be also used for Containers and Hypervisors, but the following example focuses on Virtual Machines.
+
+### Smart State Analysis Profiles
+
+A Smart State Analysis Profile defines which information is retrieved from the Virtual Machine. By default the following information is retrieved:
+
+- Services: Which services are installed (Works for Windows and Linux including SysV and SystemD)
+
+- User Accounts: Retrieves information about local user and group accounts
+
+- Software: Information about installed applications (on Windows retrieved from the registry, on Linux by running a query against the RPM or dpkg database)
+
+- VM Configuration and System: some additional information about the VM
+
+Administrators can create their own Analysis Profiles and define a list of additional files which should be retrieved. The Profile can either only check for the existence of the specified file, or also retrieve the content of the file. On Windows VMs, registry keys and event logs can be retrieved as well.
+
+### Create a custom Smart State Analysis Profile
+
+It is very simple to create a customized Profile. Simply copy the out of the box "sample" Profile and name the copy "default".
+
+1. navigate to ***Configuration*** by clicking on the username on the top right corner
+
+    ![navigate to configration](../../common/img/navigate-to-configuration.png)
+
+1. navigate to ***Analysis Profiles*** -> ***simple***
+
+    ![navigate to analysis profiles](../../common/img/navigate-to-ssa-analysis-profile.png)
+
+1. click on ***Configuration*** -> ***Copy selected analysis profile***
+
+    ![copy analysis profile](../../common/img/copy-analysis-profile.png)
+
+1. make sure the copy is called "default" and check or un-check the appropriate options
+
+    ![name the profile default](../../common//img/copy-ssa-profile.png)
+
+  If the Profile is not called "default" it will not be used unless it is explicitly assigned. Read the chapter [Assigning a Custom Analysis Profile to a Virtual Machine](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/assigning_a_custom_analysis_profile_to_a_virtual_machine/index) in the CloudForms Documentation for more details.
+
+### Modify the Smart State Analysis Profile
+
+To show how this feature works, add an additional file. In the example below, the content of /etc/sysconfig/selinux is retrieved during Smart State Analysis. 
+
+Edit the previously created State Analysis Profile:
+
+1. navigate to ***Analysis Profiles*** -> ***default***
+
+    ![navigate to default SSA profile](../../common/img/navigate-to-default-ssa-profile.png)
+
+1. click on ***Configuration*** -> ***Edit this Analysis Profile***
+
+1. click on the tab ***file***
+
+    ![navigate to tab file](../../common/img/navigate-to-ssa-file-tab.png)
+
+1. add a new line:
+
+    ***Name:*** /etc/sysconfig/selinux
+
+    ***Collect Contents?*** click (check the box)
+
+    ![Add selinux to Analysis Profile](../../common/img/add-selinux-to-analysis-profile.png)
+
+1. Click ***Save*** on the right in the same row of the table
+
+1. click ***Save*** to save all modifications
+
+## Compliance Policies
+
+Enterprises often have rules and regulations about system compliance. This could include a specific baseline configuration, for example hardening rules. It could also include other requirements, like backup and monitoring has to be configured, a proper license has to be available (particularly with proprietary software) and more. Compliance checks in CloudForms can bundle these requirements into policy profiles.
+
+If one or more of the requirements is not met, actions can be triggered. The most obvious and most simple to implement is to mark the system as being "non compliant".
+
+![System is not compliant](../../common/img/system-non-compliant.png)
+
+Compliance policies can also trigger other actions, including running an Ansible Playbook or perform a custom method, which allows us to run our own (Ruby) Method as an action.
+
+In this lab we want to use the embedded Ansible role provided by CloudForms to automatically enforce compliance on a virtual machine. If a system does not have SElinux properly configured (it is not set to "Enforcing") we want to use Ansible to fix the situation automatically.
+
+
+
+---
+TODO: get rid of the content below
 
 ### Creating the Service
 
