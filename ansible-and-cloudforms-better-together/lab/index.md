@@ -202,6 +202,8 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
 
+***Note:*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+
 ### Add a Git repository of Ansible Playbooks
 
 To be able to run Ansible Playbooks, they have to become available in CloudForms. Custom git repositories can be used as well as GitHub, GitLab or others. Other Source Control Management Systems like Subversion or Mercurial are planned for later versions.
