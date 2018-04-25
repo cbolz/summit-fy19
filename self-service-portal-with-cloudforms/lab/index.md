@@ -27,12 +27,13 @@
         - [Create a Service Catalog Item](#create-a-service-catalog-item)
         - [Test the Service Catalog Item](#test-the-service-catalog-item)
     - [OpenShift example](#openshift-example)
-        - [Create Service Dialog from OpenShift Template](#create-service-dialog-from-openshift-template)
+        - [Create Service Dialog from an OpenShift Template](#create-service-dialog-from-an-openshift-template)
         - [Create an OpenShift Service Catalog](#create-an-openshift-service-catalog)
         - [Create a OpenShift Template Service Catalog Item](#create-a-openshift-template-service-catalog-item)
         - [Order the OpenShift Template](#order-the-openshift-template)
         - [Verify provisioning of OpenShift application](#verify-provisioning-of-openshift-application)
-    - [HEAT Provisioning example](#heat-provisioning-example)
+    - [OpenStack HEAT](#openstack-heat)
+        - [HEAT Provisioning example](#heat-provisioning-example)
         - [Prepare the HEAT Template](#prepare-the-heat-template)
         - [Import the HEAT Template](#import-the-heat-template)
         - [Create a Service Dialog from a HEAT template](#create-a-service-dialog-from-a-heat-template)
@@ -58,7 +59,11 @@
 
 ## Introduction to CloudForms
 
-[General introduction](../../common/index.md)
+[Red Hat CloudForms](http://www.redhat.com/cloudforms) is an infrastructure management platform that offers a consistent way to track costs, control resource allocation, and ensure compliance across all your networked environments. Manage Virtual Machines, containers, and your clouds in the same way with a single tool.
+
+In this lab we will focus on the Self Service Catalog features CloudForms provides. We will learn how to create Service Catalogs, add individual Items and see how end users can browse and order from the Service Catalog.
+
+For more details about CloudForms, you can have a look at the [General introduction](../../common/index.md).
 
 ### Access the lab environment
 
@@ -84,13 +89,42 @@ Let's start by verifying the status of all providers. Use the URL example and lo
 
 ![CloudForms login page](../../common/img/cloudforms-login-page.png)
 
+In CloudForms we can add so called "Providers". Providers are categorized into Cloud, Infrastructure, Physical and Container Providers. CloudForms 4.6 supports the following list of providers:
+
+Cloud Providers:
+
+- Amazon EC2
+- Microsoft Azure
+- Google Compute Platform
+
+Infrastructure as a Service Providers:
+
+- Red Hat Virtualization
+- Red Hat OpenStack Platform
+- VMware vSphere
+- Microsoft System Center Virtual Machine Manager
+
+Physical Providers:
+
+- Lenovo XClarity
+
+Container Providers:
+
+- OpenShift Container Platform
+
+Let's first verify the providers you have available and check their health status.
+
 ### OpenStack Provider status
+
+[OpenStack](http://www.redhat.com/openstack) gives you a modular cloud infrastructure that runs off standard hardware—letting you deploy the tools you need, when you need them, all from one place.
 
 Let's first check the OpenStack Provider:
 
 1. Navigate to ***Compute*** -> ***Clouds*** -> ***Providers***
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
+
+    ***Note:*** Don't click while navigating the menu structure, just hover until you reach the entry you want...
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
@@ -111,6 +145,8 @@ After reloading the page, the provider tile should show a green check mark and t
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat Virtualization Provider status
+
+Take complexity and application processing latency out of your implementation. Go beyond bare metal and virtualize more resource-intensive workloads on fewer servers. Requiring no modification with better synchronization, [Red Hat Virtualization](http://www.redhat.com/rhv) is a natural choice for virtualized Linux workloads.
 
 Let's then check the RHV Provider:
 
@@ -141,6 +177,8 @@ After reloading the page, the provider tile should show a green check mark and t
 ***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 ### Red Hat OpenShift Container Platform status
+
+[Red Hat® OpenShift](http://www.redhat.com/openshift) is a container application platform that brings Docker and Kubernetes to the enterprise. Regardless of your applications architecture, OpenShift lets you easily and quickly build, develop, and deploy in nearly any infrastructure, public or private. Whether it’s on-premise, in a public cloud, or hosted, you have an award-winning platform to get your next big idea to market ahead of your competition.
 
 Let's finally check the OpenShift Provider:
 
@@ -190,22 +228,33 @@ By providing a service catalog, users can deploy the services they need quickly 
 
 But first some basics. Four items are required to make a service available to users from the CloudForms self service portal:
 
-1. A Provisioning Dialog which presents the basic configuration options for a virtual machine or instance.
-1. A Service Dialog where you allow users to configure virtual machine or instance options.
-1. A Service Catalog which is used to group Services Catalog Items together.
-1. A Service Catalog Item (the actual Service) which combines a Service Dialog, a Provisioning Dialog and some additional meta data in the Service Catalog.
+1. Provisioning Dialog
+
+   The provisioning dialog specifies the list of customizable parameters. For example, when you want to order a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
+
+1. A Service Dialog
+
+    When the user orders and Item from the Service Catalog, you might want to allow them to override certain default values. For example, you might allow users to choose from a range of values how much memory the new Virtual Machine should have. You might want them to choose between possible values like 2, 4, or 8 GB of RAM - but not more or less. This is specified in the Service Dialog.
+
+1. A Service Catalog Item
+
+    The Service Catalog Item is what users will see and be able to order. It usually consists of a Service Dialog allowing users to change specific parameters, it can have a nice icon and an (optional) HTML description. Service Catalog Items are organized in Service Catalogs for easier navigation.
+
+1. A Service Catalog
+
+    The Service Catalog allows administrator to organize the Catalog Items. You might want to have a Catalog for different Virtual Machine types, or one offering certain applications like Wordpress, MariaDB etc. Or you might want to categorize by Operating System. This is done by creating Service Catalogs and adding Items to them.
 
 We can also use Role Based Access Control to make certain Service Catalog Items available to specific groups of users.
 
 ### Virtual Machine Provisioning example
 
-The first example will guide you through the process of offering a Service Catalog Item to provision a simple virtual machine. This will include:
+The first example will guide you through the process of offering a Service Catalog Item to provision a simple Virtual Machine. This will include:
 
 - Design a Service Dialog: a form which will ask the user for the necessary input data
-- Create a Service Catalog: this will allow to organize services in a structured way
-- Publish a Service Catalog Item: puts everything together and build the item which users can order
+- Create a Service Catalog: this allows administrators to organize Service Catalog Items to make it easy for end users to find what they need
+- Publish a Service Catalog Item: this is the object end users can adjust to their needs and order from the Service Catalog
 
-The previous chapter mentions a fourth object, the Provisioning Dialog. We do not have to create one, since there are examples shipped with the product, which does everything we need.
+The previous chapter mentions a fourth object, the Provisioning Dialog. We do not have to create one, since there are good defaults shipped with the product.
 
 The following chapters will guide you through the process step-by-step.
 
@@ -213,10 +262,10 @@ The following chapters will guide you through the process step-by-step.
 
 For this example we will create a Service Dialog which will ask the user for two parameters:
 
-- the name of the new virtual machine
-- how much memory should be allocated to the new virtual machine
+- the name of the new Virtual Machine
+- how much memory should be allocated to the new Virtual Machine
 
-Follow these steps to design the service dialog:
+Follow these steps to design the Service Dialog:
 
 1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
 
@@ -224,7 +273,7 @@ Follow these steps to design the service dialog:
 
 1. Navigate to ***Service Dialogs*** in the accordion on the left.
 
-    ![navigate to service dialogs](../../common/img/service-dialog-accordion.png)
+    ![navigate to Service Dialogs](../../common/img/service-dialog-accordion.png)
 
 1. Click on ***Configuration*** -> ***Add a new Dialog***
 
@@ -236,7 +285,7 @@ Follow these steps to design the service dialog:
 
     ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
 
-    ![create a service dialog](../../common/img/create-service-dialog.png)
+    ![create a Service Dialog](../../common/img/create-service-dialog.png)
 
 1. Add a new text box by using drag and drop of the "Text Box" symbol
 
@@ -245,6 +294,8 @@ Follow these steps to design the service dialog:
 1. Click the pen icon to edit the text box
 
     ![edit text box](../../common/img/service-dialog-edit-textbox.png)
+
+    ***Note:*** The icon becomes visible when you hover your mouse over the text box.
 
 1. The first element will allow the user to specify a VM name. Modify the following fields:
 
@@ -258,7 +309,7 @@ Follow these steps to design the service dialog:
 
     The help is some text which will be shown if the mouse hovers over the little question mark icon next to the element. It can be used to provide additional information to the user to fill out this field:
 
-    ***Help:*** Specify the name of the new virtual machine
+    ***Help:*** Specify the name of the new Virtual Machine
 
     CloudForms allows us to design Service Dialogs comprised of many different types of Elements:
 
@@ -269,7 +320,7 @@ Follow these steps to design the service dialog:
     - Radio Button: Similar to the check box, but only one of the options can be selected, for example the base OS version (RHEL 6 or RHEL 7, but never more than one)
     - Tag Control: a special element which allows the user to chose from available tags. More about tagging later in this lab
     - Text Area Box: allows the user to enter relatively large amounts of text (multiple lines), could be used for example to provide description information
-    - Text Box: allows the user for short amounts of text (one line), in this example we use this element to ask the user for a name of the virtual machine
+    - Text Box: allows the user for short amounts of text (one line), in this example we use this element to ask the user for a name of the Virtual Machine
 
     The remaining options can be ignored for now.
 
@@ -291,7 +342,7 @@ Follow these steps to design the service dialog:
 
     ***Name:*** option_0_vm_memory
 
-    ***Help:*** Select how much memory the virtual machine should have
+    ***Help:*** Select how much memory the Virtual Machine should have
 
 1. Switch to the ***Options*** tab of the dialog and add the following entries.
 
@@ -311,7 +362,7 @@ Follow these steps to design the service dialog:
 
     ***Required:*** is Yes
 
-    ***Variable Type:*** Integer
+    ***Value Type:*** Integer
 
     ***Note:*** To be able to add a line to the table, click on the little plus icon on the bottom of the list
 
@@ -323,7 +374,7 @@ Follow these steps to design the service dialog:
 
 1. We are finally done designing the dialog. Click on ***Save*** to save the dialog.
 
-    ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a service dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
+    ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a Service Dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
 
 ### Build a VM Provisioning Service Catalog
 
@@ -408,11 +459,11 @@ To tie everything together, the last step is to define a service catalog item.
 1. Click on the ***Details*** tab. You can provide some more descriptive explanation about the service here. We can even use basic HTML formatting in this box.
 
         <h1>Simple VM</h1>
-        <p>When ordering this item, the user will be provided some simple questions to specify the hostname and memory size of the requested virtual machine.</p>
+        <p>When ordering this item, the user will be provided some simple questions to specify the hostname and memory size of the requested Virtual Machine.</p>
 
         <p>The VM will be deployed with <a href=http://www.redhat.com>Red Hat Enterprise Linux 7</a>.
 
-1. The ***Request Info*** tab of the dialog allows us to provide all the settings we want to use when provisioning a virtual machine from this Service Catalog Item.
+1. The ***Request Info*** tab of the dialog allows us to provide all the settings we want to use when provisioning a Virtual Machine from this Service Catalog Item.
 
     Select the template used for provisioning:
 
@@ -458,11 +509,11 @@ To tie everything together, the last step is to define a service catalog item.
 
 1. Click on the next sub tab ***Customize***
 
-    This allows to reconfigure certain settings inside the virtual machine. For the purpose of this lab, we keep them all empty
+    This allows to reconfigure certain settings inside the Virtual Machine. For the purpose of this lab, we keep them all empty
 
 1. Click on the last sub tab ***Schedule***
 
-    This allows us to delay provisioning to a later time, for example during the night or off hours. We can also set a retirement date. After notifying the user and allowing him or her to extend the lifespan of the virtual machine, retirement will shutdown and, by default, delete the virtual machine.
+    This allows us to delay provisioning to a later time, for example during the night or off hours. We can also set a retirement date. After notifying the user and allowing him or her to extend the lifespan of the Virtual Machine, retirement will shutdown and, by default, delete the Virtual Machine.
 
     For the purpose of the lab, we keep these settings unchanged.
 
@@ -490,7 +541,7 @@ For sure you want to test the Service Catalog Item you just created!
 
 1. Click on ***Order***
 
-1. The Service Dialog we created earlier will be presented and ask for the name of the virtual machine and the memory size. As you can see, the name is a free text field, and the memory size is a drop down list.
+1. The Service Dialog we created earlier will be presented and ask for the name of the Virtual Machine and the memory size. As you can see, the name is a free text field, and the memory size is a drop down list.
 
     ***VM Name:*** test
 
@@ -518,9 +569,9 @@ While the VM is cloned from template, it does not show up in the CloudForms inve
 
 1. You should see a VM with the name "test" in the overview
 
-    ***Note:*** If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically.
+    ***Note:*** If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically. When the Request State is Finished, the VM should be completely provisioned and visible in ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
 
-    ![all virtual machines](../../common/img/infrastructure-vm-overview.png)
+    ![all Virtual Machines](../../common/img/infrastructure-vm-overview.png)
 
 1. Click on the new VM "test" to see the VM details
 
@@ -582,7 +633,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***Description:*** Example Playbooks
 
-    ***URL:*** [https://github.com/cbolz/summit-fy19.git](https://github.com/cbolz/summit-fy19.git)
+    ***URL:*** https://github.com/cbolz/summit-fy19.git
 
     ***SCM Update Options:*** check "Update on Launch"
 
@@ -688,7 +739,7 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
     ***Machine Credentials:*** Virtual Machine credentials
 
-    ***Variables & Default Values***: add one new entry with:
+    ***Variables & Default Values***: add one new entry with the following settings:
 
     ***Variable:*** package_name
 
@@ -698,7 +749,7 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
     ***Dialog:*** Create New
 
-    Use "InstallPackage" as the name of the Dialog. 
+    Use "InstallPackage" as the name of the Dialog.
 
     ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage.png)
 
@@ -716,7 +767,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
     ![navigate to Ansible Service Catalog](../../common/img/navigate-to-ansible-service-catalog.png)
 
-1. Select the "Install Package" Service Catalog Item
+1. Select the "Install Package" Service Catalog Item from the "Ansible" Service Catalog
 
     ![select install package Service Catalog Item](../../common/img/select-install-package-item.png)
 
@@ -760,9 +811,11 @@ We want to make sure the resulting Service Catalog Item actually works.
 
 ## OpenShift example
 
-Since version 4.6 CloudForms can offer OpenShift application deployments based templates in the Service Catalog. To make the necessary steps simple, an administrator can create a Service Dialog from an existing OpenShift template with just a few mouse clicks. 
+Your lab environment also contains an OpenShift Container Platform installation which we want to use in the following lab. [Red Hat® OpenShift](http://www.redhat.com/openshift9) is a container application platform that brings Docker and Kubernetes to the enterprise. Regardless of your applications architecture, OpenShift lets you easily and quickly build, develop, and deploy in nearly any infrastructure, public or private. Whether it’s on-premise, in a public cloud, or hosted, you have an award-winning platform to get your next big idea to market ahead of your competition.
 
-### Create Service Dialog from OpenShift Template
+Since version 4.6 CloudForms offers support for deploying applications from OpenShift templates. To make the necessary configuration easy, an administrator can automatically create a Service Dialog from an existing OpenShift template.
+
+### Create Service Dialog from an OpenShift Template
 
 CloudForms can create a Service Dialog from an OpenShift template very easily.
 
@@ -770,7 +823,7 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
     ![navigate to container templates](../../common/img/navigate-to-container-templates.png)
 
-    You will see a list of all currently available templates. CloudForms makes sure the list is up to date by periodically running a refresh in the background.
+    You will see a list of all currently available templates. CloudForms periodically retrieves the list of available templates from OpenShift to make sure the CloudForms inventory is always up to date.
 
 1. Click on the "cakephp-mysql-example" template
 
@@ -780,13 +833,13 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
 1. Click on ***Configuration*** -> ***Create Service Dialog from Container Template***
 
-    ![create service dialog](../../common/img/container-template-cakephp-mysql-example-create-service-dialog.png)
+    ![create Service Dialog](../../common/img/container-template-cakephp-mysql-example-create-service-dialog.png)
 
 1. Give it a name and click ***Save***
 
     ***Service Dialog Name:*** cakephp-mysql-example
 
-    ![naming service dialog](../../common/img/container-template-cakephp-mysql-example-name-service-dialog.png)
+    ![naming Service Dialog](../../common/img/container-template-cakephp-mysql-example-name-service-dialog.png)
 
 1. ***OPTIONAL:*** You can find the automatically created dialog in ***Automation*** -> ***Automate*** -> ***Customization*** in the section ***Service Dialogs***.
 
@@ -872,7 +925,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     ![service catalog item details](../../common/img/service-item-details-openshift.png)
 
-    Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
+    For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
 1. ***OPTIONAL:*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
 
@@ -940,7 +993,15 @@ After a few minutes you should see your new project and the associated container
 
 1. This concludes this part of the lab.
 
-## HEAT Provisioning example
+## OpenStack HEAT
+
+The mission of the OpenStack Orchestration program is to create a human- and machine-accessible service for managing the entire lifecycle of infrastructure and applications within OpenStack clouds.
+
+Heat is the main project in the OpenStack Orchestration program. It implements an orchestration engine to launch multiple composite cloud applications based on templates in the form of text files that can be treated like code. A native Heat template format is evolving, but Heat also endeavours to provide compatibility with the AWS CloudFormation template format, so that many existing CloudFormation templates can be launched on OpenStack. Heat provides both an OpenStack-native ReST API and a CloudFormation-compatible Query API.
+
+Why ‘Heat’? It makes the clouds rise!
+
+### HEAT Provisioning example
 
 In the first part of the lab you have learned:
 
@@ -969,7 +1030,7 @@ Before we can import the template into CloudForms, we need to download it or hav
 
 ### Import the HEAT Template
 
-The following procedure will import a HEAT template, create a service dialog and tie everything together in a service catalog item.
+The following procedure will import a HEAT template, create a Service Dialog and tie everything together in a service catalog item.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
@@ -1013,17 +1074,17 @@ Earlier in this lab you learned how to manually create a Service Dialog. Now we 
 
 1. Click on ***Configuration*** -> ***Create Service Dialog from Orchestration Template***
 
-    ![create service dialog from wordpress heat template](../../common/img/create-service-dialog-from-wordpress.png)
+    ![create Service Dialog from wordpress heat template](../../common/img/create-service-dialog-from-wordpress.png)
 
 1. Enter a name for the new Service Dialog
 
     ***Service Dialog Name:*** Wordpress HEAT Template
 
-    ![create service dialog from orchestration template](../../common/img/servicedialog-from-heat.png)
+    ![create Service Dialog from orchestration template](../../common/img/servicedialog-from-heat.png)
 
 1. Click on ***Save*** to create the Service Dialog
 
-    ![service dialog from orchestration template created](../../common/img/servicedialog-from-heat-created.png)
+    ![Service Dialog from orchestration template created](../../common/img/servicedialog-from-heat-created.png)
 
 ### Verify the Service Dialog
 
@@ -1035,13 +1096,13 @@ The Service Dialog was automatically created. We want to verify it was created p
 
 1. Navigate to ***Service Dialogs*** in the accordion on the left.
 
-    ![navigate to service dialogs](../../common/img/service-dialog-accordion-after-heat.png)
+    ![navigate to Service Dialogs](../../common/img/service-dialog-accordion-after-heat.png)
 
 1. Click on the new Service Dialog "Wordpress HEAT Template"
 
 1. A preview will show how the Service Dialog will look like, when it's used in a Service Catalog Item.
 
-    ![service dialog preview](../../common/img/service-dialog-heat-preview.png)
+    ![Service Dialog preview](../../common/img/service-dialog-heat-preview.png)
 
 1. The preview shows us that the Service Dialog is using a default image called "fedora-20.x86_64". We do not have such an image and want to change the Service Dialog accordingly.
 
@@ -1147,7 +1208,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     ![service catalog item details](../../common/img/service-item-details-heat.png)
 
-    Entry Points are the hooks into CloudForms' powerful Automation Framework. It allows administrators to define provisioning, reconfiguration and retirement workflows which are different from the out of the box behavior. For example we could add integration into an IP Address Management Tool, a ticketing system or a CMDB Service. For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
+    For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
 1. ***OPTIONAL:*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
 
@@ -1219,7 +1280,7 @@ In this advanced lab we want only specific Catalog Items to be available for cer
 
 ***Note:*** The following parts of the lab are using the "Operations UI" or "Classic UI". Make sure to switch back to it by using the original URL:
 
-[https://cf-&lt;GUID&gt;.labs.rhepds.com/](https://cf-&lt;GUID&gt;.labs.rhepds.com/)
+    https://cf46-<GUID>.rhpds.opentlc.com
 
 #### User Groups
 
@@ -1247,13 +1308,13 @@ For this lab, we first want to create a role which we want to use for testing.
 
     ![access control](../../common/img/navigate-to-access-control.png)
 
-1. Click on ***roles*** and ***Configuration*** -> ***Add a new role***
+1. Click on ***Roles*** and ***Configuration*** -> ***Add a new role***
 
     ![add a new role](../../common/img/add-a-new-role.png)
 
 1. We want to define a new role, which has enough privileges to order and interact with Service Catalog Items.
 
-    ***Name:*** Self Server role
+    ***Name:*** Self Service role
 
     ***Access Restriction for Services, VMs, and Templates:*** None
 
@@ -1263,7 +1324,7 @@ For this lab, we first want to create a role which we want to use for testing.
 
     1. Click on the little triangular icon next to "Services" to open the sub folder. Make sure "My Services", "Workloads" and "Request" are selected.
 
-    1. Click on the little triangular icon next to "Catalogs Explorer" and make sure everything except "Service Catalogs" is not selected.
+    1. Click on the little triangular icon next to "Catalogs Explorer" and make sure only "Service Catalogs" is selected.
 
     The resulting dialog should look like this:
 
@@ -1271,17 +1332,17 @@ For this lab, we first want to create a role which we want to use for testing.
 
 1. Click ***Add*** to save the new role
 
-1. Now we want to create a group associated to this role. Click on ***groups*** and ***Configuration*** -> ***Add a new group***
-
-    ![add a new group](../../common/img/add-new-group.png)
-
 #### Create a new Group
 
 Next we want to create a group and assign it to the role we just created.
 
+1. Now we want to create a group associated to this role. Click on ***Groups*** and ***Configuration*** -> ***Add a new group***
+
+    ![add a new group](../../common/img/add-new-group.png)
+
 1. Create the new group
 
-    ***Description:*** Self Service Engineering
+    ***Name:*** Self Service Engineering
 
     Select the role "Self Service role" you just created:
 
@@ -1311,7 +1372,7 @@ Finally we want to create a user which is a member of the group we just created.
 
     ***Full Name:*** Joe Doe
 
-    ***username:*** joe
+    ***Username:*** joe
 
     ***Password:*** r3dh4t1!
 
@@ -1321,7 +1382,7 @@ Finally we want to create a user which is a member of the group we just created.
 
     ***Note:*** CloudForms is not configured to send out emails, but the email address is a mandatory field
 
-    ***group:*** Self Service Engineering
+    ***Available Groups:*** Self Service Engineering
 
     ![add new user Joe Doe](../../common/img/add-user-joe-doe.png)
 
@@ -1414,8 +1475,8 @@ We want to do another test and see if the user Joe Doe can now see and other the
 If you're already done and still have some time left, here are some ideas for advanced labs:
 
 - try to add other Playbooks, some examples can be found on the [Official Red Hat CloudForms Blog](http://cloudformsblog.redhat.com/2017/05/31/ansible-automation-inside-cloudforms/)
-- retire the virtual machine Service you ordered earlier, check what happens during retirement with the virtual machine (Is it shutdown? Deleted? Is there still a representation in the CloudForms Web UI?)
+- retire the Virtual Machine Service you ordered earlier, check what happens during retirement with the Virtual Machine (Is it shutdown? Deleted? Is there still a representation in the CloudForms Web UI?)
 - make the other Catalog Items available for Joe Doe as well
 - improve the Service Dialog and make the VM Name a mandatory field (right now, it's optional and can be left empty)
-- grant Joe Doe more privileges (for example, it would be nice if he could start and stop his virtual machines)
+- grant Joe Doe more privileges (for example, it would be nice if he could start and stop his Virtual Machines)
 - upload images for the Service Catalog Items to make the Service Catalog more appealing
