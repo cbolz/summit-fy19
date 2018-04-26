@@ -70,7 +70,7 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-:warning: **Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.**
+:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
 
 ## Verify Lab
 
@@ -85,6 +85,8 @@ Let's first check the OpenStack Provider:
 1. Navigate to ***Compute*** -> ***Clouds*** -> ***Providers***
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
+
+    :heavy_check_mark: ***NOTE*** Don't click while navigating the menu structure, just hover until you reach the entry you want...
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
@@ -102,9 +104,9 @@ Let's first check the OpenStack Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-:heavy_exclamation_mark: Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-:heavy_exclamation_mark: If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat Virtualization Provider status
 
@@ -134,9 +136,9 @@ Let's then check the RHV Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat OpenShift Container Platform status
 
@@ -170,11 +172,11 @@ Let's finally check the OpenShift Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
+:heavy_check_mark: ***NOTE*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
-***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ## CloudForms with Ansible batteries included
 
@@ -214,7 +216,7 @@ The following lab will use UI customizations to illustrate how easy it is to add
 
     ![cfme001 powered on](../../common/img/cfme-001-powered-on.png)
 
-    ***Note:*** The VM should also report an IP address in the 192.168.1.0/24 network.
+    :heavy_check_mark: ***NOTE*** The VM should also report an IP address in the 192.168.1.0/24 network.
 
 Now our test VM is up and running and we can proceed with the next steps.
 
@@ -236,11 +238,11 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
 
-    ***Note:*** The git role is not represented by a specific worker process.
+    :heavy_check_mark: ***NOTE*** The git role is not represented by a specific worker process.
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
 
-***Note:*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+:warning: ***WARNING*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
 
 ![restart CloudForms Server](../../common/img/restart-server.png)
 
@@ -256,7 +258,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ![Add new repository](../../common/img/embedded-ansible-add-git-repository.png)
 
-    ***Note:*** If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
+    :warning: ***WARNING*** If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
 
 1. Fill in the form.
 
@@ -274,7 +276,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 1. Click on ***Add*** to save the settings
 
-    ***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
+    :heavy_check_mark: ***NOTE*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
 
 1. You can click on your username in the top right corner and then on ***Tasks*** to see all currently running tasks. Switch to ***All Tasks*** to see the progress of your Repository import.
 
@@ -364,7 +366,7 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
     ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
 
-    ***Note:*** If you followed the instructions by the letter, you're already in this part of the UI.
+    :heavy_check_mark: ***NOTE*** If you followed the instructions by the letter, you're already in this part of the UI.
 
 1. Navigate to ***Catalog Items*** in the accordion on the left
 
@@ -442,7 +444,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
 1. After submitting your order, you will be redirected to the Requests Queue. You should also see pop up notifications on the top right informing you about the progress of your order.
 
-1. OPTIONAL: Click on ***Refresh*** to monitor the progress of your order
+1. :+1: ***OPTIONAL*** Click on ***Refresh*** to monitor the progress of your order
 
 1. Navigate to ***Services*** -> ***My Services***
 
@@ -460,7 +462,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
     ![My Service Install Package Provisioning](../../common/img/my-services-installpackage-provisioning.png)
 
-    ***Note:*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
+    :heavy_check_mark: ***NOTE*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
 
 1. This concludes this part of the lab.
 
@@ -512,7 +514,7 @@ The previous step created a Button Group, or menu. Now we want add Buttons to th
 
     ![navigate to Customization](../../common/img/navigate-to-customization.png)
 
-    ***Note:*** You should already be in this menu if you followed the previous steps
+    :heavy_check_mark: ***NOTE*** You should already be in this menu if you followed the previous steps
 
 1. Click on the "Tools" Button Group you created in the previous lab
 
@@ -612,9 +614,9 @@ In the following steps, we want to make the Service Dialog more user friendly by
 
     ![edit machine credentials](../../common/img/edit-machine-credentials.png)
 
-    ***Note:*** The edit icon only shows if you move the mouse pointer over the "Machine Credentials" text box.
+    :heavy_check_mark: ***NOTE*** The edit icon only shows if you move the mouse pointer over the "Machine Credentials" text box.
 
-    ***Important:*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
+    :warning: ***WARNING*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
 
 1. Click on ***Overridable Options*** and switch the ***Visible*** switch to "No"
 
@@ -626,13 +628,13 @@ In the following steps, we want to make the Service Dialog more user friendly by
 
     ![edit hosts](../../common/img/visible-no-for-hosts.png)
 
-    ***Note:*** The edit icon only shows if you move the mouse pointer over the "Hosts" text box.
+    :heavy_check_mark: ***NOTE*** The edit icon only shows if you move the mouse pointer over the "Hosts" text box.
 
-    ***Important:*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
+    :warning: ***WARNING*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
 
 1. Click on the little pen icon next to the "package_name" text box
 
-    ***Note:*** The edit icon only shows if you move the mouse pointer over the "package_name" text box.
+    :heavy_check_mark: ***NOTE*** The edit icon only shows if you move the mouse pointer over the "package_name" text box.
 
 1. Change the label to something more descriptive:
 
@@ -658,7 +660,7 @@ To be able to use the new Service Dialog with our button, we first have to creat
 
     ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
 
-    ***Note:*** If you followed the instructions by the letter, you're already in this part of the UI.
+    :heavy_check_mark: ***NOTE*** If you followed the instructions by the letter, you're already in this part of the UI.
 
 1. Navigate to ***Catalog Items*** in the accordion on the left
 
@@ -694,7 +696,7 @@ To be able to use the new Service Dialog with our button, we first have to creat
 
     ***Default Value:*** httpd
 
-    Click the little plus ("+") icon to save the row.
+    :heavy_check_mark: ***NOTE*** Click the little plus ("+") icon to save the row.
 
     ***Dialog:*** Use Exiting
 
@@ -802,7 +804,7 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
     ![add catalog item ansible Playbook](../../common/img/add-catalog-item-ansible-playbook.png)
 
-    ***Note:*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
+    :warning: ***WARNING*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
 
 1. Fill out the form to define the service catalog item:
 
@@ -890,7 +892,7 @@ When executing an Ansible Playbook with the embedded role in CloudForms, a "Serv
 
 1. You should see a new tile representing the Ansible Playbook Service you just ordered
 
-    ***Note:*** If you don't see the tile yet, wait a minute and try again.
+    :heavy_check_mark: ***NOTE*** If you don't see the tile yet, wait a minute and try again.
 
     ![create user service tile](../../common/img/my-service-create-user-tile.png)
 
@@ -908,7 +910,7 @@ When executing an Ansible Playbook with the embedded role in CloudForms, a "Serv
 
     ![reload icon](../../common/img/reload-icon.png)
 
-    ***Note:*** If the Playbook execution has not started yet, you might not see any details in the "Provisioning" tab. Wait a minute and reload once more.
+    :heavy_check_mark: ***NOTE*** If the Playbook execution has not started yet, you might not see any details in the "Provisioning" tab. Wait a minute and reload once more.
 
 ### Verify Playbook results
 
@@ -926,7 +928,7 @@ To make sure the user was really created, follow these steps.
 
     ![user example exists](../../common/img/user-example.png)
 
-1. OPTIONALLY: If you want, you can log out of CloudForms and try to log in with the user you just created. Click on your username on the top right and ***Logout***.
+1. :+1: ***OPTIONAL*** If you want, you can log out of CloudForms and try to log in with the user you just created. Click on your username on the top right and ***Logout***.
 
     ![logout](../../common/img/logout.png)
 
@@ -967,7 +969,7 @@ Based on your work with "Install Package" Service Dialog, you should know what i
 
 Start with a simple copy of your working example. Add a text box to ask the user for the command. It is important that you set the name for the text element correctly. 
 
-***Note:*** Make sure the text box name is called "param_command" - because "command" is the name of the extra variable in the Ansible Playbook. If you chose a different name, the Playbook will use the default command, which is "echo hello world".
+:warning: ***WARNING*** Make sure the text box name is called "param_command" - because "command" is the name of the extra variable in the Ansible Playbook. If you chose a different name, the Playbook will use the default command, which is "echo hello world".
 
 #### Service Catalog Item
 

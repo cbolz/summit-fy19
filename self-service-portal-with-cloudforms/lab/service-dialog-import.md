@@ -1,8 +1,6 @@
 # Service Dialog import
 
-***Only follow these instructions if you were unable to create the service dialog manually!***
-
-TODO: This might become obsolete!
+:warning: ***WARNING*** Only follow these instructions if you were unable to create the service dialog manually!
 
 1. Navigate to ***Automation***, ***Automate***, ***Customization***
 

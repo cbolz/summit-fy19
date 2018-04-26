@@ -81,7 +81,7 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-***Note:*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
+:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
 
 ## Verify Lab
 
@@ -124,7 +124,7 @@ Let's first check the OpenStack Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
-    ***Note:*** Don't click while navigating the menu structure, just hover until you reach the entry you want...
+    :heavy_check_mark: ***NOTE*** Don't click while navigating the menu structure, just hover until you reach the entry you want...
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
@@ -142,9 +142,9 @@ Let's first check the OpenStack Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat Virtualization Provider status
 
@@ -176,9 +176,9 @@ Let's then check the RHV Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat OpenShift Container Platform status
 
@@ -214,11 +214,11 @@ Let's finally check the OpenShift Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-***Note:*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
+:heavy_check_mark: ***NOTE*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
-***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ## Build a Service Catalog with CloudForms
 
@@ -289,8 +289,6 @@ Follow these steps to design the Service Dialog:
 
     ***Dialog's Description***: Simple VM provisioning dialog
 
-    ***Note:*** Do not try to save the changes right now! The dialog is not finished and you will receive and error message ("Validation failed: Dialog Simple VM must have at least one Tab")
-
     ![create a Service Dialog](../../common/img/create-service-dialog.png)
 
 1. Add a new text box by using drag and drop of the "Text Box" symbol
@@ -301,7 +299,7 @@ Follow these steps to design the Service Dialog:
 
     ![edit text box](../../common/img/service-dialog-edit-textbox.png)
 
-    ***Note:*** The icon becomes visible when you hover your mouse over the text box.
+    :heavy_check_mark: ***NOTE*** The icon becomes visible when you hover your mouse over the text box.
 
 1. The first element will allow the user to specify a VM name. Modify the following fields:
 
@@ -370,17 +368,17 @@ Follow these steps to design the Service Dialog:
 
     ***Value Type:*** Integer
 
-    ***Note:*** To be able to add a line to the table, click on the little plus icon on the bottom of the list
+    :heavy_check_mark: ***NOTE*** To be able to add a line to the table, click on the little plus icon on the bottom of the list
 
     ![add entries to the drop down list](../../common/img/memory-dropdownlist.png)
 
 1. Click ***Save*** to save the Field Details
 
-    ***Note:*** The memory values in the dialog editor will not reflect your changes immediately and will still show the original options One, Two, Three.
+    :heavy_check_mark: ***NOTE*** The memory values in the dialog editor will not reflect your changes immediately and will still show the original options One, Two, Three.
 
 1. We are finally done designing the dialog. Click on ***Save*** to save the dialog.
 
-    ***Note:*** If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a Service Dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
+    :warning: ***WARNING***If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a Service Dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
 
 ### Build a VM Provisioning Service Catalog
 
@@ -432,7 +430,7 @@ To tie everything together, the last step is to define a service catalog item.
 
     ![select catalog item type](../../common/img/select-catalog-item-type.png)
 
-    ***Note:*** It can take a few seconds for the next screen to load.
+    :heavy_check_mark: ***NOTE*** It can take a few seconds for the next screen to load.
 
 1. The next dialog will ask for the details of the new Service Catalog Item:
 
@@ -561,7 +559,7 @@ For sure you want to test the Service Catalog Item you just created!
 
     ![simple vm ordered](../../common/img/simple-vm-ordered.png)
 
-    ***Note:*** Since we are using nested virtualization to run these labs, performance will be slow and it can take several minutes to complete the request (20-30 minutes).
+    :heavy_check_mark: ***NOTE*** Since we are using nested virtualization to run these labs, performance will be slow and it can take several minutes to complete the request (20-30 minutes).
 
 ### Verify the order
 
@@ -575,7 +573,7 @@ While the VM is cloned from template, it does not show up in the CloudForms inve
 
 1. You should see a VM with the name "test" in the overview
 
-    ***Note:*** If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically. When the Request State is Finished, the VM should be completely provisioned and visible in ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
+    :warning: ***WARNING***If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically. When the Request State is Finished, the VM should be completely provisioned and visible in ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
 
     ![all Virtual Machines](../../common/img/infrastructure-vm-overview.png)
 
@@ -615,11 +613,11 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 1. Make sure you can see a line indicating the "Embedded Ansible Worker" is in state "started"
 
-    ***Note:*** The git role is not represented by a specific worker process.
+    :heavy_check_mark: ***NOTE*** The git role is not represented by a specific worker process.
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
 
-***Note:*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+:warning: ***WARNING***We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
 
     ![restart CloudForms Server](../../common/img/restart-server.png)
 
@@ -635,7 +633,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ![Add new repository](../../common/img/embedded-ansible-add-git-repository.png)
 
-    ***Note:*** If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
+    :warning: ***WARNING***If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
 
 1. Fill in the form.
 
@@ -653,7 +651,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 1. Click on ***Add*** to save the settings
 
-***Note:*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
+:heavy_check_mark: ***NOTE*** It takes a few seconds for the action to complete. A pop up notification will inform you after the task was completed.
 
 ### Store Virtual Machine Credentials
 
@@ -699,7 +697,7 @@ To offer a Service Catalog Item to users, they have to be organized in Service C
 
     ![service catalogs](../../common/img/service-catalogs-with-vms.png)
 
-    ***Note:*** You might already have some catalogs from previous labs.
+    :heavy_check_mark: ***NOTE*** You might already have some catalogs from previous labs.
 
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
@@ -797,7 +795,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
 1. After submitting your order, you will be redirected to the Requests Queue. You should also see pop up notifications on the top right informing you about the progress of your order.
 
-1. OPTIONAL: Click on ***Refresh*** to monitor the progress of your order
+1. :+1: ***OPTIONAL*** Click on ***Refresh*** to monitor the progress of your order
 
 1. Navigate to ***Services*** -> ***My Services***
 
@@ -815,7 +813,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
     ![My Service Install Package Provisioning](../../common/img/my-services-installpackage-provisioning.png)
 
-    ***Note:*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
+    :heavy_check_mark: ***NOTE*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
 
 1. This concludes this part of the lab.
 
@@ -839,7 +837,7 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
     ![cakephp-mysql-example](../../common/img/container-template-cakephp-mysql-example.png)
 
-    ***Note:*** Verify you're NOT using the "cakephp-mysql-persistent" by accident. This template will fail because the OpenShift environment in this lab does not have persistent storage.
+    :warning: ***WARNING***Double check you're NOT using the "cakephp-mysql-persistent" by accident. This template will fail because the OpenShift environment in this lab does not have persistent storage.
 
 1. Click on ***Configuration*** -> ***Create Service Dialog from Container Template***
 
@@ -851,7 +849,7 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
     ![naming Service Dialog](../../common/img/container-template-cakephp-mysql-example-name-service-dialog.png)
 
-1. ***OPTIONAL:*** You can find the automatically created dialog in ***Automation*** -> ***Automate*** -> ***Customization*** in the section ***Service Dialogs***.
+1. :+1: You can find the automatically created dialog in ***Automation*** -> ***Automate*** -> ***Customization*** in the section ***Service Dialogs***.
 
 ### Create an OpenShift Service Catalog
 
@@ -937,7 +935,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
-1. ***OPTIONAL:*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
+1. :+1: Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
 
 1. Finally click on ***Add*** to save the Service Catalog Item
 
@@ -969,7 +967,7 @@ Let's verify the Service Catalog Item actually works.
 
     ![order CakePHP](../../common/img/order-cakephp.png)
 
-1. ***OPTIONAL:*** Review the other fields of the form and pay attention to the tool tips (the little "i" icons). Feel free to adjust some of the fields or leave the default values unchanged
+1. :+1: ***OPTIONAL*** Review the other fields of the form and pay attention to the tool tips (the little "i" icons). Feel free to adjust some of the fields or leave the default values unchanged
 
 1. Click on ***Submit***
 
@@ -985,7 +983,7 @@ After a few minutes you should see your new project and the associated container
 
     ![select service catalog demo project](../../common/img/navigate-to-demo-project.png)
 
-    ***Note:*** if your project is not listed yet, try again a minute or two later
+    :heavy_check_mark: ***NOTE*** if your project is not listed yet, try again a minute or two later
 
 1. The project dashboard wil look similar to the one below. There will be no metrics at this point of time and hence some of the widgets will report "No data available"
 
@@ -999,7 +997,7 @@ After a few minutes you should see your new project and the associated container
 
     ![project topology view](../../common/img/openshift-project-topology-view.png)
 
-    ***Note:*** Since the topology view is rendered from live data, it can look slightly different in your lab, depending on the progress of the provisioning (which might still run in background) or availability status of services, pods and containers.
+    :heavy_check_mark: ***NOTE*** Since the topology view is rendered from live data, it can look slightly different in your lab, depending on the progress of the provisioning (which might still run in background) or availability status of services, pods and containers.
 
 1. This concludes this part of the lab.
 
@@ -1028,7 +1026,7 @@ Earlier in this lab, we had to create a Service Dialog manually. For a number of
 
 Before we can import the template into CloudForms, we need to download it or have it open in a separate browser window.
 
-***Note:*** Please use the forked version of the HEAT Template, which has an additional field "Network" defined. Without this field, running the HEAT Template will fail with an error indicating that mulitple networks are available and hence a network has to be specified.
+:warning: ***WARNING***Please make sure to use the forked version of the HEAT Template, which has an additional field "Network" defined. Without this field, running the HEAT Template will fail with an error indicating that multiple networks are available and hence a network has to be specified.
 
 1. Go to the template on the GitHub project page.
     [https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/WordPress_Native.yaml)
@@ -1064,7 +1062,7 @@ The following procedure will import a HEAT template, create a Service Dialog and
 
     ![wordpress template](../../common/img/wordpress-heat-template.png)
 
-    ***Note:*** The screenshot is truncated! Make sure you copy the entire HEAT Template! The first line should be:
+    :heavy_check_mark: ***NOTE*** The screenshot is truncated! Make sure you copy the entire HEAT Template! The first line should be:
 
         heat_template_version: 2013-05-23
 
@@ -1220,7 +1218,7 @@ To put everything together we create a Service Catalog Item similar to before.
 
     For this lab, we want to stick with the out of the box experience and leave those fields unchanged.
 
-1. ***OPTIONAL:*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
+1. :+1: ***OPTIONAL*** Click on the ***Details*** tab. You can provide some more descriptive explanation about the Service Catalog Item. We can even use basic HTML formatting in this box.
 
 1. Finally click on ***Add*** to save the Service Catalog Item
 
@@ -1262,7 +1260,7 @@ For sure you want to test the Catalog Item you just created!
 
 1. You will be redirected to the request queue where you can see CloudForms working on your request.
 
-    ***Note:*** Since we are using nested virtualization to run these labs, performs will be slow and it can take several minutes to complete the request (20-30 minutes).
+    :heavy_check_mark: ***NOTE*** Since we are using nested virtualization to run these labs, performs will be slow and it can take several minutes to complete the request (20-30 minutes).
 
     ![after ordering heat service catalog item](../../common/img/after-ordering-heat.png)
 
@@ -1288,7 +1286,7 @@ CloudForms offers a very granular system for role Based Access Control (RBAC). T
 
 In this advanced lab we want only specific Catalog Items to be available for certain user groups. CloudForms is using tags to identify objects. For example, if a Service Catalog Item is tagged as "Department Engineering" only users which are in a group which is also tagged as "Department Engineering" will see and be able to order this Catalog Item.
 
-***Note:*** The following parts of the lab are using the "Operations UI" or "Classic UI". Make sure to switch back to it by using the original URL:
+:heavy_check_mark: ***NOTE*** The following parts of the lab are using the "Operations UI" or "Classic UI". Make sure to switch back to it by using the original URL:
 
     https://cf46-<GUID>.rhpds.opentlc.com
 
@@ -1364,7 +1362,7 @@ Next we want to create a group and assign it to the role we just created.
 
     In "My Company Tags" click on the little triangular icon next to "Department" and click on "Engineering"
 
-    ***Note:*** It is important to only select this particular tag and do not click on any other additional tags!
+    :warning: ***WARNING***It is important to only select this particular tag and do not click on any other additional tags!
 
     ![define new group](../../common/img/define-new-group.png)
 
@@ -1390,7 +1388,7 @@ Finally we want to create a user which is a member of the group we just created.
 
     ***E-mail Address:*** joe@example.com
 
-    ***Note:*** CloudForms is not configured to send out emails, but the email address is a mandatory field
+    :warning: ***WARNING***CloudForms is not configured to send out emails, but the email address is a mandatory field
 
     ***Available Groups:*** Self Service Engineering
 
@@ -1404,7 +1402,7 @@ So far we have not assigned any objects to the new group, but we have granted ve
 
 Let's see what happens if we log into CloudForms as "Joe Doe".
 
-***Note:*** You can not log into CloudForms with different users while you're in the same browser session. You have to log out and log in again. As an alternative, you can use a different browser, if available, or you can open an additional window in "private" mode.
+:warning: ***WARNING***You can not log into CloudForms with different users while you're in the same browser session. You have to log out and log in again. As an alternative, you can use a different browser, if available, or you can open an additional window in "private" mode.
 
 1. Log out of CloudForms by clicking on the user name on the top right and click on ***Logout***
 
