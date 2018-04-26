@@ -70,7 +70,7 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-:heavy_exclamation_mark: **Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.**
+:warning: **Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.**
 
 ## Verify Lab
 
@@ -102,9 +102,9 @@ Let's first check the OpenStack Provider:
 
 After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
-***Note:*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
+:heavy_exclamation_mark: Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-***Note:*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:heavy_exclamation_mark: If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat Virtualization Provider status
 
