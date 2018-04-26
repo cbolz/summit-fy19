@@ -36,7 +36,11 @@
 
 ## Introduction to CloudForms
 
-[General introduction](../../common/index.md)
+[Red Hat CloudForms](http://www.redhat.com/cloudforms) is an infrastructure management platform that offers a consistent way to track costs, control resource allocation, and ensure compliance across all your networked environments. Manage Virtual Machines, containers, and your clouds in the same way with a single tool.
+
+In this lab we will focus on the Self Service Catalog features CloudForms provides. We will learn how to create Service Catalogs, add individual Items and see how end users can browse and order from the Service Catalog.
+
+For more details about CloudForms, you can have a look at the [General introduction](../../common/index.md).
 
 ### Access the lab environment
 
@@ -223,6 +227,10 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
     ***Note:*** The git role is not represented by a specific worker process.
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
+
+***Note:*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+
+    ![restart CloudForms Server](../../common/img/restart-server.png)
 
 ### Add a Git repository of Ansible Playbooks
 
