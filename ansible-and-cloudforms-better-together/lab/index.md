@@ -48,7 +48,11 @@
 
 ## Introduction to CloudForms
 
-[General introduction](../../common/index.md)
+[Red Hat CloudForms](http://www.redhat.com/cloudforms) is an infrastructure management platform that offers a consistent way to track costs, control resource allocation, and ensure compliance across all your networked environments. Manage Virtual Machines, containers, and your clouds in the same way with a single tool.
+
+In this lab we will focus on the Self Service Catalog features CloudForms provides. We will learn how to create Service Catalogs, add individual Items and see how end users can browse and order from the Service Catalog.
+
+For more details about CloudForms, you can have a look at the [General introduction](../../common/index.md).
 
 ### Access the lab environment
 
