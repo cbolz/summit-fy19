@@ -70,7 +70,7 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-:heavy_exclamation_mark: Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
+:heavy_exclamation_mark: **Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.**
 
 ## Verify Lab
 
