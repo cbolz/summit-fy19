@@ -36,6 +36,12 @@
     - [Advanced labs](#advanced-labs)
         - [Use the Self Service user Interface](#use-the-self-service-user-interface)
         - [Build a button to execute remote commands](#build-a-button-to-execute-remote-commands)
+            - [The use case](#the-use-case)
+            - [Service Dialog](#service-dialog)
+            - [Service Catalog Item](#service-catalog-item)
+            - [Button](#button)
+            - [Improve it further](#improve-it-further)
+            - [Need Help?](#need-help)
     - [Even more?](#even-more)
 
 <!-- /TOC -->
@@ -64,7 +70,7 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-***Note:*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
+:heavy_exclamation_mark: Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
 
 ## Verify Lab
 
@@ -940,17 +946,58 @@ You can login with the same credentials as before.
 
 ### Build a button to execute remote commands
 
-TODO
+You have learned how to create a Service Dialog, Ansible Playbook Service Catalog Item and how to use them from a Button to extend the out of the box features provided by CloudForms. We can use this knowledge to implement a button to allow users to execute remote commands on a Virtual Machine.
+
+This is a very popular use case because it provides a number of advantages:
+
+- administrators can allow VM owners to run specific commands themselves, so they don't have to open a service request with IT
+- administrators can also use CloudForms' powerful Role Based Access Control to make buttons only available to specific user groups
+- administrators can grant end users to run commands as a privileged user (e.g. root), without handing out credentials or setting up ACL's on all managed systems
+- users can run specific tasks by themselves and don't have to open an internal ticket or wait for someone with the necessary privileges to do it for them
+
+Since this is an advanced lab, there are now detailed step by step instructions. Instead here are couple of pointers to get you on track:
+
+#### The use case
+
+We want end users to able to run certain remote commands by themselves. First we try this with a text box where users can enter their command - but as an additional improvement you should try to replace the text box with a drop down list, where users can only select from a list of pre approved commands.
+
+#### Service Dialog
+
+Based on your work with "Install Package" Service Dialog, you should know what is needed to create a new Service Dialog for this use case. 
+
+Start with a simple copy of your working example. Add a text box to ask the user for the command. It is important that you set the name for the text element correctly. 
+
+***Note:*** Make sure the text box name is called "param_command" - because "command" is the name of the extra variable in the Ansible Playbook. If you chose a different name, the Playbook will use the default command, which is "echo hello world".
+
+#### Service Catalog Item
+
+To be able to call an Ansible Playbook from a button, you need to create a Service Catalog Item first. This should be very easy for you, since you've done this before in this lab. Just make sure you run the correct playbook and use the Service Dialog you created in the previous step.
+
+The name of the Ansible Playbook is "operatorcommand.yaml"
+
+#### Button
+
+Create a new Button and add it to the existing Button Group "Tools" - or create a new one. Use the Service Catalog Item created in the previous step when you define the button.
+
+#### Improve it further
+
+The advanced settings of a Button allow you to use Role Based Access Control. Check the "Role Access" option at the bottom of the settings page.
+
+Another cool feature is the "Enablement". Since we are using Ansible Playbooks, the Virtual Machine has to be powered on, or the Playbook will fail. With the "Enablement" you can disable your button, if the VM is off and show a pop up notification explaining the situation to the user.
+
+You can use the expression builder to check if the field "VM and Instance: Power State" has the value "on". Use the "Disabled Button Text" to show a hint to the user, for example:
+
+    The VM has to be powered on to execute this action
+
+And if you're still having more time, you can use the "Visibility" to show the Button only for Linux VMs, and not for Windows.
+
+#### Need Help?
+
+Don't hesitate to ask any of the lab organizers for help, if you're stuck!
 
 ## Even more?
 
 If you're already done and still have some time left, here are some ideas for advanced labs:
 
 - try to retire the "create user" service catalog item and see if the user is indeed deleted
-- try to add other Playbooks, some examples can be found on the [Official Red Hat CloudForms Blog](http://cloudformsblog.redhat.com/2017/05/31/ansible-automation-inside-cloudforms/)
-- retire the virtual machine Service you ordered earlier, check what happens during retirement with the virtual machine (Is it shutdown? Deleted? Is there still a representation in the CloudForms Web UI?)
-- make the second Catalog Item available for Joe Doe as well
-- improve the Service Dialog and make the VM Name a mandatory field (right now, it's optional and can be left empty)
-- grant Joe Doe more privileges (for example, it would be nice if he could start and stop his virtual machines)
-- upload items to make the Service Catalog more appealing
-- use the new Self Service user Interface by trying the "/self_service" URL on your Appliance
+- upload icons to make the Service Catalog more appealing
