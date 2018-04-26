@@ -22,6 +22,11 @@
         - [Add a Button Group](#add-a-button-group)
         - [Add a new Button to the Button Group](#add-a-new-button-to-the-button-group)
         - [Test the Ansible Button Customization](#test-the-ansible-button-customization)
+    - [Improve the Service Dialog](#improve-the-service-dialog)
+        - [Edit the Service Dialog](#edit-the-service-dialog)
+        - [Create a Service Catalog Item](#create-a-service-catalog-item-1)
+        - [Update the Button definition](#update-the-button-definition)
+        - [Test the improved Button](#test-the-improved-button)
     - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
         - [Create a Service Catalog for Ansible Playbooks](#create-a-service-catalog-for-ansible-playbooks)
         - [Create a Service Catalog Item for the Playbook](#create-a-service-catalog-item-for-the-playbook)
@@ -30,6 +35,7 @@
         - [Verify Playbook results](#verify-playbook-results)
     - [Advanced labs](#advanced-labs)
         - [Use the Self Service user Interface](#use-the-self-service-user-interface)
+        - [Build a button to execute remote commands](#build-a-button-to-execute-remote-commands)
     - [Even more?](#even-more)
 
 <!-- /TOC -->
@@ -230,7 +236,7 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 ***Note:*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
 
-    ![restart CloudForms Server](../../common/img/restart-server.png)
+![restart CloudForms Server](../../common/img/restart-server.png)
 
 ### Add a Git repository of Ansible Playbooks
 
@@ -252,7 +258,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***Description:*** Example Playbooks
 
-    ***URL:*** [https://github.com/cbolz/summit-fy19.git](https://github.com/cbolz/summit-fy19.git)
+    ***URL:*** https://github.com/cbolz/summit-fy19.git
 
     ***SCM Update Options:*** check "Update on Launch"
 
@@ -332,8 +338,6 @@ To offer a Service Catalog Item to users, they have to be organized in Service C
 
     ![service catalogs](../../common/img/service-catalogs-with-vms.png)
 
-    ***Note:*** You might already have some catalogs from previous labs.
-
 1. Click on ***Configuration*** and ***Add a New Catalog***
 
 1. Fill out name and description:
@@ -354,13 +358,15 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
     ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
 
+    ***Note:*** If you followed the instructions by the letter, you're already in this part of the UI.
+
 1. Navigate to ***Catalog Items*** in the accordion on the left
 
-    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items-with-vms-and-ansible.png)
+    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items-with-ansible.png)
 
 1. Click on ***Configuration*** -> ***Add a New Catalog Item***
 
-    ![create new catalog item](../../common/img/create-new-catalog-item-with-vms-and-ansible.png)
+    ![create new catalog item](../../common/img/create-new-catalog-item-with-ansible.png)
 
 1. Select ***Ansible Playbook*** as Catalog Item Type
 
@@ -408,11 +414,11 @@ We want to make sure the resulting Service Catalog Item actually works.
 
 1. Click on ***Service Catalogs*** in the accordion on the left, if not already selected
 
-    ![navigate to Ansible Service Catalog](../../common/img/navigate-to-ansible-service-catalog.png)
+    ![navigate to Ansible Service Catalog](../../common/img/navigate-to-ansible-only-service-catalog.png)
 
 1. Select the "Install Package" Service Catalog Item
 
-    ![select install package Service Catalog Item](../../common/img/select-install-package-item.png)
+    ![select install package Service Catalog Item](../../common/img/select-install-package-item-ansible-only.png)
 
 1. Click ***Order***
 
@@ -548,7 +554,7 @@ We want to test the resulting customization and see how it works from a user poi
 
     ![VM with addtional tools menu](../../common/img/cfme-001-tools-button.png)
 
-1. Click on ***Tools*** -> ***Install Package***. 
+1. Click on ***Tools*** -> ***Install Package***
 
     ![Ansible button dialog](../../common/img/ansible-button-dialog.png)
 
@@ -556,7 +562,191 @@ We want to test the resulting customization and see how it works from a user poi
 
 1. Navigate to ***Services*** -> ***My Services***
 
-    ![navigate to Services, My Services](../../common/navigate-to-my-services.png)
+    ![navigate to Services, My Services](../../common/img/navigate-to-my-services.png)
+
+1. As a result of your action, a new "My Services" object was created. If you don't see it yet, wait a minute and click on the reload button.
+
+1. Click on the "Install Playbook" item to see the details
+
+    ![details of Ansible Playbook](../../common/img/my-service-ansible-playbook-details.png)
+
+1. Click on the ***Provisioning*** tab to see output from your Ansible Playbook
+
+    ![Ansible Playbook output](../../common/img/my-service-ansible-playbook-output.png)
+
+This concludes this part of the Ansible lab.
+
+## Improve the Service Dialog
+
+The automatically generated Service Dialog is not perfect. It might confuse the user with too much information. It asks for the "Machine Credentials", but those have already been defined in the Service Catalog Item. It also asks for the "Host", but this one is automatically adjusted to be the selected Virtual Machine. And finally the field "paackage_name" could benefit from a more descriptive text.
+
+In the following steps, we want to make the Service Dialog more user friendly by simplifying it.
+
+### Edit the Service Dialog
+
+1. Navigate to ***Automate*** -> ***Customization***
+
+    ![navigate to Customization](../../common/img/navigate-to-customization.png)
+
+1. Click on ***Service Dialogs*** in the accordion on the left
+
+    ![navigate to Service Dialogs](../../common/img/service-dialog-accordion-after-ansible-lab.png)
+
+1. Click the check box next to "InstallPackage"
+
+1. Click on ***Configuration*** -> ***Copy the selected Dialog to a new Dialog***
+
+    ![copy install package service dialog](../../common/img/copy-install-package-service-dialog.png)
+
+1. Let's improve the Service Dialog by applying the following changes:
+
+    ***Dialog's name:*** Install Package from Button
+
+1. Hide the element "Machine Credentials" by clicking on the little pen icon.
+
+    ![edit machine credentials](../../common/img/edit-machine-credentials.png)
+
+    ***Note:*** The edit icon only shows if you move the mouse pointer over the "Machine Credentials" text box.
+
+    ***Important:*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
+
+1. Click on ***Overridable Options*** and switch the ***Visible*** switch to "No"
+
+    ![visible no for machine credentials](../../common/img/visible-no-for-machine-credentials.png)
+
+1. Click ***Save*** to close the dialog
+
+1. Repeat this for the "Hosts" element. Click on the pen icon next to it.
+
+    ![edit hosts](../../common/img/visible-no-for-hosts.png)
+
+    ***Note:*** The edit icon only shows if you move the mouse pointer over the "Hosts" text box.
+
+    ***Important:*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
+
+1. Click on the little pen icon next to the "package_name" text box
+
+    ***Note:*** The edit icon only shows if you move the mouse pointer over the "package_name" text box.
+
+1. Change the label to something more descriptive:
+
+    ***Label:*** Enter Package Name
+
+1. Also let's give more information to the user by improving the "Help" text:
+
+    ***Help:*** Enter the name of the RPM package to be installed on the system
+
+1. Click ***Save*** to apply the changes
+
+    ![package_name field details](../../common/img/edit-package_name-field.png)
+
+1. Click ***Save*** To save all changes we made in the Service Dialog
+
+    ![install package Service Dialog](../../common/img/install-package-service-dialog.png)
+
+### Create a Service Catalog Item
+
+To be able to use the new Service Dialog with our button, we first have to create an additional Service Catalog Item, which points to the Service Dialog.
+
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
+
+    ***Note:*** If you followed the instructions by the letter, you're already in this part of the UI.
+
+1. Navigate to ***Catalog Items*** in the accordion on the left
+
+    ![navigate to Catalog Items](../../common/img/navigate-to-catalog-items-with-ansible-and-install-package.png)
+
+1. Click on ***Configuration*** -> ***Add a New Catalog Item***
+
+    ![create new catalog item](../../common/img/create-new-catalog-item-with-ansible-and-install-package.png)
+
+1. Select ***Ansible Playbook*** as Catalog Item Type
+
+    ![select ansible playbook as type](../../common/img/ansible-playbook-catalog-item-type.png)
+
+1. Use the following parameters when defining the Service Catalog Item:
+
+    ***Name:*** Install Package from Button
+
+    ***Description:*** Install Package via Ansible Playbook
+
+    ***Display in Catalog:*** Yes
+
+    ***Catalog:*** Ansible
+
+    ***Repository:*** Github
+
+    ***Playbook:*** playbooks/InstallPackage.yml
+
+    ***Machine Credentials:*** Virtual Machine credentials
+
+    ***Variables & Default Values***: add one new entry with:
+
+    ***Variable:*** package_name
+
+    ***Default Value:*** httpd
+
+    Click the little plus ("+") icon to save the row.
+
+    ***Dialog:*** Use Exiting
+
+    Use "Install Package from Button" as the name of the Dialog, which is the one we created in the step before.
+
+    ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage-from-button.png)
+
+1. Click ***Add*** to save all changes
+
+### Update the Button definition
+
+As the last step, we have to change the definition of our button, to point to the just created Service Catalog Item.
+
+1. Navigate to ***Automation*** -> ***Automate*** -> ***Customization***
+
+    ![navigate to Customization](../../common/img/navigate-to-customization.png)
+
+1. Click on ***Buttons*** in the accordion on the left
+
+    ![navigate to buttons](../../common/img/navigate-to-buttons.png)
+
+1. Click on the "Install Package" Button you created in the previous lab
+
+    ![navigate to tools button group](../../common/img/install-package-button-overview.png)
+
+1. Click on ***Configuration*** -> ***Edit this Button***
+
+1. Change the Playbook Catalog item to the new one you just created "Install Package from Button"
+
+    ![change playbook catalog item](../../common/img/button-change-playbook-catalog-item.png)
+
+1. Click ***Save*** to store all changes
+
+### Test the improved Button
+
+1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
+
+    ![navigate to virtual machines](../../common/img/navigate-to-virtual-machines.png)
+
+1. Click on the cfme001 tile if not already selected
+
+    ![VM cfme001 is turned on](../../common/img/cfme-001-powered-on-ovwerview.png)
+
+1. On the details page of cfme001 note the new menu "Tools". Click to see the new button "Install Package"
+
+    ![VM with addtional tools menu](../../common/img/cfme-001-tools-button.png)
+
+1. Click on ***Tools*** -> ***Install Package***
+
+    ![Ansible button dialog](../../common/img/ansible-button-improved-dialog.png)
+
+    You should see the simplified version of the Dialog. The Package Name has a better description, there is a tool tip if you hover the mouse over the little "i" icon and the redundant fields for "Machine Credentials" and "Hosts" are gone.
+
+1. Click ***Summit*** to execute the Button
+
+1. Navigate to ***Services*** -> ***My Services***
+
+    ![navigate to Services, My Services](../../common/img/navigate-to-my-services.png)
 
 1. As a result of your action, a new "My Services" object was created. If you don't see it yet, wait a minute and click on the reload button.
 
@@ -747,6 +937,10 @@ The Self Service user Interface can be accessed by appending the string "self_se
 [https://cf-&lt;GUID&gt;.labs.rhepds.com/self_service](https://cf-&lt;GUID&gt;.labs.rhepds.com/self_service)
 
 You can login with the same credentials as before.
+
+### Build a button to execute remote commands
+
+TODO
 
 ## Even more?
 
