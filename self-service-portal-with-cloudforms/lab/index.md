@@ -226,9 +226,9 @@ This lab will guide you through the process of creating a service catalog in Clo
 
 ### Value provided by a Service Catalog
 
-One of the features a Cloud Management Platform provides, is a self service user interface. Here users can order, manage and retire services. Services are categorized in catalogs, where they can be organized and easily consumed.
+One of the features a Cloud Management Platform provides, is a Self Service User Interface. Here users can order, manage and retire services. Services are categorized in Catalogs, where they can be organized and easily consumed.
 
-By providing a service catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
+By providing a Service Catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
 
 ### Service Basics
 

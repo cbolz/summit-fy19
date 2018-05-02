@@ -189,21 +189,21 @@ Today, every business is a digital business. Technology is your innovation engin
 
 Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
 
-This integration allows customers to build service catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The user interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
+This integration allows customers to build Service Catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The User Interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
 
 ### Value provided by a Service Catalog
 
-One of the features a Cloud Management Platform provides, is a self service user interface. Here users can order, manage and retire services. Services are categorized in catalogs, where they can be organized and easily consumed.
+One of the features a Cloud Management Platform provides, is a Self Service User Interface. Here users can order, manage and retire services. Services are categorized in Catalogs, where they can be organized and easily consumed.
 
-By providing a service catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
+By providing a Service Catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
 
 ### Service Basics
 
-But first some basics. Four items are required to make a service available to users from the CloudForms self service portal:
+But first some basics. Four items are required to make a Service available to users from the CloudForms Self Service Portal:
 
 1. Provisioning Dialog
 
-   The provisioning dialog specifies the list of customizable parameters. For example, when you want to order a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
+   The Provisioning Dialog specifies the list of customizable parameters. For example, when you want to order a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
 
 1. A Service Dialog
 
@@ -237,7 +237,7 @@ The following lab will use UI customizations to illustrate how easy it is to add
 
     ![cfme001 power on ](../../common/img/cfme-001-power-on.png)
 
-1. CloudForms will perform this action in the background and it will take a minute to complete. Click on the reload icon in the menu bar to reload the screen.
+1. CloudForms will perform this action in the background and it will take a few minutes to complete. Click on the reload icon in the menu bar to reload the screen.
 
     ![reload VM details](../../common/img/cfme-001-reload-details.png)
 
@@ -251,9 +251,7 @@ Now our test VM is up and running and we can proceed with the next steps.
 
 ### Make sure embedded Ansible role is enabled and running
 
-Before we start, we want to make sure the embedded Ansible role is enabled and running.
-
-1. Log into your CloudForms Appliance
+Before we continue, we want to make sure the embedded Ansible role is enabled and running.
 
 1. Click on your user name on the top right and click on ***Configuration***
 
@@ -283,7 +281,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ![navigate to Ansible repositories](../../common/img/navigate-to-ansible-repo.png)
 
-1. Click on ***Configuration***, ***Add New Repository***
+1. Click on ***Configuration*** -> ***Add New Repository***
 
     ![Add new repository](../../common/img/embedded-ansible-add-git-repository.png)
 
@@ -301,7 +299,7 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***SCM Update Options:*** check "Update on Launch"
 
-    Update on Launch causes CloudForms to check for new Playbooks are updated Playbooks before a Playbook is executed.
+    Update on Launch causes CloudForms to check for new Playbooks or updated Playbooks before a Playbook is launched.
 
     ![add a new repository](../../common/img/add-ansible-repository.png)
 
@@ -365,7 +363,7 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
 To offer a Service Catalog Item to users, they have to be organized in Service Catalogs. Create one by following these steps:
 
-1. The next step is to create a service catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
+1. The next step is to create a Service Catalog. First we have to navigate to ***Services*** -> ***Catalogs***.
 
     ![navigate to services, catalog](../../common/img/navigate-to-service-catalog.png)
 
@@ -477,7 +475,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
     ![navigate to My Services](../../common/img/navigate-to-my-services.png)
 
-1. Every time a user places an order a object under "My Services" gets created. You should see one tile labeled "Install Package"
+1. Every time a user places an order a object under "My Services" is created. You should see one tile labeled "Install Package"
 
     ![My Service Install Package](../../common/img/my-services-installpackage-tile.png)
 
@@ -491,7 +489,7 @@ We want to make sure the resulting Service Catalog Item actually works.
 
     :heavy_check_mark: ***NOTE*** In this example the Playbook completed successfully. In your case it might be still running and not be complete. Click the little reload icon on the page to reload the information while the Playbook is executed in the background.
 
-1. This concludes this part of the lab.
+This concludes this part of the lab.
 
 ## Add a button to a Virtual Machine
 
@@ -529,7 +527,7 @@ To add new button to the UI, we first need to create a Button Group. A Button Gr
 
 1. Click ***Add*** to create the button group
 
-In the next chapter we will add a button to the group.
+In the next section we will add a button to the group.
 
 ### Add a new Button to the Button Group
 
@@ -655,13 +653,13 @@ In the following steps, we want to make the Service Dialog more user friendly by
 
 1. Repeat this for the "Hosts" element. Click on the pen icon next to it.
 
-    ![edit hosts](../../common/img/visible-no-for-hosts.png)
+    ![edit hosts](../../common/img/edit-hosts.png)
 
     :heavy_check_mark: ***NOTE*** The edit icon only shows if you move the mouse pointer over the "Hosts" text box.
 
 1. Click on ***Options*** and switch ***Visible*** to "No"
 
-TODO: Add screenshot here
+    ![visible no for hosts](../../common/img/visible-no-for-hosts.png)
 
     :warning: ***WARNING*** Do not delete the element, only hide it! The element is still needed for some CloudForms internal logic and should not be removed.
 
@@ -672,6 +670,8 @@ TODO: Add screenshot here
 1. Change the label to something more descriptive:
 
     ***Label:*** Enter Package Name
+
+    :warning: ***WARINING*** Do not change the field "Name" - it is the name of the variable used internally by CLoudForms and the Ansible Playbook. if you edit this field, the Playbook will not pickup the new variable and hence ignore the user input.
 
 1. Also let's give more information to the user by improving the "Help" text:
 
@@ -692,8 +692,6 @@ To be able to use the new Service Dialog with our button, we first have to creat
 1. Navigate to ***Services*** -> ***Catalogs***
 
     ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
-
-    :heavy_check_mark: ***NOTE*** If you followed the instructions by the letter, you're already in this part of the UI.
 
 1. Navigate to ***Catalog Items*** in the accordion on the left
 
@@ -793,15 +791,15 @@ As the last step, we have to change the definition of our button, to point to th
 
 1. Click on the "Install Playbook" item to see the details
 
-TODO: Add updated screenshot
-
-    ![details of Ansible Playbook](../../common/img/my-service-ansible-playbook-details-without-change.png)
+    ![details of Ansible Playbook](../../common/img/my-service-ansible-playbook-details-with-updated-button.png)
 
 1. Click on the ***Provisioning*** tab to see output from your Ansible Playbook
 
-    ![Ansible Playbook output](../../common/img/my-service-ansible-playbook-output.png)
+    ![Ansible Playbook output](../../common/img/my-service-ansible-playbook-output-without-change.png)
 
 This concludes this part of the Ansible lab.
+
+:+1: ***OPTIONAL*** Feel free to repeat this part of the lab with a different package name. You could use "screen" as an example instead of httpd - or some other package you want to install.
 
 ## Build a Service Catalog to create and delete users
 
@@ -818,8 +816,6 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 1. Select ***Ansible Playbook*** as "Catalog Item Type"
 
     ![add catalog item ansible Playbook](../../common/img/add-catalog-item-ansible-playbook.png)
-
-    :warning: ***WARNING*** Do not select Ansible Tower! We do not use Ansible Tower in this lab, but the embedded Ansible role of CloudForms.
 
 1. Fill out the form to define the service catalog item:
 
@@ -878,6 +874,8 @@ To make sure everything works as expected, we want to test the Catalog Item we j
 1. Navigate to the Service Catalog by clicking on ***Services*** -> ***Catalogs***
 
     ![navigate to service catalog](../../common/img/navigate-to-service-catalog.png)
+
+    :heavy_check_mark: ***NOTE*** If you followed the instructions by the letter, you're already in this part of the UI.
 
 1. Click on ***Service Catalog*** in the accordion on the left
 
