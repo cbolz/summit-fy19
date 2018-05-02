@@ -1276,7 +1276,7 @@ The user interface we used so far is often referenced as the "Operations UI" or 
 
 The Self Service user Interface can be accessed by appending the string "self_service" to the Appliance URL.
 
-[https://cf-&lt;GUID&gt;.labs.rhepds.com/ui/service/](https://cf-&lt;GUID&gt;.labs.rhepds.com/ui/service/)
+    https://cf46-<GUID>.labs.rhepds.com/ui/service/
 
 You can login with the same credentials as before.
 

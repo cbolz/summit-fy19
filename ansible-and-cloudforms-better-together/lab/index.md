@@ -26,7 +26,7 @@
         - [Test the Ansible Button Customization](#test-the-ansible-button-customization)
     - [Improve the Service Dialog](#improve-the-service-dialog)
         - [Edit the Service Dialog](#edit-the-service-dialog)
-        - [Create a Service Catalog Item](#create-a-service-catalog-item-1)
+        - [Create improved Service Catalog Item](#create-improved-service-catalog-item)
         - [Update the Button definition](#update-the-button-definition)
         - [Test the improved Button](#test-the-improved-button)
     - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
@@ -677,15 +677,17 @@ In the following steps, we want to make the Service Dialog more user friendly by
 
     ***Help:*** Enter the name of the RPM package to be installed on the system
 
-1. Click ***Save*** to apply the changes
-
     ![package_name field details](../../common/img/edit-package_name-field.png)
 
-1. Click ***Save*** To save all changes we made in the Service Dialog
+1. Click ***Save*** to apply the changes
 
     ![install package Service Dialog](../../common/img/install-package-service-dialog.png)
 
-### Create a Service Catalog Item
+1. Click ***Save*** To save all changes we made in the Service Dialog
+
+This concludes this part of the lab.
+
+### Create improved Service Catalog Item
 
 To be able to use the new Service Dialog with our button, we first have to create an additional Service Catalog Item, which points to the Service Dialog.
 
@@ -955,7 +957,7 @@ The user interface we used so far is often referenced as the "Operations UI" or 
 
 The Self Service user Interface can be accessed by appending the string "self_service" to the Appliance URL.
 
-[https://cf-&lt;GUID&gt;.labs.rhepds.com/self_service](https://cf-&lt;GUID&gt;.labs.rhepds.com/self_service)
+    https://cf46-<GUID>.labs.rhepds.com/self_service
 
 You can login with the same credentials as before.
 
