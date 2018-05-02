@@ -619,7 +619,7 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
 :warning: ***WARNING***We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
 
-    ![restart CloudForms Server](../../common/img/restart-server.png)
+![restart CloudForms Server](../../common/img/restart-server.png)
 
 ### Add a Git repository of Ansible Playbooks
 
@@ -641,7 +641,9 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ***Description:*** Example Playbooks
 
-    ***URL:*** https://github.com/cbolz/summit-fy19.git
+    ***URL:***
+
+        https://github.com/cbolz/summit-fy19.git
 
     ***SCM Update Options:*** check "Update on Launch"
 
