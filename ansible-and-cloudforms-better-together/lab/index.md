@@ -24,7 +24,7 @@
         - [Test the Ansible Button Customization](#test-the-ansible-button-customization)
     - [Improve the Service Dialog](#improve-the-service-dialog)
         - [Edit the Service Dialog](#edit-the-service-dialog)
-        - [Create a Service Catalog Item](#create-a-service-catalog-item-1)
+        - [Create a Service Catalog Item](#create-a-service-catalog-item)
         - [Update the Button definition](#update-the-button-definition)
         - [Test the improved Button](#test-the-improved-button)
     - [Build a Service Catalog to create and delete users](#build-a-service-catalog-to-create-and-delete-users)
@@ -376,7 +376,7 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
     ![create new catalog item](../../common/img/create-new-catalog-item-with-ansible.png)
 
-1. Select ***Ansible Playbook*** as Catalog Item Type
+1. Select ***Ansible Playbook*** as Catalog Item Type (please note that since CloudForms 4.6 only configured providers are available for selection)
 
     ![select ansible playbook as type](../../common/img/ansible-playbook-catalog-item-type.png)
 
