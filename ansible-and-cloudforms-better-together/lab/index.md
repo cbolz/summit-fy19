@@ -809,6 +809,10 @@ In this lab we will use an Ansible Playbook to create a local user in CloudForms
 
 ### Create a Service Catalog Item for the Playbook
 
+1. Navigate to ***Services*** -> ***Catalogs***
+
+    ![navigate to Services Catalogs](../../common/img/navigate-to-service-catalog.png)
+
 1. Click on ***Catalog Items*** in the accordion on the left
 
     ![navigate to service catalog items](../../common/img/add-catalog-item.png)
