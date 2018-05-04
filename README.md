@@ -2,7 +2,7 @@
 
 This content was presented in a lab at the Red Hat Summit 2018 in San Francisco.
 
-These labs are available at:
+These labs are available:
 
 [L1077: Building a self-service portal with Red Hat CloudForms](./self-service-portal-with-cloudforms/index.md)
 
