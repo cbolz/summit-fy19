@@ -81,11 +81,11 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
+:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab is deployed with a new self signed certificate.
 
 ## Verify Lab
 
-Let's start by verifying the status of all providers. Use the URL example and login credentials provided above to log into your appliance.
+Let's start by verifying the status of all providers. Use the URL as desplained before and the provided login credentials.
 
 ![CloudForms login page](../../common/img/cloudforms-login-page.png)
 
@@ -124,7 +124,7 @@ Let's first check the OpenStack Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
-    :heavy_check_mark: ***NOTE*** Don't click while navigating the menu structure, just hover until you reach the entry you want...
+    :heavy_check_mark: ***NOTE*** Don't click while navigating the main menu structure on the left, just hover until you reach the entry you want...
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
@@ -140,11 +140,11 @@ Let's first check the OpenStack Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+Wait a few moments before you reload the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 :heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:warning: ***WARNING*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat Virtualization Provider status
 
@@ -174,11 +174,11 @@ Let's then check the RHV Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+Wait a few moments before you reload the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 :heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:warning: ***WARNING*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat OpenShift Container Platform status
 
@@ -212,13 +212,13 @@ Let's finally check the OpenShift Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+Wait a few moments before you reload the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 :heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 :heavy_check_mark: ***NOTE*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
-:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:warning: ***WARNING*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ## Build a Service Catalog with CloudForms
 
@@ -226,31 +226,31 @@ This lab will guide you through the process of creating a service catalog in Clo
 
 ### Value provided by a Service Catalog
 
-One of the features a Cloud Management Platform provides, is a Self Service User Interface. Here users can order, manage and retire services. Services are categorized in Catalogs, where they can be organized and easily consumed.
+One of the features a Cloud Management Platform provides, is a Self Service User Interface. From the Service Catalog users can order, manage and retire Services. Services are categorized in Catalogs, where they can be organized and easily consumed.
 
-By providing a Service Catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
+By providing a Service Catalog, users can deploy the Services they need quickly and easily. This helps to improve agility, reduce provisioning time and free up resources in internal IT.
 
 ### Service Basics
 
-But first some basics. Four items are required to make a service available to users from the CloudForms self service portal:
+But first some basics. Four items are required to make a service available to users from the CloudForms self service Catalog:
 
 1. Provisioning Dialog
 
-   The provisioning dialog specifies the list of customizable parameters. For example, when you want to order a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
+   The Provisioning Dialog specifies the list of customizable parameters. For example, when ordering a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
 
 1. A Service Dialog
 
-    When the user orders and Item from the Service Catalog, you might want to allow them to override certain default values. For example, you might allow users to choose from a range of values how much memory the new Virtual Machine should have. You might want them to choose between possible values like 2, 4, or 8 GB of RAM - but not more or less. This is specified in the Service Dialog.
+    When the user orders a Service Catalog Item from the Service Catalog, you might want to allow them to override certain default values. For example, you might allow users to choose from a range of values of how much memory the new Virtual Machine can have. You might want them to only choose from a list of predefined values like 2, 4, or 8 GB of RAM - but not more or less. This is specified in the Service Dialog.
 
 1. A Service Catalog Item
 
-    The Service Catalog Item is what users will see and be able to order. It usually consists of a Service Dialog allowing users to change specific parameters, it can have a nice icon and an (optional) HTML description. Service Catalog Items are organized in Service Catalogs for easier navigation.
+    The Service Catalog Item is what users will see in the Service Catalog and are able to order. It usually consists of a Service Dialog allowing users to change specific parameters, it can have a nice icon and an (optional) HTML description. Service Catalog Items are organized in Service Catalogs for easier navigation.
 
 1. A Service Catalog
 
     The Service Catalog allows administrator to organize the Catalog Items. You might want to have a Catalog for different Virtual Machine types, or one offering certain applications like Wordpress, MariaDB etc. Or you might want to categorize by Operating System. This is done by creating Service Catalogs and adding Items to them.
 
-We can also use Role Based Access Control to make certain Service Catalog Items available to specific groups of users.
+We can also use Role Based Access Control to make certain Service Catalog Items available only to specific groups of users.
 
 ### Virtual Machine Provisioning example
 
@@ -285,7 +285,11 @@ Follow these steps to design the Service Dialog:
 
 1. Chose a label and description:
 
+    A descriptive name for the Service Dialog:
+
     ***Dialog's name***: Simple VM
+
+    Some additional description:
 
     ***Dialog's Description***: Simple VM provisioning dialog
 
@@ -311,7 +315,7 @@ Follow these steps to design the Service Dialog:
 
     ***Name:*** option_0_vm_name
 
-    The help is some text which will be shown if the mouse hovers over the little question mark icon next to the element. It can be used to provide additional information to the user to fill out this field:
+    The help is some text which will be shown if the mouse hovers over the little info icon next to the element. It can be used to provide additional information to the user to fill out this field:
 
     ***Help:*** Specify the name of the new Virtual Machine
 
@@ -323,8 +327,8 @@ Follow these steps to design the Service Dialog:
     - Drop Down List: allows the user to select one or multiple options from a list, for example to chose from a list of available networks, applications, cost centers and many more
     - Radio Button: Similar to the check box, but only one of the options can be selected, for example the base OS version (RHEL 6 or RHEL 7, but never more than one)
     - Tag Control: a special element which allows the user to chose from available tags. More about tagging later in this lab
-    - Text Area Box: allows the user to enter relatively large amounts of text (multiple lines), could be used for example to provide description information
-    - Text Box: allows the user for short amounts of text (one line), in this example we use this element to ask the user for a name of the Virtual Machine
+    - Text Area Box: allows the user to enter relatively large amounts of text (multiple lines), could be used for example to provide a description for a Service Item
+    - Text Box: allows the user to enter small amounts of text (one line), in this example we use this element to ask the user for a name of the Virtual Machine
 
     The remaining options can be ignored for now.
 
@@ -342,9 +346,15 @@ Follow these steps to design the Service Dialog:
 
 1. Modify the following fields:
 
+    The label is the user friendly name of the variable and will be presented in the UI:
+
     ***Label:*** Memory size
 
+    The name of the variable used internally to store the user input:
+
     ***Name:*** option_0_vm_memory
+
+    Some additional infmration for the user, which will be shown if the user hovers the mouse over the little "i" icon:
 
     ***Help:*** Select how much memory the Virtual Machine should have
 
@@ -378,7 +388,7 @@ Follow these steps to design the Service Dialog:
 
 1. We are finally done designing the dialog. Click on ***Save*** to save the dialog.
 
-    :warning: ***WARNING***If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a Service Dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
+    :warning: ***WARNING*** If you're having trouble creating the Service Dialog, you can download it from [GitHub](https://github.com/cbolz/summit-fy19/blob/master/self-service-portal-with-cloudforms/lab/ServiceDialog.yml) and import it. Follow the instructions on how to [import a Service Dialog](service-dialog-import.md) ONLY if you were unable to create the dialog.
 
 ### Build a VM Provisioning Service Catalog
 
@@ -396,7 +406,11 @@ The following steps will create a Service Catalog.
 
 1. Fill out name and description:
 
+    The name of the Service Catalog should be short but descriptive, so users can easily find the Service Catalog Items they are looking for:
+
     ***Name:*** Virtual Machines
+
+    A long description giving users additional information about the Service Catalog:
 
     ***Description:*** Deploy Virtual Machines from the Catalog
 
@@ -406,7 +420,7 @@ The following steps will create a Service Catalog.
 
 ### Build a Virtual Machine Service Catalog Item
 
-To tie everything together, the last step is to define a service catalog item.
+To tie everything together, the last step is to define a Service Catalog Item.
 
 1. Navigate to ***Services*** -> ***Catalogs***
 
@@ -473,13 +487,13 @@ To tie everything together, the last step is to define a service catalog item.
 
     ***Selected VM:*** RHEL7
 
-    For automatic naming chose "changeme"
+    For automatic naming chose "changeme":
 
     ***VM Name:*** changeme
 
-    If no name is specified, this will cause CloudForms to automatically assign a name based on "cfme" as a prefix. The name will be expanded with a unique ID starting with 001.
+    If the name "changeme" is specified, it will trigger the internal naming logic to automatically assign a name based on "cfme" as a prefix. The name will be expanded with a unique ID starting with 001.
 
-    Also make sure the ***Provision Type*** is "Native Clone" and do not change this value.
+    :warning: ***WARNING*** Also make sure the ***Provision Type*** is "Native Clone" and do not change this value.
 
 1. Click on the sub tab ***Environment***
 
@@ -541,7 +555,7 @@ For sure you want to test the Service Catalog Item you just created!
 
     ![service item details](../../common/img/service-item-details.png)
 
-    Note that the Link for Red Hat Enterprise Linux in fact opens the Red Hat Homepage.
+:+1: ***OPTIONAL*** Test that the Link for Red Hat Enterprise Linux in fact opens the Red Hat Homepage.
 
 1. Click on ***Order***
 
@@ -573,7 +587,7 @@ While the VM is cloned from template, it does not show up in the CloudForms inve
 
 1. You should see a VM with the name "test" in the overview
 
-    :warning: ***WARNING***If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically. When the Request State is Finished, the VM should be completely provisioned and visible in ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
+    :warning: ***WARNING*** If you don't see the VM yet, it is probably still in creation. Check ***Services*** -> ***Requests*** to see the current status and reload the VM page periodically. When the Request State is Finished, the VM should be completely provisioned and visible in ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
 
     ![all Virtual Machines](../../common/img/infrastructure-vm-overview.png)
 
@@ -591,15 +605,13 @@ This lab will guide you through the process of creating a Service Catalog Item b
 
 Today, every business is a digital business. Technology is your innovation engine, and delivering your applications faster helps you win. Historically, that required a lot of manual effort and complicated coordination. But today, there is Ansible - the simple, yet powerful IT automation engine that thousands of companies are using to drive complexity out of their environments and accelerate DevOps initiatives.
 
-Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
+Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud, and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
 
-This integration allows customers to build service catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The user interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
+This integration give customers the capability to build Service Catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The User Interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
 
 ### Make sure embedded Ansible role is enabled and running
 
 Before we start, we want to make sure the embedded Ansible role is enabled and running.
-
-1. Log into your CloudForms Appliance
 
 1. Click on your user name on the top right and click on ***Configuration***
 
@@ -617,7 +629,8 @@ Before we start, we want to make sure the embedded Ansible role is enabled and r
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
 
-:warning: ***WARNING***We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+:warning: ***WARNING*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take a few minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+
 
 ![restart CloudForms Server](../../common/img/restart-server.png)
 
@@ -633,21 +646,27 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
     ![Add new repository](../../common/img/embedded-ansible-add-git-repository.png)
 
-    :warning: ***WARNING***If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
+    :warning: ***WARNING*** If the menu item "Add New Repository" is disabled, the Git Repository Role is not active.
 
 1. Fill in the form.
 
+    An internal name for the git repository:
+
     ***Name:*** Github
 
+    A description for the git repository:
+
     ***Description:*** Example Playbooks
+
+    How to access the git repository:
 
     ***URL:***
 
         https://github.com/cbolz/summit-fy19.git
 
-    ***SCM Update Options:*** check "Update on Launch"
+    Update on Launch causes CloudForms to check for new Playbooks or updated Playbooks before a Playbook is launched.
 
-    Update on Launch causes CloudForms to check for new Playbooks are updated Playbooks before a Playbook is executed.
+    ***SCM Update Options:*** check "Update on Launch"
 
     ![add a new repository](../../common/img/add-ansible-repository.png)
 
@@ -669,13 +688,23 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
 1. Use the following settings:
 
+    A user descriptive name for the Credentials you want to store:
+
     ***Name:*** Virtual Machine credentials
+
+    CloudForms supports several credential types to connect to other systems. For this lab we chose "Machine":
 
     ***Credential type:*** Machine
 
+    The username used to login to the target system:
+
     ***Username:*** root
 
+    The password used to login to the target system:
+
     ***Password:*** r3dh4t1!
+
+    Passwrds are stored encrypted in the CloudForms database.
 
     ![provide VM credentials](../../common/img/ansible-vm-credentials.png)
 
@@ -705,7 +734,11 @@ To offer a Service Catalog Item to users, they have to be organized in Service C
 
 1. Fill out name and description:
 
+    A user friendly name of the Service Catalog. End users will see the different Service Catalogs by name:
+
     ***Name:*** Ansible
+
+    Additional description about the Service Catalog. End users will see the description and it will help them to find the Service Catalog Items they are looking for:
 
     ***Description:*** Order Ansible Playbooks from a Service Catalog
 
@@ -735,31 +768,49 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
 1. Use the following parameters when defining the Service Catalog Item:
 
+    The user friendly name of the Service Catalog Item. It will be presented to the end user:
+
     ***Name:*** Install Package
+
+    Additional description about the Service Catalog Item to make it easier for the end user to find what they are looking for:
 
     ***Description:*** Install Package via Ansible Playbook
 
+    You can hide Service Catalog Items from users by setting this to "No". For this lab we want to allow users to order the Service Catalog Item, so we set this to "Yes"
+
     ***Display in Catalog:*** Yes
+
+    In which Service Catalog do you want the Service Catalog Item to show up?
 
     ***Catalog:*** Ansible
 
+    You might have many git repositories, to better identify the correct Ansible Playbook, you first select the Repository. We only have one Repository so far, so this is simple:
+
     ***Repository:*** Github
+
+    The actual Playbook which will be exected when the Service Catalog Item is ordered.
 
     ***Playbook:*** playbooks/InstallPackage.yml
 
+    The credentials used to login to the target machine to run the Ansible Playbook:
+
     ***Machine Credentials:*** Virtual Machine credentials
 
-    ***Variables & Default Values***: add one new entry with the following settings:
+    Ansible Playbooks can use variables which gives us more flexiblity. In this example the package name is not hard coded, but can be set and changed from a variable:
+
+    ***Variables & Default Values***: add one new entry with:
+
+    Since a Playbook can have multiple variables, you can add multiple lines. 
 
     ***Variable:*** package_name
 
     ***Default Value:*** httpd
 
-    Click the little plus ("+") icon to save the row.
+    Click the little plus ("+") icon to save the row. We only use one variable in this playbook, but your Playbooks might use more.
 
     ***Dialog:*** Create New
 
-    Use "InstallPackage" as the name of the Dialog.
+    Use "InstallPackage" as the name of the Dialog. CloudForms will automatically create the Service Dialog for us, to save some time. The automatically created Service Dialog is still fully customizable, which we will do in a later part of the lab.
 
     ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage.png)
 
@@ -785,9 +836,15 @@ We want to make sure the resulting Service Catalog Item actually works.
 
 1. Select the following options:
 
+    These are the credantials stored in CloudForms earlier, to log into the target machine:
+
     ***Machine Credentials:*** Virtual Machine Credentials
 
+    On which machine the Playbook should be executed:
+
     ***Hosts:*** localhost (should already be the default)
+
+    The varaible specified when creating the Service Catalog Item, which can be overriden by the end user during order:
 
     ***package_name:*** httpd (should already be the default)
 
@@ -833,13 +890,13 @@ CloudForms can create a Service Dialog from an OpenShift template very easily.
 
     ![navigate to container templates](../../common/img/navigate-to-container-templates.png)
 
-    You will see a list of all currently available templates. CloudForms periodically retrieves the list of available templates from OpenShift to make sure the CloudForms inventory is always up to date.
+    You will see a list of all currently available templates. CloudForms periodically retrieves the list of available templates from OpenShift to make sure the CloudForms inventory is up to date.
 
 1. Click on the "cakephp-mysql-example" template
 
     ![cakephp-mysql-example](../../common/img/container-template-cakephp-mysql-example.png)
 
-    :warning: ***WARNING***Double check you're NOT using the "cakephp-mysql-persistent" by accident. This template will fail because the OpenShift environment in this lab does not have persistent storage.
+    :warning: ***WARNING*** Double check you're NOT using the "cakephp-mysql-persistent" by accident. This template will fail because the OpenShift environment in this lab does not have persistent storage.
 
 1. Click on ***Configuration*** -> ***Create Service Dialog from Container Template***
 
@@ -1364,7 +1421,7 @@ Next we want to create a group and assign it to the role we just created.
 
     In "My Company Tags" click on the little triangular icon next to "Department" and click on "Engineering"
 
-    :warning: ***WARNING***It is important to only select this particular tag and do not click on any other additional tags!
+    :warning: ***WARNING*** It is important to only select this particular tag and do not click on any other additional tags!
 
     ![define new group](../../common/img/define-new-group.png)
 
@@ -1390,7 +1447,7 @@ Finally we want to create a user which is a member of the group we just created.
 
     ***E-mail Address:*** joe@example.com
 
-    :warning: ***WARNING***CloudForms is not configured to send out emails, but the email address is a mandatory field
+    :warning: ***WARNING*** CloudForms is not configured to send out emails, but the email address is a mandatory field
 
     ***Available Groups:*** Self Service Engineering
 
@@ -1404,7 +1461,7 @@ So far we have not assigned any objects to the new group, but we have granted ve
 
 Let's see what happens if we log into CloudForms as "Joe Doe".
 
-:warning: ***WARNING***You can not log into CloudForms with different users while you're in the same browser session. You have to log out and log in again. As an alternative, you can use a different browser, if available, or you can open an additional window in "private" mode.
+:warning: ***WARNING*** You can not log into CloudForms with different users while you're in the same browser session. You have to log out and log in again. As an alternative, you can use a different browser, if available, or you can open an additional window in "private" mode.
 
 1. Log out of CloudForms by clicking on the user name on the top right and click on ***Logout***
 

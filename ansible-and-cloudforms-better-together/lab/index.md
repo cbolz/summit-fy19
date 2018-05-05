@@ -51,7 +51,7 @@
 
 [Red Hat CloudForms](http://www.redhat.com/cloudforms) is an infrastructure management platform that offers a consistent way to track costs, control resource allocation, and ensure compliance across all your networked environments. Manage Virtual Machines, containers, and your clouds in the same way with a single tool.
 
-In this lab we will focus on the Self Service Catalog features CloudForms provides. We will learn how to create Service Catalogs, add individual Items and see how end users can browse and order from the Service Catalog.
+In this lab we will focus on he Ansible features provided by CloudForms. We will setup the embedded Ansible role, create Service Catalog Items for Ansible Playbooks, and demonstrate how the CloudForms UI can be exteded with custom menus and buttons.
 
 For more details about CloudForms, you can have a look at the [General introduction](../../common/index.md).
 
@@ -71,13 +71,38 @@ The ID &lt;GUID&gt; is unique to your lab environment and was presented to you o
 
         https://cf46-123a.rhpds.opentlc.com
 
-:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab deployed with new certificates on request.
+:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab is deployed with a new self signed certificate.
 
 ## Verify Lab
 
-Let's start by verifying the status of all providers. Use the URL example and login credentials provided above to log into your appliance.
+Let's start by verifying the status of all providers. Use the URL as desplained before and the provided login credentials.
 
 ![CloudForms login page](../../common/img/cloudforms-login-page.png)
+
+In CloudForms we can add so called "Providers". Providers are categorized into Cloud, Infrastructure, Physical and Container Providers. CloudForms 4.6 supports the following list of providers:
+
+Cloud Providers:
+
+- Amazon EC2
+- Microsoft Azure
+- Google Compute Platform
+
+Infrastructure as a Service Providers:
+
+- Red Hat Virtualization
+- Red Hat OpenStack Platform
+- VMware vSphere
+- Microsoft System Center Virtual Machine Manager
+
+Physical Providers:
+
+- Lenovo XClarity
+
+Container Providers:
+
+- OpenShift Container Platform
+
+Let's first verify the providers you have available and check their health status.
 
 ### OpenStack Provider status
 
@@ -87,7 +112,7 @@ Let's first check the OpenStack Provider:
 
     ![navigate to cloud providers](../../common/img/navigate-to-compute-clouds-providers.png)
 
-    :heavy_check_mark: ***NOTE*** Don't click while navigating the menu structure, just hover until you reach the entry you want...
+    :heavy_check_mark: ***NOTE*** Don't click while navigating the main menu structure on the left, just hover until you reach the entry you want...
 
 1. You should see a tile icon labeled "OpenStack". Click on it.
 
@@ -103,11 +128,11 @@ Let's first check the OpenStack Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+Wait a few moments before you reload the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 :heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:warning: ***WARNING*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat Virtualization Provider status
 
@@ -135,11 +160,11 @@ Let's then check the RHV Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+Wait a few moments before you reload the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 :heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
-:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:warning: ***WARNING*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ### Red Hat OpenShift Container Platform status
 
@@ -171,63 +196,63 @@ Let's finally check the OpenShift Provider:
 
     ![provider page reload](../../common/img/provider-reload.png)
 
-After reloading the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
+Wait a few moments before you reload the page, the provider tile should show a green check mark and the last refresh fields should report "less than a minute ago" or similar.
 
 :heavy_check_mark: ***NOTE*** Don't worry if the last refresh does not change. As long as the provider icon is showing a green check box, you're good and can carry on with the lab.
 
 :heavy_check_mark: ***NOTE*** Metrics collection has been disabled in this lab. If the "Last Metrics Collection" is not updated, this can be ignored.
 
-:heavy_check_mark: ***NOTE*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
+:warning: ***WARNING*** If the provider icon does not show a green check mark, consult an instructor before you continue with the lab!
 
 ## CloudForms with Ansible batteries included
 
-This lab will guide you through the process of creating a Service Catalog Item based on an Ansible Playbook.
+This first excersie of the lab will guide you through the process of creating a Service Catalog Item based on an Ansible Playbook.
 
 ### Introduction to Ansible
 
 Today, every business is a digital business. Technology is your innovation engine, and delivering your applications faster helps you win. Historically, that required a lot of manual effort and complicated coordination. But today, there is Ansible - the simple, yet powerful IT automation engine that thousands of companies are using to drive complexity out of their environments and accelerate DevOps initiatives.
 
-Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
+Red Hat CloudForms can integrate with IaaS, PaaS, public and private cloud, and configuration management providers. Since version 4.2 of CloudForms, it can also integrate with Ansible Tower by Red Hat. The latest version which is 4.6, which has an improved "embedded Ansible" role which allows it to run Playbooks, manage credentials and retrieve Playbooks from a source control management like git.
 
-This integration allows customers to build Service Catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The User Interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
+This integration give customers the capability to build Service Catalogs from Ansible Playbooks to allow end users to easily browse, order and manage resources from Ansible. Ansible Playbooks can be used in Control Policies which can not only detect problems, but also automatically fix them. The User Interface of CloudForms can be extended seamless with additional menus and buttons, which utilize Ansible Playbooks to perform user initiated tasks.
 
 ### Value provided by a Service Catalog
 
-One of the features a Cloud Management Platform provides, is a Self Service User Interface. Here users can order, manage and retire services. Services are categorized in Catalogs, where they can be organized and easily consumed.
+One of the features a Cloud Management Platform provides, is a Self Service User Interface. From the Service Catalog users can order, manage and retire Services. Services are categorized in Catalogs, where they can be organized and easily consumed.
 
-By providing a Service Catalog, users can deploy the services they need quickly and simply. This will improve agility, reduce provisioning time and free up resources in internal IT.
+By providing a Service Catalog, users can deploy the Services they need quickly and easily. This helps to improve agility, reduce provisioning time and free up resources in internal IT.
 
 ### Service Basics
 
-But first some basics. Four items are required to make a Service available to users from the CloudForms Self Service Portal:
+But first some basics. Four items are required to make a Service available to users from the CloudForms Self Service Catalog:
 
 1. Provisioning Dialog
 
-   The Provisioning Dialog specifies the list of customizable parameters. For example, when you want to order a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
+   The Provisioning Dialog specifies the list of customizable parameters. For example, when ordering a Virtual Machine, users can specify the number of virtual CPUs, how much memory the VM should have and other parameters. The list of possible parameters is defined in the Provisioning Dialog
 
 1. A Service Dialog
 
-    When the user orders and Item from the Service Catalog, you might want to allow them to override certain default values. For example, you might allow users to choose from a range of values how much memory the new Virtual Machine should have. You might want them to choose between possible values like 2, 4, or 8 GB of RAM - but not more or less. This is specified in the Service Dialog.
+    When the user orders a Service Catalog Item from the Service Catalog, you might want to allow them to override certain default values. For example, you might allow users to choose from a range of values of how much memory the new Virtual Machine can have. You might want them to only choose from a list of predefined values like 2, 4, or 8 GB of RAM - but not more or less. This is specified in the Service Dialog.
 
 1. A Service Catalog Item
 
-    The Service Catalog Item is what users will see and be able to order. It usually consists of a Service Dialog allowing users to change specific parameters, it can have a nice icon and an (optional) HTML description. Service Catalog Items are organized in Service Catalogs for easier navigation.
+    The Service Catalog Item is what users will see in the Service Catalog and are able to order. It usually consists of a Service Dialog allowing users to change specific parameters, it can have a nice icon and an (optional) HTML description. Service Catalog Items are organized in Service Catalogs for easier navigation.
 
 1. A Service Catalog
 
     The Service Catalog allows administrator to organize the Catalog Items. You might want to have a Catalog for different Virtual Machine types, or one offering certain applications like Wordpress, MariaDB etc. Or you might want to categorize by Operating System. This is done by creating Service Catalogs and adding Items to them.
 
-We can also use Role Based Access Control to make certain Service Catalog Items available to specific groups of users.
+We can also use Role Based Access Control to make certain Service Catalog Items available only to specific groups of users.
 
 ### Power on target VM
 
-The following lab will use UI customizations to illustrate how easy it is to additional functionality to CloudForms. The example will use an Ansible Playbook which will be executed on a Virtual Machine. Ansible uses SSH to access the remote machine and therefore the VM has to be powered on. The following steps will power on a Virtual Machine which will be used as a target for the Ansible Playbook.
+The following lab will use UI customizations to illustrate how easy it is to add additional functionality to CloudForms. The example will use an Ansible Playbook which will be executed on a Virtual Machine. Ansible uses SSH to access the remote machine and therefore the VM has to be powered on. The following steps will power on a Virtual Machine which we later use as the target for the Ansible Playbook.
 
 1. Navigate to ***Compute*** -> ***Infrastructure*** -> ***Virtual Machines***
 
     ![navigate to virtual machines](../../common/img/navigate-to-virtual-machines.png)
 
-1. Tiles represent the Virtual Machines. Note that the VM "cfme001" is turned off.
+1. Tiles represent the Virtual Machines. Note that the VM "cfme001" is powered off.
 
     ![VM cfme001 is turned off](../../common/img/cfme-001-powered-off.png)
 
@@ -269,7 +294,7 @@ Before we continue, we want to make sure the embedded Ansible role is enabled an
 
     ![ansible worker started](../../common/img/ansible-worker-started.png)
 
-:warning: ***WARNING*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take up to three minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
+:warning: ***WARNING*** We've noticed that sometimes the role does not start automatically. You can trigger a restart by clicking on ***Diagnostics*** -> ***Server*** and then ***Configuration*** -> ***Restart Server***. This will trigger a restart of all services and can take a few minutes to complete. Only do this, if your Embedded Ansible role was not in state "started".
 
 ![restart CloudForms Server](../../common/img/restart-server.png)
 
@@ -289,17 +314,23 @@ To be able to run Ansible Playbooks, they have to become available in CloudForms
 
 1. Fill in the form.
 
+    An internal name for the git repository:
+
     ***Name:*** Github
 
+    A description for the git repository:
+
     ***Description:*** Example Playbooks
+
+    How to access the git repository:
 
     ***URL:***
 
         https://github.com/cbolz/summit-fy19.git
 
-    ***SCM Update Options:*** check "Update on Launch"
-
     Update on Launch causes CloudForms to check for new Playbooks or updated Playbooks before a Playbook is launched.
+
+    ***SCM Update Options:*** check "Update on Launch"
 
     ![add a new repository](../../common/img/add-ansible-repository.png)
 
@@ -345,13 +376,23 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
 1. Use the following settings:
 
+    A user descriptive name for the Credentials you want to store:
+
     ***Name:*** Virtual Machine credentials
+
+    CloudForms supports several credential types to connect to other systems. For this lab we chose "Machine":
 
     ***Credential type:*** Machine
 
+    The username used to login to the target system:
+
     ***Username:*** root
 
+    The password used to login to the target system:
+
     ***Password:*** r3dh4t1!
+
+    Passwrds are stored encrypted in the CloudForms database.
 
     ![provide VM credentials](../../common/img/ansible-vm-credentials.png)
 
@@ -375,7 +416,11 @@ To offer a Service Catalog Item to users, they have to be organized in Service C
 
 1. Fill out name and description:
 
+    A user friendly name of the Service Catalog. End users will see the different Service Catalogs by name:
+
     ***Name:*** Ansible
+
+    Additional description about the Service Catalog. End users will see the description and it will help them to find the Service Catalog Items they are looking for:
 
     ***Description:*** Order Ansible Playbooks from a Service Catalog
 
@@ -407,31 +452,49 @@ In the following step we create a Service Catalog Item which will execute an Ans
 
 1. Use the following parameters when defining the Service Catalog Item:
 
+    The user friendly name of the Service Catalog Item. It will be presented to the end user:
+
     ***Name:*** Install Package
+
+    Additional description about the Service Catalog Item to make it easier for the end user to find what they are looking for:
 
     ***Description:*** Install Package via Ansible Playbook
 
+    You can hide Service Catalog Items from users by setting this to "No". For this lab we want to allow users to order the Service Catalog Item, so we set this to "Yes"
+
     ***Display in Catalog:*** Yes
+
+    In which Service Catalog do you want the Service Catalog Item to show up?
 
     ***Catalog:*** Ansible
 
+    You might have many git repositories, to better identify the correct Ansible Playbook, you first select the Repository. We only have one Repository so far, so this is simple:
+
     ***Repository:*** Github
+
+    The actual Playbook which will be exected when the Service Catalog Item is ordered.
 
     ***Playbook:*** playbooks/InstallPackage.yml
 
+    The credentials used to login to the target machine to run the Ansible Playbook:
+
     ***Machine Credentials:*** Virtual Machine credentials
 
+    Ansible Playbooks can use variables which gives us more flexiblity. In this example the package name is not hard coded, but can be set and changed from a variable:
+
     ***Variables & Default Values***: add one new entry with:
+
+    Since a Playbook can have multiple variables, you can add multiple lines. 
 
     ***Variable:*** package_name
 
     ***Default Value:*** httpd
 
-    Click the little plus ("+") icon to save the row.
+    Click the little plus ("+") icon to save the row. We only use one variable in this playbook, but your Playbooks might use more.
 
     ***Dialog:*** Create New
 
-    Use "InstallPackage" as the name of the Dialog. 
+    Use "InstallPackage" as the name of the Dialog. CloudForms will automatically create the Service Dialog for us, to save some time. The automatically created Service Dialog is still fully customizable, which we will do in a later part of the lab.
 
     ![dialog to create InstallPackage Service Catalog Item](../../common/img/service-catalog-installpackage.png)
 
@@ -457,9 +520,15 @@ We want to make sure the resulting Service Catalog Item actually works.
 
 1. Select the following options:
 
+    These are the credantials stored in CloudForms earlier, to log into the target machine:
+
     ***Machine Credentials:*** Virtual Machine Credentials
 
+    On which machine the Playbook should be executed:
+
     ***Hosts:*** localhost (should already be the default)
+
+    The varaible specified when creating the Service Catalog Item, which can be overriden by the end user during order:
 
     ***package_name:*** httpd (should already be the default)
 
@@ -515,9 +584,15 @@ To add new button to the UI, we first need to create a Button Group. A Button Gr
 
 1. Enter the following data into the form:
 
+    The name of the Button Group, or menu, as shown in the UI:
+
     ***Text:*** Tools
 
+    A description text which will be shown when hovering the mouse over the Button Group:
+
     ***Hover Text:*** Additional tasks
+
+    An icon for the Button Group:
 
     ***Icon:*** search for the wrench symbol in ***Font Awesome***
 
@@ -549,15 +624,27 @@ The previous step created a Button Group, or menu. Now we want add Buttons to th
 
 1. Make the following adjustments:
 
+    There are different Button types to extend the CloudForms UI:
+
     ***Button Type:*** Ansible Playbook
+
+    Which action should be performed, when a user submits the request. In this example we call the previously created Service Catalog Item, which runs an Ansible Playbook.
 
     ***Playbook Catalog Item:*** Install Package - this is the Service Catalog Item you created in the previous part of the lab
 
+    On which target system should the Ansible Playbook run? For this lab, we want it to be executed on the selected machine:
+
     ***Inventory:*** Target Machine
+
+    The name of the Button which will be shown in the UI and should be short and descriptive:
 
     ***Text:*** Install Package
 
+    A more descriptive text which will be shown if the user hovers the mouse over the Button.
+
     ***Hover Text:*** Install additional package
+
+    An icon to make the Button easy to find:
 
     ***Icon:*** Select the Software Package Icon at the "Font Fabulous" tab and click ***Apply***
 
@@ -577,11 +664,11 @@ We want to test the resulting customization and see how it works from a user poi
 
     ![navigate to virtual machines](../../common/img/navigate-to-virtual-machines.png)
 
-1. Click on the cfme001 tile if not already selected
+1. Click on the "cfme001" tile if not already selected
 
     ![VM cfme001 is turned on](../../common/img/cfme-001-powered-on-ovwerview.png)
 
-1. On the details page of cfme001 note the new menu "Tools". Click to see the new button "Install Package"
+1. On the details page of "cfme001" note the new menu "Tools". Click to see the new button "Install Package"
 
     ![VM with addtional tools menu](../../common/img/cfme-001-tools-button.png)
 
@@ -607,13 +694,13 @@ We want to test the resulting customization and see how it works from a user poi
 
     ![Ansible Playbook output](../../common/img/my-service-ansible-playbook-output.png)
 
-:heavy_check_mark: ***NOTE*** Ansible is idempotent - this means you can run the same Playbook many times and Ansible detects if the desired state was already reached. In that case, no changes will be performed. In this example, if the package "httpd" is already installed on the Virtual Machine, Ansible will detect that and do nothing - and will also note "no changes" in the output of the Playbook.
+:heavy_check_mark: ***NOTE*** Ansible is idempotent - this means you can run the same Playbook many times and Ansible detects if the desired state was already reached. In this lab, no changes are necessary, because the package httpd is already installed.
 
 This concludes this part of the Ansible lab.
 
 ## Improve the Service Dialog
 
-The automatically generated Service Dialog is not perfect. It might confuse the user with too much information. It asks for the "Machine Credentials", but those have already been defined in the Service Catalog Item. It also asks for the "Host", but this one is automatically adjusted to be the selected Virtual Machine. And finally the field "package_name" could benefit from a more descriptive text.
+The automatically generated Service Dialog is not perfect. It might confuse the user with too many input fields. It asks for the "Machine Credentials", but those have already been defined in the Service Catalog Item. It also asks for the "Host", but this one is automatically adjusted to be the selected Virtual Machine. And finally the field "package_name" could benefit from a more descriptive text.
 
 In the following steps, we want to make the Service Dialog more user friendly by simplifying it.
 
@@ -671,7 +758,7 @@ In the following steps, we want to make the Service Dialog more user friendly by
 
     ***Label:*** Enter Package Name
 
-    :warning: ***WARINING*** Do not change the field "Name" - it is the name of the variable used internally by CLoudForms and the Ansible Playbook. if you edit this field, the Playbook will not pickup the new variable and hence ignore the user input.
+    :warning: ***WARINING*** Do not change the field "Name" - it is the name of the variable used internally by CLoudForms and the Ansible Playbook. if you change the name of this field, the Playbook will not pickup the new variable and hence ignore the user input.
 
 1. Also let's give more information to the user by improving the "Help" text:
 
@@ -769,11 +856,11 @@ As the last step, we have to change the definition of our button, to point to th
 
     ![navigate to virtual machines](../../common/img/navigate-to-virtual-machines.png)
 
-1. Click on the cfme001 tile if not already selected
+1. Click on the "cfme001" tile if not already selected
 
     ![VM cfme001 is turned on](../../common/img/cfme-001-powered-on-ovwerview.png)
 
-1. On the details page of cfme001 click on ***Tools*** -> ***Install Package***
+1. On the details page of "cfme001" click on ***Tools*** -> ***Install Package***
 
     ![VM with addtional tools menu](../../common/img/cfme-001-tools-button.png)
 
@@ -805,7 +892,7 @@ This concludes this part of the Ansible lab.
 
 ## Build a Service Catalog to create and delete users
 
-In this lab we will use an Ansible Playbook to create a local user in CloudForms. This example will also demonstrate how we can define a retirement process as well. In CloudForms' understanding of complete life cycle management, every object has a provisioning and a retirement workflow.
+In this lab we will use an Ansible Playbook to create a local user in CloudForms. This example will also demonstrate how we can define a retirement process as well. In CloudForms' understanding of complete life cycle management, every object should have a provisioning and a retirement workflow.
 
 ### Create a Service Catalog Item for the Playbook
 
