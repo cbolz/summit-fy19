@@ -870,7 +870,7 @@ As the last step, we have to change the definition of our button, to point to th
 
     You should see the simplified version of the Dialog. The Package Name has a better description, there is a tool tip if you hover the mouse over the little "i" icon and the redundant fields for "Machine Credentials" and "Hosts" are gone.
 
-1. Click ***Summit*** to execute the Button action
+1. Click ***Submit*** to execute the Button action
 
 1. Navigate to ***Services*** -> ***My Services***
 
