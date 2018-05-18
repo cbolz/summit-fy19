@@ -718,7 +718,7 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
     The password used to login to the target system:
 
-    ***Password:*** r3dh4t1!
+    ***Password:*** `<to_be_provided>`
 
     Passwrds are stored encrypted in the CloudForms database.
 
@@ -1457,9 +1457,9 @@ Finally we want to create a user which is a member of the group we just created.
 
     ***Username:*** joe
 
-    ***Password:*** r3dh4t1!
+    ***Password:*** `<to_be_provided>`
 
-    ***Confirm Password:*** r3dh4t1!
+    ***Confirm Password:*** `<to_be_provided>`
 
     ***E-mail Address:*** joe@example.com
 
@@ -1487,7 +1487,7 @@ Let's see what happens if we log into CloudForms as "Joe Doe".
 
     ***username:*** joe
 
-    ***Password:*** r3dh4t1!
+    ***Password:*** `<to_be_provided>`
 
     ![login as Joe Doe](../../common/img/login-as-joe-doe.png)
 

@@ -406,7 +406,7 @@ Ansible is using SSH by default to perform actions on the target machine. To be 
 
     The password used to login to the target system:
 
-    ***Password:*** r3dh4t1!
+    ***Password:*** `<to_be_provided>`
 
     Passwrds are stored encrypted in the CloudForms database.
 
