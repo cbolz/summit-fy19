@@ -67,21 +67,37 @@ For more details about CloudForms, you can have a look at the [General introduct
 
 ### Access the lab environment
 
-Your workstation was configured to show a start page which has instructions on how to access the lab and this guide. Make sure you use the GUID provided on the front page in all of the following examples.
+- First time login, forgot login or password? Go to [https://www.opentlc.com/account](https://www.opentlc.com/account)
 
-To access the Red Hat CloudForms Management Engine use the URL and credentials below:
+- Your username should NOT have an *@* in it.
 
-        URL: https://cf46-<GUID>.rhpds.opentlc.com
+- Partners MUST request access to RHPDS by sending an email to open-program@redhat.com.
 
-        User: admin
+- Passwords to the services is referred as `<to_be_provided>`. Please contact GPTE you didn't get them.
 
-        Password: r3dh4t1!
+Log into RHDPS and order the Lab from the Service Catalog as follows:
 
-The ID &lt;GUID&gt; is unique to your lab environment and was presented to you on the browser start page! Replace the &lt;GUID&gt; with your lab specific value. For example, if your &lt;GUID&gt; would be "123a" the URL would become:
+1. Log in to the [Red Hat Product Demo System](https://rhpds.redhat.com/) with your provided credentials. 
 
-        https://cf46-123a.rhpds.opentlc.com
+    ![RHPDS](../../common/img/rhpds_login.png)
 
-:warning: ***WARNING*** Your browser might give you a warning message about the used SSL Certificates. These warning messages can be accepted and are due to the fact that each lab is deployed with a new self signed certificate.
+1. Go to ***Services*** -> ***Catalogs***
+
+    ![Navigate to Service catalogs](../../common/img/rhpds-navigate-to-service-catalog.png)
+
+1. Under ***All Services*** -> ***Red Hat Summit 2018***, select ***Building a Self-Service Portal with CF***
+
+    ![Summit Service Catalog](../../common/img/rhpds-summit-catalog.png)
+
+1. On the right pane, click ***Order***
+
+    ![Order Ansible Lab](../../common/img/rhpds-self-service.png)
+
+1. Please, read carefully all of the information on the resulting page, check the box to confirm you understood the runtime warning message, and then click *Submit*.
+
+:warning: ***WARNING*** It takes about 20 ~ 25 minutes for the demo to load completely and become accessible. Wait for the full demo to load, even if some of its systems are marked "Up.". Watch for an email with information about how to access your demo environment. Make note of the email's contents: a list of hostnames, IP addresses, and your GUID. Whenever you see <GUID> in the demo instructions, replace it with the GUID provided in the email. You can get real-time updates and status of your demo environment at [https://www.opentlc.com/rhpds-status](https://www.opentlc.com/rhpds-status).
+
+:heavy_check_mark: ***NOTE*** Be mindful of the runtime of your demo environment! It may take several hours to complete the demo, so you may need to extend the runtime. This is especially important in later steps when you are building virtual machines. For information on how to extend runtime and lifetime, see https://www.opentlc.com/lifecycle.
 
 ## Verify Lab
 
